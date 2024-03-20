@@ -3,42 +3,42 @@ using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Base;
 
 namespace BoardGame.WarOfTheRing.PoliticalTrack.Domain.ValueObjects;
 
-public class Track : ValueObject
+public class Position : ValueObject
 {
-    private readonly int position;
-
-    public Track(int position)
+    public int Value { get; }
+    
+    public Position(int value)
     {
-        if (position < 0 || position > 3)
+        if (value < 0 || value > 3)
         {
             throw new ArgumentOutOfRangeException();
         }
         
-        this.position = position;
+        Value = value;
     }
 
     protected override IEnumerable<object> GetEqualityComponents()
     {
-        yield return position;
+        yield return Value;
     }
 
     public bool IsInAtWarPosition()
     {
-        return position == 3;
+        return Value == 3;
     }
     
     public bool IsInOneStepBehindAtWarPosition()
     {
-        return position == 2;
+        return Value == 2;
     }
 
-    public Track AdvancePosition()
+    public Position AdvancePosition()
     {
         if (IsInAtWarPosition())
         {
             throw new PoliticalTrackAdvanceException(PoliticalTrackAdvanceException.Reason.BecauseOfOutOfRange);
         }
        
-        return new Track(position + 1);
+        return new Position(Value + 1);
     }
 }

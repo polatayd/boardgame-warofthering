@@ -4,6 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.Poli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.PoliticalTrack.Tests", "BoardGame.WarOfTheRing.PoliticalTrack.Tests\BoardGame.WarOfTheRing.PoliticalTrack.Tests.csproj", "{2E374CCC-32AB-44FE-9AF3-FC533D110F1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.PoliticalTrack.Application", "BoardGame.WarOfTheRing.PoliticalTrack.Application\BoardGame.WarOfTheRing.PoliticalTrack.Application.csproj", "{658622F2-D440-4BBA-8D1A-CDB581C589C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.PoliticalTrack.Infrastructure", "BoardGame.WarOfTheRing.PoliticalTrack.Infrastructure\BoardGame.WarOfTheRing.PoliticalTrack.Infrastructure.csproj", "{8E64283A-36AF-4AC2-A968-F613EA2F4DD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.PoliticalTrack.Api", "BoardGame.WarOfTheRing.PoliticalTrack.Api\BoardGame.WarOfTheRing.PoliticalTrack.Api.csproj", "{1617F9CC-27EE-46D6-AD5C-45655DAFFD2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +24,17 @@ Global
 		{2E374CCC-32AB-44FE-9AF3-FC533D110F1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E374CCC-32AB-44FE-9AF3-FC533D110F1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E374CCC-32AB-44FE-9AF3-FC533D110F1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{658622F2-D440-4BBA-8D1A-CDB581C589C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{658622F2-D440-4BBA-8D1A-CDB581C589C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{658622F2-D440-4BBA-8D1A-CDB581C589C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{658622F2-D440-4BBA-8D1A-CDB581C589C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E64283A-36AF-4AC2-A968-F613EA2F4DD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E64283A-36AF-4AC2-A968-F613EA2F4DD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E64283A-36AF-4AC2-A968-F613EA2F4DD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E64283A-36AF-4AC2-A968-F613EA2F4DD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1617F9CC-27EE-46D6-AD5C-45655DAFFD2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1617F9CC-27EE-46D6-AD5C-45655DAFFD2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1617F9CC-27EE-46D6-AD5C-45655DAFFD2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1617F9CC-27EE-46D6-AD5C-45655DAFFD2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

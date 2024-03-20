@@ -1,3 +1,4 @@
+using AutoFixture;
 using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates;
 using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Exceptions;
 using BoardGame.WarOfTheRing.PoliticalTrack.Domain.ValueObjects;
@@ -11,10 +12,13 @@ public class NationTest
     public void AdvanceAtWarStatus()
     {
         //Arrange
-        var status = Status.Active;
-        var track = new Track(2);
+        var fixture = new Fixture();
         
-        var sut = new Nation(status, track);
+        var status = Status.Active;
+        var position = new Position(2);
+        var name = fixture.Create<Name>(); 
+        
+        var sut = new Nation(status, position, name);
 
         //Act
         sut.AdvanceOnPoliticalTrack();
@@ -27,10 +31,13 @@ public class NationTest
     public void AdvanceNotAtWarStatus()
     {
         //Arrange
+        var fixture = new Fixture();
+
         var status = Status.Passive;
-        var track = new Track(1);
-        
-        var sut = new Nation(status, track);
+        var position = new Position(1);
+        var name = fixture.Create<Name>(); 
+
+        var sut = new Nation(status, position, name);
 
         //Act
         sut.AdvanceOnPoliticalTrack();
@@ -43,10 +50,13 @@ public class NationTest
     public void NotAdvanceAtWarStatus()
     {
         //Arrange
+        var fixture = new Fixture();
+
         var status = Status.Passive;
-        var track = new Track(2);
-        
-        var sut = new Nation(status, track);
+        var position = new Position(2);
+        var name = fixture.Create<Name>(); 
+
+        var sut = new Nation(status, position, name);
 
         //Act
         var action = () => sut.AdvanceOnPoliticalTrack();
@@ -59,12 +69,16 @@ public class NationTest
     public void NotAdvanceIfAlreadyInAtWarStatus()
     {
         //Arrange
+        var fixture = new Fixture();
+
         var status = Status.Active;
-        var track = new Track(3);
-        
-        var sut = new Nation(status, track);
+        var position = new Position(2);
+        var name = fixture.Create<Name>(); 
+
+        var sut = new Nation(status, position, name);
 
         //Act
+        sut.AdvanceOnPoliticalTrack();
         var action = () => sut.AdvanceOnPoliticalTrack();
         
         //Assert
@@ -75,11 +89,14 @@ public class NationTest
     public void NotCreateNationIsAlreadyInAtWarPosition()
     {
         //Arrange
-        var status = Status.Passive;
-        var track = new Track(3);
+        var fixture = new Fixture();
         
+        var status = Status.Passive;
+        var position = new Position(3);
+        var name = fixture.Create<Name>(); 
+
         //Act
-        var action = () => new Nation(status, track);
+        var action = () => new Nation(status, position, name);
         
         //Assert
         action.Should().ThrowExactly<ArgumentOutOfRangeException>();
@@ -88,12 +105,11 @@ public class NationTest
     [Theory]
     [InlineData(-1)]
     [InlineData(4)]
-    public void NotCreateTrackOutOfRange(int position)
+    public void NotCreatePositionOutOfRange(int position)
     {
         //Arrange
-        
         //Act
-        var action = () => new Track(position);
+        var action = () => new Position(position);
         
         //Assert
         action.Should().ThrowExactly<ArgumentOutOfRangeException>();
@@ -103,10 +119,13 @@ public class NationTest
     public void MustActivate()
     {
         //Arrange
-        var status = Status.Passive;
-        var track = new Track(1);
+        var fixture = new Fixture();
         
-        var sut = new Nation(status, track);
+        var status = Status.Passive;
+        var position = new Position(1);
+        var name = fixture.Create<Name>(); 
+
+        var sut = new Nation(status, position, name);
 
         //Act
         sut.Activate();

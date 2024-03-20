@@ -8,6 +8,6 @@ public class AdvanceAtWarRestrictionSpecification : Specification<Nation>
 {
     public override Expression<Func<Nation, bool>> ToExpression()
     {
-        return nation => nation.Track.IsInOneStepBehindAtWarPosition() && nation.Status == Status.Passive;
+        return nation => nation.Position.IsInOneStepBehindAtWarPosition() && nation.Status == Status.Passive;
     }
 }

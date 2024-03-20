@@ -7,23 +7,25 @@ namespace BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates;
 
 public class Nation : EntityBase, IAggregateRoot
 {
-    public Nation(Status status, Track track)
+    public Status Status { get; private set; }
+    public Position Position { get; private set; }
+    public Name Name { get; private set; }
+    
+    public Nation(Status status, Position position, Name name)
     {
-        if (status == Status.Passive && track.IsInAtWarPosition())
+        if (position.IsInAtWarPosition())
         {
             throw new ArgumentOutOfRangeException();
         }
         
         Status = status;
-        Track = track;
+        Position = position;
+        Name = name;
     }
-
-    public Status Status { get; private set; }
-    public Track Track { get; private set; }
 
     public bool IsAtWar()
     {
-        return Track.IsInAtWarPosition();
+        return Position.IsInAtWarPosition();
     }
 
     public void AdvanceOnPoliticalTrack()
@@ -35,7 +37,7 @@ public class Nation : EntityBase, IAggregateRoot
             throw new PoliticalTrackAdvanceException(PoliticalTrackAdvanceException.Reason.BecauseOfPassiveStatus);
         }
         
-        Track = Track.AdvancePosition();
+        Position = Position.AdvancePosition();
     }
 
     public void Activate()

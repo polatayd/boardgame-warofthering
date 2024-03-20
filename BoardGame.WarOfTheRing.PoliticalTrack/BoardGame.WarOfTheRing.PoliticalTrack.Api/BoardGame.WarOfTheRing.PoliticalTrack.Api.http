@@ -1,0 +1,11 @@
+@BoardGame.WarOfTheRing.PoliticalTrack.Api_HostAddress = http://localhost:5145
+
+POST {{BoardGame.WarOfTheRing.PoliticalTrack.Api_HostAddress}}/nation/
+Accept: application/json
+
+###
+
+GET {{BoardGame.WarOfTheRing.PoliticalTrack.Api_HostAddress}}/nation/
+Accept: application/json
+
+###
