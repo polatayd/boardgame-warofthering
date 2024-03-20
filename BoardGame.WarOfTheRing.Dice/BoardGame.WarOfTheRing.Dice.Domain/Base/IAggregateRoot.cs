@@ -1,3 +1,3 @@
 ﻿namespace BoardGame.WarOfTheRing.Dice.Domain.Base;
 
-public interface IAggregateRoot { }
+public interface IAggregateRoot;

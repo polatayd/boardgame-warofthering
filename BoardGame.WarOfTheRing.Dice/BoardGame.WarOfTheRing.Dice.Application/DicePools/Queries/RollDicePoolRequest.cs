@@ -24,9 +24,9 @@ public class RollDicePoolRequestHandler : IRequestHandler<RollDicePoolRequest, R
         {
             Name = x.Name,
             Value = x.Value
-        });
+        }).ToList();
 
-        return Task.FromResult(new RollDicePoolOutput() { Results = outputResult.ToList() });
+        return Task.FromResult(new RollDicePoolOutput(outputResult));
     }
 
     private static DicePoolType GetDicePoolType(DicePoolTypeInput dicePoolTypeInput)

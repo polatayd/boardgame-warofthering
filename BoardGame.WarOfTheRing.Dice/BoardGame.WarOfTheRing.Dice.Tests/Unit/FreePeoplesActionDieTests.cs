@@ -1,10 +1,9 @@
 using BoardGame.WarOfTheRing.Dice.Domain.ValueObjects;
 using FluentAssertions;
-using Xunit.Abstractions;
 
 namespace BoardGame.WarOfTheRing.Dice.Tests.Unit;
 
-public class FreePeoplesActionDieTests(ITestOutputHelper testOutputHelper)
+public class FreePeoplesActionDieTests
 {
     private readonly List<DieFace> validFaces =
     [
@@ -40,6 +39,20 @@ public class FreePeoplesActionDieTests(ITestOutputHelper testOutputHelper)
         //Assert
         faces.Should().ContainInOrder(DieFace.CharacterDieFace, DieFace.CharacterDieFace);
         faces.Should().NotContainInOrder(DieFace.CharacterDieFace, DieFace.CharacterDieFace, DieFace.CharacterDieFace);
+    }
+    
+    [Fact]
+    public void TwoDiceMustBeSame()
+    {
+        //Arrange
+        var sut1 = FreePeoplesActionDie.Create();
+        var sut2 = FreePeoplesActionDie.Create();
+
+        //Act
+        var isSame = sut1 == sut2;
+
+        //Assert
+        isSame.Should().BeTrue();
     }
 
     [Fact]

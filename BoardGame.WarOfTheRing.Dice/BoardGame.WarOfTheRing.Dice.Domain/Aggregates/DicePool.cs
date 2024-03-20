@@ -6,7 +6,7 @@ namespace BoardGame.WarOfTheRing.Dice.Domain.Aggregates;
 public class DicePool : EntityBase, IAggregateRoot
 {
     private readonly List<Die> dice;
-    public IEnumerable<Die> Dice => dice.AsReadOnly();
+    public IReadOnlyList<Die> Dice => dice.AsReadOnly();
 
     public DicePool(DicePoolType dicePoolType, ushort numberOfDice)
     {
@@ -14,7 +14,7 @@ public class DicePool : EntityBase, IAggregateRoot
         dice = DicePoolFactory.CreateDicePool(dicePoolType, numberOfDice);
     }
 
-    public IEnumerable<DieFace> Roll()
+    public IReadOnlyList<DieFace> Roll()
     {
         return dice.Select(die => die.Roll()).ToList();
     }

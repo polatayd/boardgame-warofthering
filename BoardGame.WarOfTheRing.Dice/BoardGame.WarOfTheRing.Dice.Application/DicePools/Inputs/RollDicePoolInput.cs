@@ -1,5 +1,3 @@
-using BoardGame.WarOfTheRing.Dice.Domain.Aggregates;
-
 namespace BoardGame.WarOfTheRing.Dice.Application.DicePools.Inputs;
 
 public class RollDicePoolInput

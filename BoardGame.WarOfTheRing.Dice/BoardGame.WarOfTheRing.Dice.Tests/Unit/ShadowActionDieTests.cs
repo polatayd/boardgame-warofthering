@@ -1,10 +1,9 @@
 using BoardGame.WarOfTheRing.Dice.Domain.ValueObjects;
 using FluentAssertions;
-using Xunit.Abstractions;
 
 namespace BoardGame.WarOfTheRing.Dice.Tests.Unit;
 
-public class ShadowActionDieTests(ITestOutputHelper testOutputHelper)
+public class ShadowActionDieTests
 {
     private readonly List<DieFace> validFaces =
     [
@@ -27,6 +26,20 @@ public class ShadowActionDieTests(ITestOutputHelper testOutputHelper)
 
         //Assert
         faces.Should().HaveCount(6);
+    }
+    
+    [Fact]
+    public void TwoDiceMustBeSame()
+    {
+        //Arrange
+        var sut1 = ShadowActionDie.Create();
+        var sut2 = ShadowActionDie.Create();
+
+        //Act
+        var isSame = sut1 == sut2;
+
+        //Assert
+        isSame.Should().BeTrue();
     }
     
     [Fact]

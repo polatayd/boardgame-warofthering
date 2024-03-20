@@ -4,7 +4,7 @@ namespace BoardGame.WarOfTheRing.Dice.Domain.ValueObjects;
 
 public abstract class Die : ValueObject
 {
-    public IEnumerable<DieFace> Faces => dieFaces.AsReadOnly();
+    public IReadOnlyList<DieFace> Faces => dieFaces.AsReadOnly();
     private readonly List<DieFace> dieFaces;
 
     protected Die(List<DieFace> dieFaces)

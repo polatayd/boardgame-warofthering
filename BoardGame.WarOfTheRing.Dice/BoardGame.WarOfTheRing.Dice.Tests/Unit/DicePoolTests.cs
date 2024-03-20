@@ -5,7 +5,7 @@ using FluentAssertions;
 
 namespace BoardGame.WarOfTheRing.Dice.Tests.Unit;
 
-public class DicePoolTests()
+public class DicePoolTests
 {
     [Fact]
     public void CreateFreePeoplesDicePool()

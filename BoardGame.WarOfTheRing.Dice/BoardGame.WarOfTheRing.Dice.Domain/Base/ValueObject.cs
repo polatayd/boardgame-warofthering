@@ -3,7 +3,7 @@
 [Serializable]
 public abstract class ValueObject : IComparable, IComparable<ValueObject>
 {
-  private int? _cachedHashCode;
+  private int? cachedHashCode;
 
   protected abstract IEnumerable<object> GetEqualityComponents();
 
@@ -22,9 +22,9 @@ public abstract class ValueObject : IComparable, IComparable<ValueObject>
 
   public override int GetHashCode()
   {
-    if (!_cachedHashCode.HasValue)
+    if (!cachedHashCode.HasValue)
     {
-      _cachedHashCode = GetEqualityComponents()
+      cachedHashCode = GetEqualityComponents()
           .Aggregate(1, (current, obj) =>
           {
             unchecked
@@ -34,7 +34,7 @@ public abstract class ValueObject : IComparable, IComparable<ValueObject>
           });
     }
 
-    return _cachedHashCode.Value;
+    return cachedHashCode.Value;
   }
 
   public int CompareTo(object? obj)
@@ -85,7 +85,7 @@ public abstract class ValueObject : IComparable, IComparable<ValueObject>
     return CompareTo(other as object);
   }
 
-  public static bool operator ==(ValueObject a, ValueObject b)
+  public static bool operator ==(ValueObject? a, ValueObject? b)
   {
     if (a is null && b is null)
       return true;
@@ -105,13 +105,13 @@ public abstract class ValueObject : IComparable, IComparable<ValueObject>
   {
     ArgumentNullException.ThrowIfNull(obj);
 
-    const string EFCoreProxyPrefix = "Castle.Proxies.";
-    const string NHibernateProxyPostfix = "Proxy";
+    const string efCoreProxyPrefix = "Castle.Proxies.";
+    const string nHibernateProxyPostfix = "Proxy";
 
     var type = obj.GetType();
     var typeString = type.ToString();
 
-    if (typeString.Contains(EFCoreProxyPrefix) || typeString.EndsWith(NHibernateProxyPostfix))
+    if (typeString.Contains(efCoreProxyPrefix) || typeString.EndsWith(nHibernateProxyPostfix))
       return type.BaseType!;
 
     return type;

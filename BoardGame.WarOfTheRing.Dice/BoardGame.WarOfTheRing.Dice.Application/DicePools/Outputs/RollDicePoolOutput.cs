@@ -1,12 +1,12 @@
 namespace BoardGame.WarOfTheRing.Dice.Application.DicePools.Outputs;
 
-public class RollDicePoolOutput
+public class RollDicePoolOutput(List<DieFaceResult> results)
 {
-    public List<DieFaceResult> Results { get; set; }
+    public List<DieFaceResult> Results { get; } = results;
 }
 
 public class DieFaceResult
 {
-    public string Name { get; set; }
+    public string? Name { get; set; }
     public ushort Value { get; set; }
 }
