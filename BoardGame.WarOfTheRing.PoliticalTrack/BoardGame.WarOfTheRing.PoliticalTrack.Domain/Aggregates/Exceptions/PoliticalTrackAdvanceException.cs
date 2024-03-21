@@ -1,6 +1,6 @@
 namespace BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Exceptions;
 
-public class PoliticalTrackAdvanceException(PoliticalTrackAdvanceException.Reason reason) : Exception
+public class PoliticalTrackAdvanceException : ApplicationException
 {
     public enum Reason
     {
@@ -8,7 +8,14 @@ public class PoliticalTrackAdvanceException(PoliticalTrackAdvanceException.Reaso
         BecauseOfOutOfRange
     }
 
-    public override string ToString()
+    public PoliticalTrackAdvanceException(Reason reason)
+    {
+        Message = GetMessage(reason);
+    }
+
+    public override string Message { get; }
+
+    private string GetMessage(Reason reason)
     {
         return reason switch
         {

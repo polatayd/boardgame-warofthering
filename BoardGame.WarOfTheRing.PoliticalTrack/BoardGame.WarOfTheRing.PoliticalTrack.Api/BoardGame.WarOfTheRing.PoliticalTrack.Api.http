@@ -9,3 +9,13 @@ GET {{BoardGame.WarOfTheRing.PoliticalTrack.Api_HostAddress}}/nation/
 Accept: application/json
 
 ###
+
+PUT {{BoardGame.WarOfTheRing.PoliticalTrack.Api_HostAddress}}/nation/activation
+Accept: application/json
+
+###
+
+POST {{BoardGame.WarOfTheRing.PoliticalTrack.Api_HostAddress}}/nation/advancement
+Accept: application/json
+
+###

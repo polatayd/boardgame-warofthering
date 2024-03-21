@@ -3,8 +3,10 @@ using System.Text.Json.Serialization;
 using BoardGame.WarOfTheRing.PoliticalTrack.Application;
 using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations;
 using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations.Commands;
+using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations.Exceptions;
 using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations.Inputs;
 using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations.Queries;
+using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Exceptions;
 using BoardGame.WarOfTheRing.PoliticalTrack.Infrastructure.Persistence.EntityFrameworkCore;
 using BoardGame.WarOfTheRing.PoliticalTrack.Infrastructure.Persistence.EntityFrameworkCore.Nations;
 using MediatR;
@@ -46,24 +48,66 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost("/nation", async ([FromBody] CreateNationCommandInput createNationCommandInput, [FromServices] IMediator mediator) =>
-    {
-        await mediator.Send(new CreateNationCommand(createNationCommandInput));
-        return Results.Created();
-    })
+app.MapPost("/nation",
+        async ([FromBody] CreateNationCommandInput createNationCommandInput, [FromServices] IMediator mediator) =>
+        {
+            await mediator.Send(new CreateNationCommand(createNationCommandInput));
+            return Results.Created();
+        })
     .WithName("CreateNation")
     .WithOpenApi();
 
 app.MapGet("/nation", async ([FromQuery] string name, [FromServices] IMediator mediator) =>
     {
-        var nation = await mediator.Send(new GetNationRequest(new GetNationRequestInput() { Name = name}));
+        var nation = await mediator.Send(new GetNationRequest(new GetNationRequestInput() { Name = name }));
 
         if (nation is null)
             return Results.NotFound();
-        
+
         return Results.Ok(nation);
     })
     .WithName("GetNation")
+    .WithOpenApi();
+
+app.MapPut("/nation/activation",
+        async ([FromBody] ActivateNationCommandInput activateNationCommandInput, [FromServices] IMediator mediator) =>
+        {
+            try
+            {
+                await mediator.Send(new ActivateNationCommand(activateNationCommandInput));
+            }
+            catch (NationNotFoundException e)
+            {
+                return Results.NotFound();
+            }
+
+            return Results.Ok();
+        })
+    .WithName("ActivateNation")
+    .WithOpenApi();
+
+app.MapPost("/nation/advancement",
+        async ([FromBody] AdvanceNationCommandInput advanceNationCommandInput, [FromServices] IMediator mediator) =>
+        {
+            try
+            {
+                await mediator.Send(new AdvanceNationCommand(advanceNationCommandInput));
+            }
+            catch (NationNotFoundException e)
+            {
+                return Results.NotFound();
+            }
+            catch (PoliticalTrackAdvanceException e)
+            {
+                return Results.BadRequest(new
+                {
+                    error = e.Message,
+                });
+            }
+
+            return Results.Ok();
+        })
+    .WithName("AdvanceNation")
     .WithOpenApi();
 
 app.Run();

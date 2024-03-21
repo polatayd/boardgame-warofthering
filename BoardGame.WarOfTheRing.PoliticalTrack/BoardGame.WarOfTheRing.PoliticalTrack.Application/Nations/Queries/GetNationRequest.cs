@@ -34,7 +34,8 @@ public class GetNationRequestHandler : IRequestHandler<GetNationRequest, GetNati
         {
             Name = nation.Name.Value,
             Position = nation.Position.Value,
-            Status = NationFactory.CreateStatusOutput(nation.Status)
+            Status = NationFactory.CreateStatusOutput(nation.Status),
+            IsAtWar = nation.IsAtWar()
         };
         
         return Task.FromResult(nationOutput);

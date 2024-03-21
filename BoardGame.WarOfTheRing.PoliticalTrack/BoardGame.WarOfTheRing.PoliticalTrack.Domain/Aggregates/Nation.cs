@@ -13,7 +13,7 @@ public class Nation : EntityBase, IAggregateRoot
     
     public Nation(Status status, Position position, Name name)
     {
-        if (position.IsInAtWarPosition())
+        if (status == Status.Passive && position.IsInAtWarPosition())
         {
             throw new ArgumentOutOfRangeException();
         }

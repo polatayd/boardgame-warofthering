@@ -5,6 +5,7 @@ public class GetNationRequestOutput
     public StatusOutput Status { get; set; }
     public int Position { get; set; }
     public string Name { get; set; }
+    public bool IsAtWar { get; set; }
 }
 
 public enum StatusOutput
