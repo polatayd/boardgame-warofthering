@@ -1,0 +1,20 @@
+﻿services:
+  boardgame.warofthering.dice.api:
+    image: boardgame.warofthering.dice.api
+    build:
+      context: .
+      dockerfile: BoardGame.WarOfTheRing.Dice/BoardGame.WarOfTheRing.Dice.Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - 5111:8080
+  
+  boardgame.warofthering.politicaltrack.api:
+    image: boardgame.warofthering.politicaltrack.api
+    build:
+      context: .
+      dockerfile: BoardGame.WarOfTheRing.PoliticalTrack/BoardGame.WarOfTheRing.PoliticalTrack.Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - 5145:8080

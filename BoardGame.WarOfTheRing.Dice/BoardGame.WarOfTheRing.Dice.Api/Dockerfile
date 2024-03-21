@@ -6,11 +6,12 @@ EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["BoardGame.WarOfTheRing.Dice.Api/BoardGame.WarOfTheRing.Dice.Api.csproj", "BoardGame.WarOfTheRing.Dice.Api/"]
-RUN dotnet restore "BoardGame.WarOfTheRing.Dice.Api/BoardGame.WarOfTheRing.Dice.Api.csproj"
-COPY . .
-WORKDIR "/src/BoardGame.WarOfTheRing.Dice.Api"
+WORKDIR /app
+COPY ./ ./
+
+WORKDIR /app/BoardGame.WarOfTheRing.Dice/BoardGame.WarOfTheRing.Dice.Api
+RUN dotnet restore
+
 RUN dotnet build "BoardGame.WarOfTheRing.Dice.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
