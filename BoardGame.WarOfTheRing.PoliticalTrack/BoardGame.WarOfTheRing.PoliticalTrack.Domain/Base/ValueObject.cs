@@ -1,4 +1,5 @@
-﻿namespace BoardGame.WarOfTheRing.PoliticalTrack.Domain.Base;
+﻿// ReSharper disable NonReadonlyMemberInGetHashCode
+namespace BoardGame.WarOfTheRing.PoliticalTrack.Domain.Base;
 
 [Serializable]
 public abstract class ValueObject : IComparable, IComparable<ValueObject>
@@ -7,7 +8,7 @@ public abstract class ValueObject : IComparable, IComparable<ValueObject>
 
   protected abstract IEnumerable<object> GetEqualityComponents();
 
-  public override bool Equals(object? obj)
+  public override bool Equals(object obj)
   {
     if (obj == null)
       return false;
@@ -37,7 +38,7 @@ public abstract class ValueObject : IComparable, IComparable<ValueObject>
     return cachedHashCode.Value;
   }
 
-  public int CompareTo(object? obj)
+  public int CompareTo(object obj)
   {
     if (obj == null)
       return 1;
@@ -63,7 +64,7 @@ public abstract class ValueObject : IComparable, IComparable<ValueObject>
     return 0;
   }
 
-  private static int CompareComponents(object? object1, object? object2)
+  private static int CompareComponents(object object1, object object2)
   {
     if (object1 is null && object2 is null)
       return 0;
@@ -80,12 +81,12 @@ public abstract class ValueObject : IComparable, IComparable<ValueObject>
     return object1.Equals(object2) ? 0 : -1;
   }
 
-  public int CompareTo(ValueObject? other)
+  public int CompareTo(ValueObject other)
   {
     return CompareTo(other as object);
   }
 
-  public static bool operator ==(ValueObject? a, ValueObject? b)
+  public static bool operator ==(ValueObject a, ValueObject b)
   {
     if (a is null && b is null)
       return true;

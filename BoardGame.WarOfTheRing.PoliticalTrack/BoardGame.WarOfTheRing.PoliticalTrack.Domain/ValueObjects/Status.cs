@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Base;
 
 namespace BoardGame.WarOfTheRing.PoliticalTrack.Domain.ValueObjects;
@@ -9,6 +10,7 @@ public class Status : ValueObject
 
     public bool IsActive { get; init; }
 
+    [SuppressMessage("ReSharper", "UnusedMember.Local")]
     private Status() {}
 
     public Status(bool isActive)

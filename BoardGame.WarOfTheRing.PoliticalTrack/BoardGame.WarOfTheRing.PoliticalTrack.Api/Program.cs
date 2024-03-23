@@ -30,7 +30,7 @@ builder.Services.Configure<JsonOptions>(options =>
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreateNationCommand).GetTypeInfo().Assembly));
 
-builder.Services.AddDbContext<PoliticalTrackDbContext>((provider, optionsBuilder) =>
+builder.Services.AddDbContext<PoliticalTrackDbContext>((_, optionsBuilder) =>
         optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("postgresql"))
             .EnableSensitiveDataLogging())
     .AddScoped<IUnitOfWork, PoliticalTrackDbContext>(x => x.GetRequiredService<PoliticalTrackDbContext>());
@@ -86,7 +86,7 @@ app.MapPut("/nation/activation",
             {
                 await mediator.Send(new ActivateNationCommand(activateNationCommandInput));
             }
-            catch (NationNotFoundException e)
+            catch (NationNotFoundException)
             {
                 return Results.NotFound();
             }
@@ -103,7 +103,7 @@ app.MapPost("/nation/advancement",
             {
                 await mediator.Send(new AdvanceNationCommand(advanceNationCommandInput));
             }
-            catch (NationNotFoundException e)
+            catch (NationNotFoundException)
             {
                 return Results.NotFound();
             }

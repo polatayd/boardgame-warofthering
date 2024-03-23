@@ -13,7 +13,7 @@ public class PoliticalTrackDbContext : DbContext, IUnitOfWork
     }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder) =>
-        modelBuilder?.ApplyConfigurationsFromAssembly(typeof(PoliticalTrackDbContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(PoliticalTrackDbContext).Assembly);
 
     async Task<int> IUnitOfWork.SaveChangesAsync()
     {

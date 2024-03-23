@@ -1,6 +1,4 @@
-using System.Net;
 using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates;
-using BoardGame.WarOfTheRing.PoliticalTrack.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

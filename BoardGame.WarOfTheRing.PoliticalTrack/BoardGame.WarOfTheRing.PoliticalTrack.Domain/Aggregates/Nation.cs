@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Exceptions;
 using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Specifications;
 using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Base;
@@ -11,6 +12,7 @@ public class Nation : EntityBase, IAggregateRoot
     public Position Position { get; private set; }
     public Name Name { get; private set; }
 
+    [SuppressMessage("ReSharper", "UnusedMember.Local")]
     private Nation() {}
     
     public Nation(Status status, Position position, Name name)

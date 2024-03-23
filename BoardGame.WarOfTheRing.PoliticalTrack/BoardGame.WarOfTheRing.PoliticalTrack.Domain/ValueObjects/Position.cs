@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Exceptions;
 using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Base;
 
@@ -7,6 +8,7 @@ public class Position : ValueObject
 {
     public int Value { get; init; }
     
+    [SuppressMessage("ReSharper", "UnusedMember.Local")]
     private Position() {}
 
     public Position(int value)

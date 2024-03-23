@@ -7,6 +7,6 @@ public class RollDicePoolOutput(List<DieFaceResult> results)
 
 public class DieFaceResult
 {
-    public string? Name { get; set; }
+    public string Name { get; set; }
     public ushort Value { get; set; }
 }

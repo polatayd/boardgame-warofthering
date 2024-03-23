@@ -1,7 +1,6 @@
 using BoardGame.WarOfTheRing.Dice.Application.DicePools.Inputs;
 using BoardGame.WarOfTheRing.Dice.Application.DicePools.Outputs;
 using BoardGame.WarOfTheRing.Dice.Domain.Aggregates;
-using BoardGame.WarOfTheRing.Dice.Domain.ValueObjects;
 using MediatR;
 
 namespace BoardGame.WarOfTheRing.Dice.Application.DicePools.Queries;
@@ -20,7 +19,7 @@ public class RollDicePoolRequestHandler : IRequestHandler<RollDicePoolRequest, R
         var dicePool = new DicePool(dicePoolType, request.RollDicePoolInput.NumberOfDice);
         var result = dicePool.Roll();
 
-        var outputResult = result.Select<DieFace, DieFaceResult>(x => new DieFaceResult()
+        var outputResult = result.Select(x => new DieFaceResult()
         {
             Name = x.Name,
             Value = x.Value
