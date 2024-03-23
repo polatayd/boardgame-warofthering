@@ -31,7 +31,7 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreateNationCommand).GetTypeInfo().Assembly));
 
 builder.Services.AddDbContext<PoliticalTrackDbContext>((provider, optionsBuilder) =>
-        optionsBuilder.UseInMemoryDatabase("InMemoryDatabase")
+        optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("postgresql"))
             .EnableSensitiveDataLogging())
     .AddScoped<IUnitOfWork, PoliticalTrackDbContext>(x => x.GetRequiredService<PoliticalTrackDbContext>());
 
@@ -51,7 +51,17 @@ app.UseHttpsRedirection();
 app.MapPost("/nation",
         async ([FromBody] CreateNationCommandInput createNationCommandInput, [FromServices] IMediator mediator) =>
         {
-            await mediator.Send(new CreateNationCommand(createNationCommandInput));
+            try
+            {
+                await mediator.Send(new CreateNationCommand(createNationCommandInput));
+            }
+            catch (NationAlreadyExistException e)
+            {
+                return Results.BadRequest(new
+                {
+                    error = e.Message,
+                });
+            }
             return Results.Created();
         })
     .WithName("CreateNation")

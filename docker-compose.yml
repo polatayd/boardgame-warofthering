@@ -18,3 +18,14 @@
       ASPNETCORE_ENVIRONMENT: Development
     ports:
       - 5145:8080
+        
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    shm_size: 128mb
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+        - POSTGRES_PASSWORD=password
+        - POSTGRES_USER=aydin

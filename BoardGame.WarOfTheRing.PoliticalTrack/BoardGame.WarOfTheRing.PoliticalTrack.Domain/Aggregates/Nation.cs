@@ -10,6 +10,8 @@ public class Nation : EntityBase, IAggregateRoot
     public Status Status { get; private set; }
     public Position Position { get; private set; }
     public Name Name { get; private set; }
+
+    private Nation() {}
     
     public Nation(Status status, Position position, Name name)
     {

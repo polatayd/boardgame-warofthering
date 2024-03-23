@@ -1,3 +1,4 @@
+using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations.Exceptions;
 using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations.Factories;
 using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations.Inputs;
 using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates;
@@ -24,6 +25,13 @@ public class CreateNationCommandHandler : IRequestHandler<CreateNationCommand>
 
     public async Task Handle(CreateNationCommand request, CancellationToken cancellationToken)
     {
+        var existingNation = nationRepository.Get(request.Input.Name);
+
+        if (existingNation is not null)
+        {
+            throw new NationAlreadyExistException();
+        }
+        
         var status = NationFactory.CreateStatus(request.Input.Status);
         var position = new Position(request.Input.Position);
         var name = new Name(request.Input.Name);

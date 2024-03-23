@@ -5,8 +5,10 @@ namespace BoardGame.WarOfTheRing.PoliticalTrack.Domain.ValueObjects;
 
 public class Position : ValueObject
 {
-    public int Value { get; }
+    public int Value { get; init; }
     
+    private Position() {}
+
     public Position(int value)
     {
         if (value < 0 || value > 3)
