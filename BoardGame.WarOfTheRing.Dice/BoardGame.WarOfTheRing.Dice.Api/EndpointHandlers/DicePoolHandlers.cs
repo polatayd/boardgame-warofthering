@@ -12,16 +12,21 @@ public static class DicePoolHandlers
 {
     public static async Task<Results<ProblemHttpResult, Ok<RollDicePoolOutput>>> RollDicePool(
         [FromBody] RollDicePoolInput rollDicePoolInput,
-        [FromServices] IMediator mediator)
+        [FromServices] IMediator mediator,
+        [FromServices] ILogger<RollDicePoolRequest> logger)
     {
         RollDicePoolOutput result;
-        
+
         try
         {
             result = await mediator.Send(new RollDicePoolRequest(rollDicePoolInput));
         }
         catch (NumberOfDiceOutOfRangeException e)
         {
+            logger.LogError("DicePoolType: {DicePoolType}, NumberOfDice: {NumberOfDice}, Message: {Message}",
+                rollDicePoolInput.DicePoolType, rollDicePoolInput.NumberOfDice,
+                e.Message);
+
             return TypedResults.Problem(new ProblemDetails()
             {
                 Status = StatusCodes.Status400BadRequest,
@@ -30,7 +35,7 @@ public static class DicePoolHandlers
                 Detail = e.Message,
             });
         }
-        
+
         return TypedResults.Ok(result);
     }
 }

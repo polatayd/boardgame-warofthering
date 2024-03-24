@@ -70,7 +70,8 @@ public static class NationHandlers
     public static async Task<Results<NotFound, ProblemHttpResult, Ok>> AdvanceNation(
         [FromRoute] string name,
         [FromBody] AdvanceNationInput advanceNationInput,
-        [FromServices] IMediator mediator)
+        [FromServices] IMediator mediator,
+        [FromServices] ILogger<AdvanceNationCommand> logger)
     {
         try
         {
@@ -86,6 +87,9 @@ public static class NationHandlers
         }
         catch (PoliticalTrackAdvanceException e)
         {
+            logger.LogError("GameId: {GameId}, Nation: {Nation}, Message: {Message}", advanceNationInput.GameId, name,
+                e.Message);
+            
             return TypedResults.Problem(new ProblemDetails()
             {
                 Status = StatusCodes.Status400BadRequest,
