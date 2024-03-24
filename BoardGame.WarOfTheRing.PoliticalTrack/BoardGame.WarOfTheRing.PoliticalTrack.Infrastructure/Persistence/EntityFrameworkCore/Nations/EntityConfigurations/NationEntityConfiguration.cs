@@ -12,5 +12,6 @@ public class NationEntityConfiguration : IEntityTypeConfiguration<Nation>
         builder.ComplexProperty(x => x.Name, y => { y.IsRequired(); });
         builder.ComplexProperty(x => x.Position, y => y.IsRequired());
         builder.ComplexProperty(x => x.Status, y => y.IsRequired());
+        builder.HasIndex(x => x.GameId);
     }
 }

@@ -17,8 +17,9 @@ public class NationTest
         var status = Status.Active;
         var position = new Position(2);
         var name = fixture.Create<Name>(); 
+        var gameId = fixture.Create<Guid>(); 
         
-        var sut = new Nation(status, position, name);
+        var sut = new Nation(status, position, name, gameId);
 
         //Act
         sut.AdvanceOnPoliticalTrack();
@@ -36,8 +37,9 @@ public class NationTest
         var status = Status.Passive;
         var position = new Position(1);
         var name = fixture.Create<Name>(); 
-
-        var sut = new Nation(status, position, name);
+        var gameId = fixture.Create<Guid>(); 
+        
+        var sut = new Nation(status, position, name, gameId);
 
         //Act
         sut.AdvanceOnPoliticalTrack();
@@ -55,8 +57,9 @@ public class NationTest
         var status = Status.Passive;
         var position = new Position(2);
         var name = fixture.Create<Name>(); 
-
-        var sut = new Nation(status, position, name);
+        var gameId = fixture.Create<Guid>(); 
+        
+        var sut = new Nation(status, position, name, gameId);
 
         //Act
         var action = () => sut.AdvanceOnPoliticalTrack();
@@ -74,8 +77,9 @@ public class NationTest
         var status = Status.Active;
         var position = new Position(2);
         var name = fixture.Create<Name>(); 
-
-        var sut = new Nation(status, position, name);
+        var gameId = fixture.Create<Guid>(); 
+        
+        var sut = new Nation(status, position, name, gameId);
 
         //Act
         sut.AdvanceOnPoliticalTrack();
@@ -94,9 +98,10 @@ public class NationTest
         var status = Status.Passive;
         var position = new Position(3);
         var name = fixture.Create<Name>(); 
-
+        var gameId = fixture.Create<Guid>(); 
+        
         //Act
-        var action = () => new Nation(status, position, name);
+        var action = () => new Nation(status, position, name, gameId);
         
         //Assert
         action.Should().ThrowExactly<ArgumentOutOfRangeException>();
@@ -124,8 +129,9 @@ public class NationTest
         var status = Status.Passive;
         var position = new Position(1);
         var name = fixture.Create<Name>(); 
-
-        var sut = new Nation(status, position, name);
+        var gameId = fixture.Create<Guid>(); 
+        
+        var sut = new Nation(status, position, name, gameId);
 
         //Act
         sut.Activate();

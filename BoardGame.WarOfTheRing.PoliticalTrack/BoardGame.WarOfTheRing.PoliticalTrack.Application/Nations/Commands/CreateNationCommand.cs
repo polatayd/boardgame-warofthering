@@ -25,7 +25,7 @@ public class CreateNationCommandHandler : IRequestHandler<CreateNationCommand>
 
     public async Task Handle(CreateNationCommand request, CancellationToken cancellationToken)
     {
-        var existingNation = nationRepository.Get(request.Input.Name);
+        var existingNation = nationRepository.Get(request.Input.Name, request.Input.GameId);
 
         if (existingNation is not null)
         {
@@ -36,7 +36,7 @@ public class CreateNationCommandHandler : IRequestHandler<CreateNationCommand>
         var position = new Position(request.Input.Position);
         var name = new Name(request.Input.Name);
 
-        var nation = new Nation(status, position, name);
+        var nation = new Nation(status, position, name, request.Input.GameId);
 
         nationRepository.Add(nation);
 

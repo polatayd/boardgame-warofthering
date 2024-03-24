@@ -14,7 +14,7 @@ public class PoliticalTrackDbContextFactory : IDesignTimeDbContextFactory<Politi
             .Build();
 
         var optionsBuilder = new DbContextOptionsBuilder<PoliticalTrackDbContext>();
-        optionsBuilder.UseNpgsql(configuration.GetConnectionString("postgresql-design"));
+        optionsBuilder.UseNpgsql(configuration.GetConnectionString("postgresql"));
 
         return new PoliticalTrackDbContext(optionsBuilder.Options);
     }

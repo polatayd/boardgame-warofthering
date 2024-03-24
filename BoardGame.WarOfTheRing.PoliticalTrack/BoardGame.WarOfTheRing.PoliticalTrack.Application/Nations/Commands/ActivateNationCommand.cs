@@ -22,7 +22,7 @@ public class ActivateNationCommandHandler : IRequestHandler<ActivateNationComman
 
     public async Task Handle(ActivateNationCommand request, CancellationToken cancellationToken)
     {
-        var nation = nationRepository.Get(request.Input.Name);
+        var nation = nationRepository.Get(request.Input.Name, request.Input.GameId);
 
         if (nation == null)
         {

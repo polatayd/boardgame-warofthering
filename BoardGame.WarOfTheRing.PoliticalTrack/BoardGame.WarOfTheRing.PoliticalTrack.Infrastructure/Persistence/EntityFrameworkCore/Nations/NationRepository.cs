@@ -10,8 +10,8 @@ public class NationRepository(PoliticalTrackDbContext politicalTrackDbContext) :
         politicalTrackDbContext.Nations.Add(nation);
     }
 
-    public Nation Get(string name)
+    public Nation Get(string name, Guid gameId)
     {
-        return politicalTrackDbContext.Nations.FirstOrDefault(x => x.Name.Value == name);
+        return politicalTrackDbContext.Nations.FirstOrDefault(x => x.Name.Value == name && x.GameId == gameId);
     }
 }

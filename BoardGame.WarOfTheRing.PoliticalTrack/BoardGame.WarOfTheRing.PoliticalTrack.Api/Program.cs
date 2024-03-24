@@ -67,9 +67,9 @@ app.MapPost("/nation",
     .WithName("CreateNation")
     .WithOpenApi();
 
-app.MapGet("/nation", async ([FromQuery] string name, [FromServices] IMediator mediator) =>
+app.MapGet("/nation", async ([FromQuery] string name, [FromQuery] Guid gameId, [FromServices] IMediator mediator) =>
     {
-        var nation = await mediator.Send(new GetNationRequest(new GetNationRequestInput() { Name = name }));
+        var nation = await mediator.Send(new GetNationRequest(new GetNationRequestInput() { Name = name, GameId = gameId }));
 
         if (nation is null)
             return Results.NotFound();

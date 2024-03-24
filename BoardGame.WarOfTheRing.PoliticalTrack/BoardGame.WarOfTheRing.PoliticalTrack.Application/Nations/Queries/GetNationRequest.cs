@@ -21,7 +21,7 @@ public class GetNationRequestHandler : IRequestHandler<GetNationRequest, GetNati
 
     public Task<GetNationRequestOutput> Handle(GetNationRequest request, CancellationToken cancellationToken)
     {
-        var nation = nationRepository.Get(request.Input.Name);
+        var nation = nationRepository.Get(request.Input.Name, request.Input.GameId);
 
         if (nation is null)
         {

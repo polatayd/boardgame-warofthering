@@ -11,11 +11,12 @@ public class Nation : EntityBase, IAggregateRoot
     public Status Status { get; private set; }
     public Position Position { get; private set; }
     public Name Name { get; private set; }
+    public Guid GameId { get; private set; }
 
     [SuppressMessage("ReSharper", "UnusedMember.Local")]
     private Nation() {}
     
-    public Nation(Status status, Position position, Name name)
+    public Nation(Status status, Position position, Name name, Guid gameId)
     {
         if (status == Status.Passive && position.IsInAtWarPosition())
         {
@@ -25,6 +26,7 @@ public class Nation : EntityBase, IAggregateRoot
         Status = status;
         Position = position;
         Name = name;
+        GameId = gameId;
     }
 
     public bool IsAtWar()
