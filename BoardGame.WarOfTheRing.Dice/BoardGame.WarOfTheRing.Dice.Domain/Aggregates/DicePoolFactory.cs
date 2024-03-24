@@ -20,9 +20,9 @@ public static class DicePoolFactory
             case DicePoolType.NumberedDicePool:
                 if (numberOfDice > 5)
                 {
-                    throw new ArgumentException("Number of dice can not be more than five, if it's numbered dice.");
+                    throw new NumberOfDiceOutOfRangeException();
                 }
-                
+
                 addDieMethod = NumberedDie.Create;
                 break;
             default:
