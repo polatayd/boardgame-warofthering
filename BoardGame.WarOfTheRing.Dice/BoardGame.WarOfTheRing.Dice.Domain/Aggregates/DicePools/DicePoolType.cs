@@ -1,4 +1,4 @@
-namespace BoardGame.WarOfTheRing.Dice.Domain.Aggregates;
+namespace BoardGame.WarOfTheRing.Dice.Domain.Aggregates.DicePools;
 
 public enum DicePoolType
 {

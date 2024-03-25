@@ -1,6 +1,7 @@
-using BoardGame.WarOfTheRing.Dice.Domain.ValueObjects;
+using BoardGame.WarOfTheRing.Dice.Domain.Aggregates.DicePools.Exceptions;
+using BoardGame.WarOfTheRing.Dice.Domain.Aggregates.DicePools.ValueObjects;
 
-namespace BoardGame.WarOfTheRing.Dice.Domain.Aggregates;
+namespace BoardGame.WarOfTheRing.Dice.Domain.Aggregates.DicePools;
 
 public static class DicePoolFactory
 {

@@ -1,6 +1,6 @@
 using BoardGame.WarOfTheRing.Dice.Domain.Base;
 
-namespace BoardGame.WarOfTheRing.Dice.Domain.ValueObjects;
+namespace BoardGame.WarOfTheRing.Dice.Domain.Aggregates.DicePools.ValueObjects;
 
 public abstract class Die : ValueObject
 {

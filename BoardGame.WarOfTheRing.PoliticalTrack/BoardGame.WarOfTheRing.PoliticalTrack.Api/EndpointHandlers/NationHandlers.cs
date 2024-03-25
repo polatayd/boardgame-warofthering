@@ -3,7 +3,7 @@ using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations.Exceptions;
 using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations.Inputs;
 using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations.Outputs;
 using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations.Queries;
-using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Exceptions;
+using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;

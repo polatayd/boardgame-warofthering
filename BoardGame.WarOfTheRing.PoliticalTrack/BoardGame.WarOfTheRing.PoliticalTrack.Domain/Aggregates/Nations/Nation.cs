@@ -1,10 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
-using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Exceptions;
-using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Specifications;
+using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations.Exceptions;
+using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations.Specifications;
+using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations.ValueObjects;
 using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Base;
-using BoardGame.WarOfTheRing.PoliticalTrack.Domain.ValueObjects;
 
-namespace BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates;
+namespace BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations;
 
 public class Nation : EntityBase, IAggregateRoot
 {

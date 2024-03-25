@@ -1,6 +1,6 @@
 using BoardGame.WarOfTheRing.Dice.Application.DicePools.Inputs;
 using BoardGame.WarOfTheRing.Dice.Application.DicePools.Outputs;
-using BoardGame.WarOfTheRing.Dice.Domain.Aggregates;
+using BoardGame.WarOfTheRing.Dice.Domain.Aggregates.DicePools;
 using MediatR;
 
 namespace BoardGame.WarOfTheRing.Dice.Application.DicePools.Queries;

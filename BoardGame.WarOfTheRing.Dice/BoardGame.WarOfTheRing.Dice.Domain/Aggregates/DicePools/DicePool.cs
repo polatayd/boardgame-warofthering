@@ -1,7 +1,7 @@
+using BoardGame.WarOfTheRing.Dice.Domain.Aggregates.DicePools.ValueObjects;
 using BoardGame.WarOfTheRing.Dice.Domain.Base;
-using BoardGame.WarOfTheRing.Dice.Domain.ValueObjects;
 
-namespace BoardGame.WarOfTheRing.Dice.Domain.Aggregates;
+namespace BoardGame.WarOfTheRing.Dice.Domain.Aggregates.DicePools;
 
 public class DicePool : EntityBase, IAggregateRoot
 {

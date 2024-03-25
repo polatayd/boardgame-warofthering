@@ -1,8 +1,8 @@
 using System.Linq.Expressions;
+using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations.ValueObjects;
 using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Base;
-using BoardGame.WarOfTheRing.PoliticalTrack.Domain.ValueObjects;
 
-namespace BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Specifications;
+namespace BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations.Specifications;
 
 public class AdvanceAtWarRestrictionSpecification : Specification<Nation>
 {

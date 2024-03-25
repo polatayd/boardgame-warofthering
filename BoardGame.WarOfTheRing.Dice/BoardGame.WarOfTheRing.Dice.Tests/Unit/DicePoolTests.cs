@@ -1,6 +1,6 @@
 using AutoFixture;
-using BoardGame.WarOfTheRing.Dice.Domain.Aggregates;
-using BoardGame.WarOfTheRing.Dice.Domain.ValueObjects;
+using BoardGame.WarOfTheRing.Dice.Domain.Aggregates.DicePools;
+using BoardGame.WarOfTheRing.Dice.Domain.Aggregates.DicePools.ValueObjects;
 using FluentAssertions;
 
 namespace BoardGame.WarOfTheRing.Dice.Tests.Unit;

@@ -1,8 +1,8 @@
 using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations.Exceptions;
 using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations.Factories;
 using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations.Inputs;
-using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates;
-using BoardGame.WarOfTheRing.PoliticalTrack.Domain.ValueObjects;
+using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations;
+using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations.ValueObjects;
 using MediatR;
 
 namespace BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations.Commands;

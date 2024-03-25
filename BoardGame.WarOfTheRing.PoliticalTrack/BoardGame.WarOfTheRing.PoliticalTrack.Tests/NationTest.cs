@@ -1,7 +1,7 @@
 using AutoFixture;
-using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates;
-using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Exceptions;
-using BoardGame.WarOfTheRing.PoliticalTrack.Domain.ValueObjects;
+using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations;
+using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations.Exceptions;
+using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations.ValueObjects;
 using FluentAssertions;
 
 namespace BoardGame.WarOfTheRing.PoliticalTrack.Tests;

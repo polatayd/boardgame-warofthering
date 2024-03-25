@@ -1,8 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
-using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Exceptions;
+using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations.Exceptions;
 using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Base;
 
-namespace BoardGame.WarOfTheRing.PoliticalTrack.Domain.ValueObjects;
+namespace BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations.ValueObjects;
 
 public class Position : ValueObject
 {

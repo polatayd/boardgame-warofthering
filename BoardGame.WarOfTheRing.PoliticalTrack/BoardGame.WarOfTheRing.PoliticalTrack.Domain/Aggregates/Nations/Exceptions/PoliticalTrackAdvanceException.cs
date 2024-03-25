@@ -1,4 +1,4 @@
-namespace BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Exceptions;
+namespace BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations.Exceptions;
 
 public class PoliticalTrackAdvanceException : ApplicationException
 {

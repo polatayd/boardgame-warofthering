@@ -1,7 +1,7 @@
 using BoardGame.WarOfTheRing.Dice.Application.DicePools.Inputs;
 using BoardGame.WarOfTheRing.Dice.Application.DicePools.Outputs;
 using BoardGame.WarOfTheRing.Dice.Application.DicePools.Queries;
-using BoardGame.WarOfTheRing.Dice.Domain.Aggregates;
+using BoardGame.WarOfTheRing.Dice.Domain.Aggregates.DicePools.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;

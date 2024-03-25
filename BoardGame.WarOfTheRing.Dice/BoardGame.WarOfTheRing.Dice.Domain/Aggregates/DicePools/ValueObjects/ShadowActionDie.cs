@@ -1,4 +1,4 @@
-namespace BoardGame.WarOfTheRing.Dice.Domain.ValueObjects;
+namespace BoardGame.WarOfTheRing.Dice.Domain.Aggregates.DicePools.ValueObjects;
 
 public class ShadowActionDie : Die
 {

@@ -1,5 +1,5 @@
 using BoardGame.WarOfTheRing.PoliticalTrack.Application.Nations;
-using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates;
+using BoardGame.WarOfTheRing.PoliticalTrack.Domain.Aggregates.Nations;
 
 namespace BoardGame.WarOfTheRing.PoliticalTrack.Infrastructure.Persistence.EntityFrameworkCore.Nations;
 

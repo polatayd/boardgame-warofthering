@@ -1,6 +1,6 @@
 using BoardGame.WarOfTheRing.Dice.Domain.Base;
 
-namespace BoardGame.WarOfTheRing.Dice.Domain.ValueObjects;
+namespace BoardGame.WarOfTheRing.Dice.Domain.Aggregates.DicePools.ValueObjects;
 
 public class DieFace(string name, ushort value) : ValueObject
 {

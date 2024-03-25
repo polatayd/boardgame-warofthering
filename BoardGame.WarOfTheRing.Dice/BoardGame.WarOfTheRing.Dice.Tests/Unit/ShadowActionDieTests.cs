@@ -1,4 +1,4 @@
-using BoardGame.WarOfTheRing.Dice.Domain.ValueObjects;
+using BoardGame.WarOfTheRing.Dice.Domain.Aggregates.DicePools.ValueObjects;
 using FluentAssertions;
 
 namespace BoardGame.WarOfTheRing.Dice.Tests.Unit;
