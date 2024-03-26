@@ -16,6 +16,6 @@ public class FellowshipDbContextFactory : IDesignTimeDbContextFactory<Fellowship
         var optionsBuilder = new DbContextOptionsBuilder<FellowshipDbContext>();
         optionsBuilder.UseNpgsql(configuration.GetConnectionString("postgresql"));
 
-        return new FellowshipDbContext(optionsBuilder.Options);
+        return new FellowshipDbContext(optionsBuilder.Options, null);
     }
 }

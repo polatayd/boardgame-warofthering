@@ -6,4 +6,17 @@
         <Nullable>disable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\BoardGame.WarOfTheRing.Fellowships.Domain\BoardGame.WarOfTheRing.Fellowships.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Fellowships\Outputs\" />
+      <Folder Include="Fellowships\Queries\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.2.0" />
+    </ItemGroup>
+
 </Project>

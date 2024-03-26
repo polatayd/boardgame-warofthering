@@ -28,7 +28,7 @@ public class Fellowship : EntityBase, IAggregateRoot
     {
         var fellowship = new Fellowship(gameId);
 
-        fellowship.RegisterDomainEvent(new FellowshipCreated(fellowship.Id, fellowship.HuntingId));
+        fellowship.RegisterDomainEvent(new FellowshipCreated(fellowship.Id, fellowship.HuntingId, fellowship.GameId));
 
         return fellowship;
     }

@@ -14,7 +14,7 @@ public class HuntPool : ValueObject
         [
             new HuntTile(1, true, false, false, false),
             new HuntTile(2, false, false, false, false),
-            new HuntTile(0, false, false, false, false)
+            new HuntTile(0, false, false, true, false)
         ];
     }
 

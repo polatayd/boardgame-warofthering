@@ -10,5 +10,5 @@ public abstract class EntityBase
     [NotMapped] public IReadOnlyList<DomainEvent> DomainEvents => domainEvents.AsReadOnly();
 
     protected void RegisterDomainEvent(DomainEvent domainEvent) => domainEvents.Add(domainEvent);
-    internal void ClearDomainEvents() => domainEvents.Clear();
+    public void ClearDomainEvents() => domainEvents.Clear();
 }

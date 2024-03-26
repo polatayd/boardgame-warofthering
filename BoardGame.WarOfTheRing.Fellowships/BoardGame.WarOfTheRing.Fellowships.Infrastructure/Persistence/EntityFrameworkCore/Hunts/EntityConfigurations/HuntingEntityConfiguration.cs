@@ -1,3 +1,4 @@
+using BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Fellowships;
 using BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -8,8 +9,17 @@ public class HuntingEntityConfiguration : IEntityTypeConfiguration<Hunting>
 {
     public void Configure(EntityTypeBuilder<Hunting> builder)
     {
-        builder.HasIndex(x => x.FellowshipId);
-        builder.ComplexProperty(x => x.HuntBox);
-        builder.ComplexProperty(x => x.HuntPool);
+        builder.HasOne<Fellowship>().WithOne().HasForeignKey<Hunting>(x => x.FellowshipId);
+        builder.HasIndex(x => x.FellowshipId).IsUnique();
+        builder.HasIndex(x => x.GameId).IsUnique();
+        builder.ComplexProperty(x => x.HuntBox,y => y.IsRequired());
+        builder.OwnsOne(x => x.HuntPool, huntingBuilder =>
+        {
+            huntingBuilder.ToJson();
+            huntingBuilder.OwnsMany(z => z.HuntTiles, huntTilesBuilder =>
+            {
+                huntTilesBuilder.ToJson();
+            });
+        });
     }
 }

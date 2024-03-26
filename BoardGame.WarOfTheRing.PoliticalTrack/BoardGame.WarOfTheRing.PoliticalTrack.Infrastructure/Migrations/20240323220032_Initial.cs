@@ -25,6 +25,7 @@ namespace BoardGame.WarOfTheRing.PoliticalTrack.Infrastructure.Migrations
                     table.PrimaryKey("PK_Nations", x => x.Id);
                 });
             
+            //TODO: Make composite index.
             migrationBuilder.CreateIndex(
                 name: "IX_Nations_Name_Value",
                 table: "Nations",

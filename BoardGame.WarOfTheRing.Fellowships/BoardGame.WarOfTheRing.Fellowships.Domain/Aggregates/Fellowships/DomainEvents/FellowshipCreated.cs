@@ -5,11 +5,13 @@ namespace BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Fellowships.Domai
 public class FellowshipCreated : DomainEvent
 {
     public Guid FellowshipId { get; init; }
-    public Guid FellowshipHuntingId { get; init; }
+    public Guid HuntingId { get; init; }
+    public Guid GameId { get; init; }
 
-    public FellowshipCreated(Guid fellowshipId, Guid fellowshipHuntingId)
+    public FellowshipCreated(Guid fellowshipId, Guid huntingId, Guid gameId)
     {
         FellowshipId = fellowshipId;
-        FellowshipHuntingId = fellowshipHuntingId;
+        HuntingId = huntingId;
+        GameId = gameId;
     }
 }

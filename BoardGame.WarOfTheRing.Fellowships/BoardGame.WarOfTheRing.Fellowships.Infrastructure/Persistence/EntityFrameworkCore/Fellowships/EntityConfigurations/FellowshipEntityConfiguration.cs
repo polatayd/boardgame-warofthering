@@ -8,8 +8,8 @@ public class FellowshipEntityConfiguration : IEntityTypeConfiguration<Fellowship
 {
     public void Configure(EntityTypeBuilder<Fellowship> builder)
     {
-        builder.HasIndex(x => x.GameId);
-        builder.ComplexProperty(x => x.ProgressCounter);
-        builder.ComplexProperty(x => x.CorruptionCounter);
+        builder.HasIndex(x => x.GameId).IsUnique();
+        builder.ComplexProperty(x => x.ProgressCounter, y => y.IsRequired());
+        builder.ComplexProperty(x => x.CorruptionCounter, y=>y.IsRequired());
     }
 }
