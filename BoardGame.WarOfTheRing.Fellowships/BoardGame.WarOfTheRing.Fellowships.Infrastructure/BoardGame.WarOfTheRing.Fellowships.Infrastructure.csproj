@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.3" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\BoardGame.WarOfTheRing.Fellowships.Application\BoardGame.WarOfTheRing.Fellowships.Application.csproj" />
+      <ProjectReference Include="..\BoardGame.WarOfTheRing.Fellowships.Domain\BoardGame.WarOfTheRing.Fellowships.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

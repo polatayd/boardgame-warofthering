@@ -1,3 +1,4 @@
+using BoardGame.WarOfTheRing.Dice.Api;
 using BoardGame.WarOfTheRing.Dice.Api.EndpointMappings;
 using BoardGame.WarOfTheRing.Dice.Api.ServiceRegistrations;
 using Serilog;
@@ -16,13 +17,13 @@ builder.Services.RegisterPoliticalTrackServices();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.ApplicationIsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-if (!app.Environment.IsDevelopment())
+if (!app.Environment.ApplicationIsDevelopment())
 {
     app.UseExceptionHandler();
 }

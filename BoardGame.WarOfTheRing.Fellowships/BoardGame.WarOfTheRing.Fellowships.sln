@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.Fellowships.Domain", "BoardGame.WarOfTheRing.Fellowships.Domain\BoardGame.WarOfTheRing.Fellowships.Domain.csproj", "{F0CFBCED-9462-4214-AF37-1DA96BEB22AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.Fellowships.Infrastructure", "BoardGame.WarOfTheRing.Fellowships.Infrastructure\BoardGame.WarOfTheRing.Fellowships.Infrastructure.csproj", "{60598447-3BE4-401B-A911-A4D66B894D57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.Fellowships.Application", "BoardGame.WarOfTheRing.Fellowships.Application\BoardGame.WarOfTheRing.Fellowships.Application.csproj", "{4775D93B-677B-4194-A76F-C9205E99603F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.Fellowships.Api", "BoardGame.WarOfTheRing.Fellowships.Api\BoardGame.WarOfTheRing.Fellowships.Api.csproj", "{C2C5E892-9823-4B0D-867F-E1B5BD5F6B8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1276157D-45FB-44C4-B726-ECB4BC9C2CA5}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = ./../docker-compose.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0CFBCED-9462-4214-AF37-1DA96BEB22AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0CFBCED-9462-4214-AF37-1DA96BEB22AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0CFBCED-9462-4214-AF37-1DA96BEB22AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0CFBCED-9462-4214-AF37-1DA96BEB22AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60598447-3BE4-401B-A911-A4D66B894D57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60598447-3BE4-401B-A911-A4D66B894D57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60598447-3BE4-401B-A911-A4D66B894D57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60598447-3BE4-401B-A911-A4D66B894D57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4775D93B-677B-4194-A76F-C9205E99603F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4775D93B-677B-4194-A76F-C9205E99603F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4775D93B-677B-4194-A76F-C9205E99603F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4775D93B-677B-4194-A76F-C9205E99603F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2C5E892-9823-4B0D-867F-E1B5BD5F6B8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C5E892-9823-4B0D-867F-E1B5BD5F6B8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2C5E892-9823-4B0D-867F-E1B5BD5F6B8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2C5E892-9823-4B0D-867F-E1B5BD5F6B8D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

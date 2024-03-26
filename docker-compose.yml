@@ -18,6 +18,16 @@
       ASPNETCORE_ENVIRONMENT: DockerDevelopment
     ports:
       - 5145:8080
+      
+  boardgame.warofthering.fellowships.api:
+    image: boardgame.warofthering.fellowships.api
+    build:
+      context: .
+      dockerfile: BoardGame.WarOfTheRing.Fellowships/BoardGame.WarOfTheRing.Fellowships.Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: DockerDevelopment
+    ports:
+      - 5280:8080
         
   db:
     image: postgres
