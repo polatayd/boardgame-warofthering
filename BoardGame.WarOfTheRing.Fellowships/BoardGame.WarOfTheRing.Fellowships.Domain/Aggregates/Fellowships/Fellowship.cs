@@ -1,6 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 using BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Fellowships.DomainEvents;
+using BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Fellowships.Exceptions;
+using BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Fellowships.Specifications;
 using BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Fellowships.ValueObjects;
+using BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts.ValueObjects;
 using BoardGame.WarOfTheRing.Fellowships.Domain.Base;
 
 namespace BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Fellowships;
@@ -33,8 +36,15 @@ public class Fellowship : EntityBase, IAggregateRoot
         return fellowship;
     }
 
-    public void ForwardProgressCounter()
+    public void ForwardProgressCounter(HuntState huntState)
     {
+        var restriction = new ProgressCounterForwardRestriction(huntState);
+
+        if (restriction.IsSatisfiedBy(this))
+        {
+            throw new FellowshipProgressCounterException(restriction.Message);
+        }
+        
         ProgressCounter = ProgressCounter.Forward();
         
         RegisterDomainEvent(new FellowshipProgressCounterForwarded(Id, HuntingId, ProgressCounter.Value));

@@ -10,8 +10,13 @@ public class HuntRepository(FellowshipDbContext fellowshipDbContext) : IHuntRepo
         fellowshipDbContext.Huntings.Add(hunting);
     }
 
-    public Hunting Get(Guid gameId)
+    public Hunting GetByGameId(Guid gameId)
     {
         return fellowshipDbContext.Huntings.FirstOrDefault(x => x.GameId == gameId);
+    }
+    
+    public Hunting GetById(Guid id)
+    {
+        return fellowshipDbContext.Huntings.FirstOrDefault(x => x.Id == id);
     }
 }

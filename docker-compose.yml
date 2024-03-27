@@ -35,7 +35,7 @@
       - 5432:5432
     shm_size: 128mb
     volumes:
-      - ~/apps/postgres:/var/lib/postgresql/data
+      - ~/apps/postgres-warofthering:/var/lib/postgresql/data
     environment:
         - POSTGRES_PASSWORD=password
         - POSTGRES_USER=aydin

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Persistence.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BoardGame.WarOfTheRing.Fellowships.Infrastructure.Migrations
 {
     [DbContext(typeof(FellowshipDbContext))]
-    partial class FellowshipDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240327215619_HuntAdded")]
+    partial class HuntAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +62,7 @@ namespace BoardGame.WarOfTheRing.Fellowships.Infrastructure.Migrations
                     b.HasIndex("GameId")
                         .IsUnique();
 
-                    b.ToTable("Fellowships", (string)null);
+                    b.ToTable("Fellowships");
                 });
 
             modelBuilder.Entity("BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts.Hunting", b =>
@@ -106,7 +109,7 @@ namespace BoardGame.WarOfTheRing.Fellowships.Infrastructure.Migrations
                     b.HasIndex("GameId")
                         .IsUnique();
 
-                    b.ToTable("Huntings", (string)null);
+                    b.ToTable("Huntings");
                 });
 
             modelBuilder.Entity("BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts.Hunting", b =>
@@ -117,21 +120,21 @@ namespace BoardGame.WarOfTheRing.Fellowships.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts.Hunting.HuntPool#BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts.ValueObjects.HuntPool", "HuntPool", b1 =>
+                    b.OwnsOne("BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts.ValueObjects.HuntPool", "HuntPool", b1 =>
                         {
                             b1.Property<Guid>("HuntingId")
                                 .HasColumnType("uuid");
 
                             b1.HasKey("HuntingId");
 
-                            b1.ToTable("Huntings", (string)null);
+                            b1.ToTable("Huntings");
 
                             b1.ToJson("HuntPool");
 
                             b1.WithOwner()
                                 .HasForeignKey("HuntingId");
 
-                            b1.OwnsMany("BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts.Hunting.HuntPool#BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts.ValueObjects.HuntPool.HuntTiles#BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts.ValueObjects.HuntTile", "HuntTiles", b2 =>
+                            b1.OwnsMany("BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts.ValueObjects.HuntTile", "HuntTiles", b2 =>
                                 {
                                     b2.Property<Guid>("HuntPoolHuntingId")
                                         .HasColumnType("uuid");
@@ -157,7 +160,7 @@ namespace BoardGame.WarOfTheRing.Fellowships.Infrastructure.Migrations
 
                                     b2.HasKey("HuntPoolHuntingId", "Id");
 
-                                    b2.ToTable("Huntings", (string)null);
+                                    b2.ToTable("Huntings");
 
                                     b2.ToJson("HuntTiles");
 

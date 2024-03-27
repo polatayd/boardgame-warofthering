@@ -6,10 +6,15 @@ public static class FellowshipEndpointMappings
 {
     public static void RegisterFellowshipEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
     {
-        var nationEndpoints = endpointRouteBuilder.MapGroup("/fellowships");
+        var fellowshipsEndpoints = endpointRouteBuilder.MapGroup("/fellowships");
+        var fellowshipEndpoints = fellowshipsEndpoints.MapGroup("/{gameId:guid}");
 
-        nationEndpoints.MapPost("", FellowshipHandlers.CreateFellowship)
+        fellowshipsEndpoints.MapPost("", FellowshipHandlers.CreateFellowship)
             .WithName("CreateFellowship")
+            .WithOpenApi();
+        
+        fellowshipEndpoints.MapPost("/forward", FellowshipHandlers.ForwardFellowship)
+            .WithName("ForwardFellowship")
             .WithOpenApi();
     }
 }

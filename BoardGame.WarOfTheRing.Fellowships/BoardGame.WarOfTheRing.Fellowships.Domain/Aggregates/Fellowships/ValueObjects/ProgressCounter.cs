@@ -29,7 +29,7 @@ public class ProgressCounter : ValueObject
     {
         if (!IsHidden)
         {
-            throw new RevealedFellowshipCanNotBeForwardedException();
+            throw new FellowshipProgressCounterException("Revealed Fellowship can not be forwarded");
         }
         
         return new ProgressCounter(Value + 1, IsHidden);

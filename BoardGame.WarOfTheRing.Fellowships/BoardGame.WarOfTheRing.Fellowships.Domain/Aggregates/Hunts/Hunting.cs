@@ -10,6 +10,7 @@ public class Hunting : EntityBase, IAggregateRoot
     public Guid GameId { get; private set; }
     public HuntBox HuntBox { get; private set; }
     public HuntPool HuntPool { get; private set; }
+    public Hunt ActiveHunt { get; private set; }
     
     [SuppressMessage("ReSharper", "UnusedMember.Local")]
     private Hunting() {}
@@ -20,6 +21,12 @@ public class Hunting : EntityBase, IAggregateRoot
         FellowshipId = fellowshipId;
         GameId = gameId;
         HuntBox = new HuntBox();
-        HuntPool = new HuntPool();
+        HuntPool = HuntPool.Create();
+        ActiveHunt = new Hunt();
+    }
+
+    public void StartActiveHunt()
+    {
+        ActiveHunt = ActiveHunt.Start();
     }
 }

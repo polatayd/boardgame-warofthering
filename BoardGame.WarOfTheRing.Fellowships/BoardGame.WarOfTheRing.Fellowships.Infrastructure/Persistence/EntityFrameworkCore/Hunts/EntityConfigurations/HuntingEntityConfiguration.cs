@@ -13,11 +13,17 @@ public class HuntingEntityConfiguration : IEntityTypeConfiguration<Hunting>
         builder.HasIndex(x => x.FellowshipId).IsUnique();
         builder.HasIndex(x => x.GameId).IsUnique();
         builder.ComplexProperty(x => x.HuntBox,y => y.IsRequired());
+        builder.ComplexProperty(x => x.ActiveHunt,y =>
+        {
+            y.ComplexProperty(z => z.State, t => t.IsRequired());
+            y.IsRequired();
+        });
         builder.OwnsOne(x => x.HuntPool, huntingBuilder =>
         {
             huntingBuilder.ToJson();
             huntingBuilder.OwnsMany(z => z.HuntTiles, huntTilesBuilder =>
             {
+                huntTilesBuilder.UsePropertyAccessMode(PropertyAccessMode.Field);
                 huntTilesBuilder.ToJson();
             });
         });
