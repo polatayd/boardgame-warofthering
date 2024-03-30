@@ -1,6 +1,8 @@
 using System.Reflection;
 using System.Text.Json.Serialization;
 using BoardGame.WarOfTheRing.Dice.Application.DicePools.Queries;
+using BoardGame.WarOfTheRing.Dice.Application.DicePools.Validators;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGame.WarOfTheRing.Dice.Api.ServiceRegistrations;
@@ -19,6 +21,8 @@ public static class DiceServiceRegistration
 
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(RollDicePoolRequest).GetTypeInfo().Assembly));
+
+        services.AddValidatorsFromAssemblyContaining<RollDicePoolInputValidator>();
 
         services.AddProblemDetails();
 

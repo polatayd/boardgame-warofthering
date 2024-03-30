@@ -22,7 +22,7 @@ public class DiceApiClient : IDiceService
 
     public async Task<List<int>> SendRollDiceRequestAsync(int numberOfDice)
     {
-        var input = new RollDiceRequestInput { NumberOfDice = numberOfDice };
+        var input = new RollDiceRequestInput { NumberOfDice = 6 };
         var serializedInput = JsonSerializer.Serialize(input, jsonSerializerOptionsWrapper.Options);
 
         var request = new HttpRequestMessage(HttpMethod.Post, "dicepool");
@@ -39,9 +39,10 @@ public class DiceApiClient : IDiceService
             {
                 var errorContent = await response.Content.ReadAsStringAsync();
                 var errorAsProblemDetails =
-                    JsonSerializer.Deserialize<ProblemDetails>(errorContent, jsonSerializerOptionsWrapper.Options);
-                
-                logger.LogError("Message:{Message}", errorAsProblemDetails.Detail);
+                    JsonSerializer.Deserialize<ValidationProblemDetails>(errorContent,
+                        jsonSerializerOptionsWrapper.Options);
+
+                errorAsProblemDetails.LogValidationProblemDetails(logger);
 
                 throw new DiceServiceException($"Dice services returned error with status code {response.StatusCode}");
             }
