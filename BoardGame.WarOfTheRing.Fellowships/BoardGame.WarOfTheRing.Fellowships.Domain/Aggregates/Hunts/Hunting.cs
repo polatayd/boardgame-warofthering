@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts.Exceptions;
 using BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts.ValueObjects;
 using BoardGame.WarOfTheRing.Fellowships.Domain.Base;
 
@@ -28,5 +29,15 @@ public class Hunting : EntityBase, IAggregateRoot
     public void StartActiveHunt()
     {
         ActiveHunt = ActiveHunt.Start();
+    }
+
+    public int GetDiceToRollCount()
+    {
+        if (!ActiveHunt.IsAvailableForRoll())
+        {
+            throw new HuntStateException("Hunt is not available for roll");
+        }
+
+        return HuntBox.GetDiceToRollCount();
     }
 }

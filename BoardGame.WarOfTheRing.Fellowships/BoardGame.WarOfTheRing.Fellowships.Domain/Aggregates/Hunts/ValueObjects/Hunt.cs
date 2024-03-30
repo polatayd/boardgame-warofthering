@@ -31,4 +31,9 @@ public class Hunt : ValueObject
         
         return new Hunt(HuntState.RollDiceNeeded);
     }
+
+    public bool IsAvailableForRoll()
+    {
+        return State == HuntState.RollDiceNeeded;
+    }
 }

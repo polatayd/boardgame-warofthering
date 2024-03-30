@@ -8,6 +8,7 @@ using BoardGame.WarOfTheRing.Fellowships.Infrastructure.DomainEventDispatcher;
 using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Persistence.EntityFrameworkCore;
 using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Persistence.EntityFrameworkCore.Fellowships;
 using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Persistence.EntityFrameworkCore.Hunts;
+using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +26,7 @@ public static class FellowshipServiceRegistration
             options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
         services.Configure<JsonOptions>(options =>
             options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+        services.AddSingleton<JsonSerializerOptionsWrapper>();
 
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(CreateFellowshipCommand).GetTypeInfo().Assembly));
@@ -33,6 +35,8 @@ public static class FellowshipServiceRegistration
                 optionsBuilder.UseNpgsql(configuration.GetConnectionString("postgresql"))
                     .EnableSensitiveDataLogging())
             .AddScoped<IUnitOfWork, FellowshipDbContext>(x => x.GetRequiredService<FellowshipDbContext>());
+
+        services.RegisterHttpClientServices(configuration);
 
         services.AddScoped<IFellowshipRepository, FellowshipRepository>();
         services.AddScoped<IHuntRepository, HuntRepository>();

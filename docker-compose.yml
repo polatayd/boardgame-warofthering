@@ -8,6 +8,8 @@
       ASPNETCORE_ENVIRONMENT: DockerDevelopment
     ports:
       - 5111:8080
+    networks:
+      - backend
   
   boardgame.warofthering.politicaltrack.api:
     image: boardgame.warofthering.politicaltrack.api
@@ -18,6 +20,8 @@
       ASPNETCORE_ENVIRONMENT: DockerDevelopment
     ports:
       - 5145:8080
+    networks:
+      - backend
       
   boardgame.warofthering.fellowships.api:
     image: boardgame.warofthering.fellowships.api
@@ -28,6 +32,8 @@
       ASPNETCORE_ENVIRONMENT: DockerDevelopment
     ports:
       - 5280:8080
+    networks:
+      - backend
         
   db:
     image: postgres
@@ -39,3 +45,9 @@
     environment:
         - POSTGRES_PASSWORD=password
         - POSTGRES_USER=aydin
+    networks:
+      - backend
+  
+networks:
+  backend:
+    

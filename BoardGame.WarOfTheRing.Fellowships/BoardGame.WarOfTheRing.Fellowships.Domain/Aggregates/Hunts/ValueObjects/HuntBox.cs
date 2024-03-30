@@ -4,6 +4,8 @@ namespace BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts.ValueObject
 
 public class HuntBox : ValueObject
 {
+    private const int MaximumNumberOfDiceToRoll = 5;
+    
     public int NumberOfEyeResultDice { get; private set; }
     public int NumberOfCharacterResultDice { get; private set; }
 
@@ -38,5 +40,10 @@ public class HuntBox : ValueObject
     {
         yield return NumberOfEyeResultDice;
         yield return NumberOfCharacterResultDice;
+    }
+
+    public int GetDiceToRollCount()
+    {
+        return NumberOfEyeResultDice >= MaximumNumberOfDiceToRoll ? MaximumNumberOfDiceToRoll : NumberOfEyeResultDice;
     }
 }
