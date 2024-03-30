@@ -1,4 +1,3 @@
-using System.Net;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using BoardGame.WarOfTheRing.Fellowships.Application.Services;
@@ -13,7 +12,8 @@ public class DiceApiClient : IDiceService
     private readonly JsonSerializerOptionsWrapper jsonSerializerOptionsWrapper;
     private readonly ILogger<DiceApiClient> logger;
 
-    public DiceApiClient(HttpClient client, JsonSerializerOptionsWrapper jsonSerializerOptionsWrapper, ILogger<DiceApiClient> logger)
+    public DiceApiClient(HttpClient client, JsonSerializerOptionsWrapper jsonSerializerOptionsWrapper,
+        ILogger<DiceApiClient> logger)
     {
         this.client = client;
         this.jsonSerializerOptionsWrapper = jsonSerializerOptionsWrapper;
@@ -37,25 +37,25 @@ public class DiceApiClient : IDiceService
             var response = await client.SendAsync(request);
             if (!response.IsSuccessStatusCode)
             {
-                if (response.StatusCode is HttpStatusCode.BadRequest or HttpStatusCode.InternalServerError)
-                {
-                    var errorContent = await response.Content.ReadAsStringAsync();
-                    var errorAsProblemDetails =
-                        JsonSerializer.Deserialize<ProblemDetails>(errorContent, jsonSerializerOptionsWrapper.Options);
-                    logger.LogError("Message:{Message}", errorAsProblemDetails.Detail);
-                    throw new DiceServiceException($"Dice services returned error with status code {response.StatusCode}");
-                }
+                var errorContent = await response.Content.ReadAsStringAsync();
+                var errorAsProblemDetails =
+                    JsonSerializer.Deserialize<ProblemDetails>(errorContent, jsonSerializerOptionsWrapper.Options);
+                
+                logger.LogError("Message:{Message}", errorAsProblemDetails.Detail);
+
+                throw new DiceServiceException($"Dice services returned error with status code {response.StatusCode}");
             }
 
             var content = await response.Content.ReadAsStringAsync();
-            var output = JsonSerializer.Deserialize<RollDiceRequestOutput>(content, jsonSerializerOptionsWrapper.Options);
+            var output =
+                JsonSerializer.Deserialize<RollDiceRequestOutput>(content, jsonSerializerOptionsWrapper.Options);
 
             return output.Results.Select(x => x.Value).ToList();
         }
         catch (OperationCanceledException e)
         {
             logger.LogError("Message:{Message}", e.Message);
-            throw new DiceServiceException($"Dice services operation canceled");
+            throw new DiceServiceException($"Dice service operation canceled");
         }
     }
 }
