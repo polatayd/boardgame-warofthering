@@ -47,6 +47,18 @@
         - POSTGRES_USER=aydin
     networks:
       - backend
+    
+  mountebank:
+    container_name: mountebank
+    image: bbyars/mountebank:latest
+    volumes:
+      - ./imposters:/imposters
+    ports:
+      - 2525:2525
+      - 8090:8090
+    networks:
+      - backend
+    command: --configfile /imposters/imposters.ejs --allowInjection
   
 networks:
   backend:

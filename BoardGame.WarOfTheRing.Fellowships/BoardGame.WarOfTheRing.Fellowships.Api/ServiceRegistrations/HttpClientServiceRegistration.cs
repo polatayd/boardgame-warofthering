@@ -13,40 +13,32 @@ public static class HttpClientServiceRegistration
         var servicesOptions = configuration.GetSection(ServicesOptions.Services).Get<ServicesOptions>();
         var diceOptions = servicesOptions.Dice;
 
-        ILogger<DiceApiClient> diceApiLogger = null;
-
         services.AddHttpClient<IDiceService, DiceApiClient>().ConfigureHttpClient((serviceProvider, client) =>
         {
-            diceApiLogger = serviceProvider.GetRequiredService<ILogger<DiceApiClient>>();
-
             client.BaseAddress = new Uri(diceOptions.BaseAddress);
             client.Timeout = TimeSpan.FromMilliseconds(diceOptions.Timeout);
         }).AddResilienceHandler("dice-pipeline",
-            pb => DiceApiClientResilienceHandler(pb, diceOptions, diceApiLogger));
+            pb => DiceApiClientResilienceHandler(pb, diceOptions));
 
         return services;
     }
 
     private static void DiceApiClientResilienceHandler(ResiliencePipelineBuilder<HttpResponseMessage> pipelineBuilder,
-        DiceOptions diceOptions, ILogger<DiceApiClient> logger)
+        DiceOptions diceOptions)
     {
         var retryStrategy = diceOptions.RetryStrategy;
 
-        pipelineBuilder.AddRetry(new HttpRetryStrategyOptions
+        if (retryStrategy.MaxRetryAttempts != 0)
         {
-            MaxRetryAttempts = retryStrategy.MaxRetryAttempts,
-            BackoffType = Enum.TryParse(retryStrategy.BackoffType, out DelayBackoffType backoffType)
-                ? backoffType
-                : DelayBackoffType.Constant,
-            Delay = TimeSpan.FromMilliseconds(retryStrategy.Delay),
-            OnRetry = arguments =>
+            pipelineBuilder.AddRetry(new HttpRetryStrategyOptions
             {
-                logger.LogError("Message:{Message}",
-                    $"Dice Api Retry Attempt {arguments.AttemptNumber} failed");
-
-                return ValueTask.CompletedTask;
-            }
-        });
+                MaxRetryAttempts = retryStrategy.MaxRetryAttempts,
+                BackoffType = Enum.TryParse(retryStrategy.BackoffType, out DelayBackoffType backoffType)
+                    ? backoffType
+                    : DelayBackoffType.Constant,
+                Delay = TimeSpan.FromMilliseconds(retryStrategy.Delay)
+            });
+        }
 
         pipelineBuilder.Build();
     }

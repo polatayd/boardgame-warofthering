@@ -11,6 +11,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1276157D-45FB-44C4-B726-ECB4BC9C2CA5}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = ./../docker-compose.yml
+		..\imposters\imposters\diceImposter.ejs = ..\imposters\imposters\diceImposter.ejs
+		..\imposters\imposters.ejs = ..\imposters\imposters.ejs
 	EndProjectSection
 EndProject
 Global
