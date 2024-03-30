@@ -6,7 +6,9 @@ namespace BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts.ValueObject
 public class HuntState : ValueObject
 {
     public static HuntState Empty { get; } = new("Empty");
-    public static HuntState RollDiceNeeded { get; } = new("RollDiceNeeded");
+    public static HuntState RollDice { get; } = new("RollDice");
+    public static HuntState ReRollDice { get; } = new("ReRollDice");
+    public static HuntState DrawHuntTile { get; } = new("DrawHuntTile");
     
     [SuppressMessage("ReSharper", "UnusedMember.Local")]
     private HuntState() {}

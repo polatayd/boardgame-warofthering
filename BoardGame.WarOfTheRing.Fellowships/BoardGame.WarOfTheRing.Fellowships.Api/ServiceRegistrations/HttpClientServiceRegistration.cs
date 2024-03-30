@@ -13,7 +13,7 @@ public static class HttpClientServiceRegistration
         var servicesOptions = configuration.GetSection(ServicesOptions.Services).Get<ServicesOptions>();
         var diceOptions = servicesOptions.Dice;
 
-        services.AddHttpClient<IDiceService, DiceApiClient>().ConfigureHttpClient((serviceProvider, client) =>
+        services.AddHttpClient<IDiceService, DiceApiClient>().ConfigureHttpClient(client =>
         {
             client.BaseAddress = new Uri(diceOptions.BaseAddress);
             client.Timeout = TimeSpan.FromMilliseconds(diceOptions.Timeout);

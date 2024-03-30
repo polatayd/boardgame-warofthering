@@ -42,8 +42,14 @@ public class HuntBox : ValueObject
         yield return NumberOfCharacterResultDice;
     }
 
-    public int GetDiceToRollCount()
+    public int GetDiceToRollCount(int numberOfSuccessDiceResult)
     {
-        return NumberOfEyeResultDice >= MaximumNumberOfDiceToRoll ? MaximumNumberOfDiceToRoll : NumberOfEyeResultDice;
+        var numberOfDiceToRoll = NumberOfEyeResultDice >= MaximumNumberOfDiceToRoll
+            ? MaximumNumberOfDiceToRoll
+            : NumberOfEyeResultDice;
+
+        numberOfDiceToRoll -= numberOfSuccessDiceResult;
+
+        return numberOfDiceToRoll >= 0 ? numberOfDiceToRoll : 0;
     }
 }

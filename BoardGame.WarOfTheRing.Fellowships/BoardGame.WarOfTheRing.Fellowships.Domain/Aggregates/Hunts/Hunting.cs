@@ -12,9 +12,11 @@ public class Hunting : EntityBase, IAggregateRoot
     public HuntBox HuntBox { get; private set; }
     public HuntPool HuntPool { get; private set; }
     public Hunt ActiveHunt { get; private set; }
-    
+
     [SuppressMessage("ReSharper", "UnusedMember.Local")]
-    private Hunting() {}
+    private Hunting()
+    {
+    }
 
     public Hunting(Guid huntingId, Guid fellowshipId, Guid gameId)
     {
@@ -33,11 +35,28 @@ public class Hunting : EntityBase, IAggregateRoot
 
     public int GetDiceToRollCount()
     {
-        if (!ActiveHunt.IsAvailableForRoll())
+        if (!ActiveHunt.IsInAnyRollState())
         {
             throw new HuntStateException("Hunt is not available for roll");
         }
 
-        return HuntBox.GetDiceToRollCount();
+        return HuntBox.GetDiceToRollCount(ActiveHunt.NumberOfSuccessfulDiceResult);
+    }
+
+    public void EvaluateRollResult(List<int> diceResults)
+    {
+        ActiveHunt = ActiveHunt.CalculateSuccessRolls(diceResults, HuntBox.NumberOfCharacterResultDice);
+    }
+
+    public bool IsAvailableForReRollCalculation()
+    {
+        return HuntBox.GetDiceToRollCount(ActiveHunt.NumberOfSuccessfulDiceResult) > 0 &&
+               ActiveHunt.IsInRollState();
+    }
+
+    public void EvaluateNextHuntMove(bool rerollIsAvailable)
+    {
+        var diceToRollCount = HuntBox.GetDiceToRollCount(ActiveHunt.NumberOfSuccessfulDiceResult);
+        ActiveHunt = ActiveHunt.EvaluateNextHuntMoveAfterRoll(diceToRollCount, rerollIsAvailable);
     }
 }
