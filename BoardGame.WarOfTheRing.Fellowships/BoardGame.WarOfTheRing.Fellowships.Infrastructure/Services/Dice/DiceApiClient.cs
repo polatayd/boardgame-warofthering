@@ -22,7 +22,7 @@ public class DiceApiClient : IDiceService
 
     public async Task<List<int>> SendRollDiceRequestAsync(int numberOfDice)
     {
-        var input = new RollDiceRequestInput { NumberOfDice = 6 };
+        var input = new RollDiceRequestInput { NumberOfDice = numberOfDice };
         var serializedInput = JsonSerializer.Serialize(input, jsonSerializerOptionsWrapper.Options);
 
         var request = new HttpRequestMessage(HttpMethod.Post, "dicepool");
