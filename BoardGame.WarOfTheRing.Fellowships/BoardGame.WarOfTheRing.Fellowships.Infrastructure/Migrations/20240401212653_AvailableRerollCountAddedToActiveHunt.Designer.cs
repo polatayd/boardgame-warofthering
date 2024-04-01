@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BoardGame.WarOfTheRing.Fellowships.Infrastructure.Migrations
 {
     [DbContext(typeof(FellowshipDbContext))]
-    [Migration("20240401200407_NumberOfRerollCountAddedToActiveHunt")]
-    partial class NumberOfRerollCountAddedToActiveHunt
+    [Migration("20240401212653_AvailableRerollCountAddedToActiveHunt")]
+    partial class AvailableRerollCountAddedToActiveHunt
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,7 +81,7 @@ namespace BoardGame.WarOfTheRing.Fellowships.Infrastructure.Migrations
                         {
                             b1.IsRequired();
 
-                            b1.Property<int>("NumberOfRerollCount")
+                            b1.Property<int>("AvailableReRollCount")
                                 .HasColumnType("integer");
 
                             b1.Property<int>("NumberOfSuccessfulDiceResult")

@@ -50,11 +50,11 @@ public class HuntBox : ValueObject
             : NumberOfEyeResultDice;
     }
     
-    public int GetDiceToRollCountForReRoll(int rerollCount, int numberOfSuccessDiceResult)
+    public int GetDiceToRollCountForReRoll(int availableReRollCount, int numberOfSuccessDiceResult)
     {
         var availableRollCount = GetDiceToRollCountForRoll();
         availableRollCount -= numberOfSuccessDiceResult;
 
-        return Math.Max(0, Math.Min(availableRollCount, rerollCount));
+        return Math.Max(0, Math.Min(availableRollCount, availableReRollCount));
     }
 }

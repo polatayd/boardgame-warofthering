@@ -5,13 +5,13 @@
 namespace BoardGame.WarOfTheRing.Fellowships.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class NumberOfRerollCountAddedToActiveHunt : Migration
+    public partial class AvailableRerollCountAddedToActiveHunt : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "ActiveHunt_NumberOfRerollCount",
+                name: "ActiveHunt_AvailableReRollCount",
                 table: "Huntings",
                 type: "integer",
                 nullable: false,
@@ -22,7 +22,7 @@ namespace BoardGame.WarOfTheRing.Fellowships.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "ActiveHunt_NumberOfRerollCount",
+                name: "ActiveHunt_AvailableReRollCount",
                 table: "Huntings");
         }
     }

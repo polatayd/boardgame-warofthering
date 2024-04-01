@@ -21,7 +21,7 @@ public class MapApiClient : IMapService
     }
 
     //TODO: This service should return Region that contains fellowship and this service should decide that it's available for reroll or not.
-    public async Task<int> SendRerollIsAvailableRequestAsync(Guid fellowshipId)
+    public async Task<int> SendReRollCountRequestAsync(Guid fellowshipId)
     {
         var request = new HttpRequestMessage(HttpMethod.Get, $"fellowships/{fellowshipId}/reroll-availability");
 

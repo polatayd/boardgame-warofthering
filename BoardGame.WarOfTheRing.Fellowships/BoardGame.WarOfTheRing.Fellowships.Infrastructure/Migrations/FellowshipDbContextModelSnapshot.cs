@@ -78,7 +78,7 @@ namespace BoardGame.WarOfTheRing.Fellowships.Infrastructure.Migrations
                         {
                             b1.IsRequired();
 
-                            b1.Property<int>("NumberOfRerollCount")
+                            b1.Property<int>("AvailableReRollCount")
                                 .HasColumnType("integer");
 
                             b1.Property<int>("NumberOfSuccessfulDiceResult")

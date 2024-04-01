@@ -9,6 +9,7 @@ public class HuntState : ValueObject
     public static HuntState RollDice { get; } = new("RollDice");
     public static HuntState ReRollDice { get; } = new("ReRollDice");
     public static HuntState DrawHuntTile { get; } = new("DrawHuntTile");
+    public static HuntState Ended { get; } = new("Ended");
     
     [SuppressMessage("ReSharper", "UnusedMember.Local")]
     private HuntState() {}
