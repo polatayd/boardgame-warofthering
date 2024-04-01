@@ -6,7 +6,6 @@ using MediatR;
 
 namespace BoardGame.WarOfTheRing.Fellowships.Application.Hunts.Commands;
 
-//TODO: Think seperate the RollDiceCommand and ReRollDiceCommand in domain layer logics.
 public class RollDiceCommand : IRequest<RollDiceCommandOutput>
 {
     public RollDiceCommand(RollDiceCommandInput input)
@@ -20,13 +19,16 @@ public class RollDiceCommand : IRequest<RollDiceCommandOutput>
 public class RollDiceCommandHandler : IRequestHandler<RollDiceCommand, RollDiceCommandOutput>
 {
     private readonly IDiceService diceService;
+    private readonly IMapService mapService;
     private readonly IHuntRepository huntRepository;
     private readonly IUnitOfWork unitOfWork;
 
-    public RollDiceCommandHandler(IDiceService diceService, IHuntRepository huntRepository, IUnitOfWork unitOfWork)
+    public RollDiceCommandHandler(IDiceService diceService, IHuntRepository huntRepository, IMapService mapService,
+        IUnitOfWork unitOfWork)
     {
         this.diceService = diceService;
         this.huntRepository = huntRepository;
+        this.mapService = mapService;
         this.unitOfWork = unitOfWork;
     }
 
@@ -45,16 +47,18 @@ public class RollDiceCommandHandler : IRequestHandler<RollDiceCommand, RollDiceC
         }
 
         var diceResults = await diceService.SendRollDiceRequestAsync(diceToRollCount);
-        hunting.EvaluateRollResult(diceResults);
+        hunting.CalculateSuccessRolls(diceResults);
 
-        bool rerollIsAvailable = false;
-        if (hunting.IsAvailableForReRollCalculation())
+        if (hunting.ActiveHunt.IsInRollState())
         {
-            //TODO: Fetch fellowship and send it to the map service to get if reroll is available or not.
-            rerollIsAvailable = true;
+            var isAvailable = await mapService.SendRerollIsAvailableRequestAsync(hunting.FellowshipId);
+            
+            hunting.CalculateNextHuntMoveAfterRoll(isAvailable);
         }
-
-        hunting.EvaluateNextHuntMove(rerollIsAvailable);
+        else if (hunting.ActiveHunt.IsInReRollState())
+        {
+            hunting.CalculateNextHuntMoveAfterReRoll();
+        }
 
         await unitOfWork.SaveChangesAsync();
 

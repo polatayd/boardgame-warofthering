@@ -1,5 +1,6 @@
 using BoardGame.WarOfTheRing.Fellowships.Application.Services;
 using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Services.Dice;
+using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Services.Map;
 using Microsoft.Extensions.Http.Resilience;
 using Polly;
 
@@ -11,23 +12,30 @@ public static class HttpClientServiceRegistration
         IConfiguration configuration)
     {
         var servicesOptions = configuration.GetSection(ServicesOptions.Services).Get<ServicesOptions>();
+        
         var diceOptions = servicesOptions.Dice;
-
         services.AddHttpClient<IDiceService, DiceApiClient>().ConfigureHttpClient(client =>
         {
             client.BaseAddress = new Uri(diceOptions.BaseAddress);
             client.Timeout = TimeSpan.FromMilliseconds(diceOptions.Timeout);
         }).AddResilienceHandler("dice-pipeline",
-            pb => DiceApiClientResilienceHandler(pb, diceOptions));
+            pb => ApiClientResilienceHandler(pb, diceOptions));
+        
+        var mapOptions = servicesOptions.Map;
+        services.AddHttpClient<IMapService, MapApiClient>().ConfigureHttpClient(client =>
+        {
+            client.BaseAddress = new Uri(mapOptions.BaseAddress);
+            client.Timeout = TimeSpan.FromMilliseconds(mapOptions.Timeout);
+        }).AddResilienceHandler("map-pipeline",
+            pb => ApiClientResilienceHandler(pb, mapOptions));
 
         return services;
     }
 
-    private static void DiceApiClientResilienceHandler(ResiliencePipelineBuilder<HttpResponseMessage> pipelineBuilder,
-        DiceOptions diceOptions)
+    private static void ApiClientResilienceHandler(ResiliencePipelineBuilder<HttpResponseMessage> pipelineBuilder,
+        ResiliencyOptions resiliencyOptions)
     {
-        var retryStrategy = diceOptions.RetryStrategy;
-
+        var retryStrategy = resiliencyOptions.RetryStrategy;
         if (retryStrategy.MaxRetryAttempts != 0)
         {
             pipelineBuilder.AddRetry(new HttpRetryStrategyOptions

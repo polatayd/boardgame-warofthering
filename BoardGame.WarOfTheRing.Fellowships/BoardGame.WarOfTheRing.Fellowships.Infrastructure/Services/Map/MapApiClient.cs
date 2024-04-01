@@ -4,33 +4,28 @@ using BoardGame.WarOfTheRing.Fellowships.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace BoardGame.WarOfTheRing.Fellowships.Infrastructure.Services.Dice;
+namespace BoardGame.WarOfTheRing.Fellowships.Infrastructure.Services.Map;
 
-public class DiceApiClient : IDiceService
+public class MapApiClient : IMapService
 {
     private readonly HttpClient client;
     private readonly JsonSerializerOptionsWrapper jsonSerializerOptionsWrapper;
-    private readonly ILogger<DiceApiClient> logger;
+    private readonly ILogger<MapApiClient> logger;
 
-    public DiceApiClient(HttpClient client, JsonSerializerOptionsWrapper jsonSerializerOptionsWrapper,
-        ILogger<DiceApiClient> logger)
+    public MapApiClient(HttpClient client, JsonSerializerOptionsWrapper jsonSerializerOptionsWrapper,
+        ILogger<MapApiClient> logger)
     {
         this.client = client;
         this.jsonSerializerOptionsWrapper = jsonSerializerOptionsWrapper;
         this.logger = logger;
     }
 
-    public async Task<IReadOnlyList<int>> SendRollDiceRequestAsync(int numberOfDice)
+    //TODO: This service should return Region that contains fellowship and this service should decide that it's available for reroll or not.
+    public async Task<bool> SendRerollIsAvailableRequestAsync(Guid fellowshipId)
     {
-        var input = new RollDiceRequestInput { NumberOfDice = numberOfDice };
-        var serializedInput = JsonSerializer.Serialize(input, jsonSerializerOptionsWrapper.Options);
-
-        var request = new HttpRequestMessage(HttpMethod.Post, "dicepool");
+        var request = new HttpRequestMessage(HttpMethod.Get, $"fellowships/{fellowshipId}/reroll-availability");
 
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-        request.Content = new StringContent(serializedInput);
-        request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
         try
         {
@@ -44,19 +39,20 @@ public class DiceApiClient : IDiceService
 
                 errorAsProblemDetails.LogValidationProblemDetails(logger);
 
-                throw new DiceServiceException($"Dice services returned error with status code {response.StatusCode}");
+                throw new MapServiceException($"Map services returned error with status code {response.StatusCode}");
             }
 
             var content = await response.Content.ReadAsStringAsync();
             var output =
-                JsonSerializer.Deserialize<RollDiceRequestOutput>(content, jsonSerializerOptionsWrapper.Options);
+                JsonSerializer.Deserialize<RerollIsAvailableRequestOutput>(content,
+                    jsonSerializerOptionsWrapper.Options);
 
-            return output.Results.Select(x => x.Value).ToList().AsReadOnly();
+            return output.IsAvailable;
         }
         catch (OperationCanceledException e)
         {
             logger.LogError("Message:{Message}", e.Message);
-            throw new DiceServiceException($"Dice service operation canceled");
+            throw new MapServiceException($"Map service operation canceled");
         }
     }
 }

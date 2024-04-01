@@ -27,7 +27,7 @@ public class Hunting : EntityBase, IAggregateRoot
         HuntPool = HuntPool.Create();
         ActiveHunt = new Hunt();
     }
-
+    
     public void StartActiveHunt()
     {
         ActiveHunt = ActiveHunt.Start();
@@ -43,20 +43,19 @@ public class Hunting : EntityBase, IAggregateRoot
         return HuntBox.GetDiceToRollCount(ActiveHunt.NumberOfSuccessfulDiceResult);
     }
 
-    public void EvaluateRollResult(List<int> diceResults)
+    public void CalculateSuccessRolls(IEnumerable<int> diceResults)
     {
         ActiveHunt = ActiveHunt.CalculateSuccessRolls(diceResults, HuntBox.NumberOfCharacterResultDice);
     }
 
-    public bool IsAvailableForReRollCalculation()
-    {
-        return HuntBox.GetDiceToRollCount(ActiveHunt.NumberOfSuccessfulDiceResult) > 0 &&
-               ActiveHunt.IsInRollState();
-    }
-
-    public void EvaluateNextHuntMove(bool rerollIsAvailable)
+    public void CalculateNextHuntMoveAfterRoll(bool rerollIsAvailable)
     {
         var diceToRollCount = HuntBox.GetDiceToRollCount(ActiveHunt.NumberOfSuccessfulDiceResult);
-        ActiveHunt = ActiveHunt.EvaluateNextHuntMoveAfterRoll(diceToRollCount, rerollIsAvailable);
+        ActiveHunt = ActiveHunt.CalculateNextHuntMoveAfterRoll(diceToRollCount, rerollIsAvailable);
+    }
+    
+    public void CalculateNextHuntMoveAfterReRoll()
+    {
+        ActiveHunt = ActiveHunt.CalculateNextHuntMoveAfterReRoll();
     }
 }

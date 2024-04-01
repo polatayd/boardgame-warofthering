@@ -1,7 +1,7 @@
 {
-    "port": 8090,
+    "port": "8090",
     "protocol": "http",
-    "name": "success dice response",
+    "name": "dice response",
     "stubs": [
         {
             "predicates": [
@@ -20,7 +20,29 @@
                         "headers": {
                             "Content-Type": "application/json; charset=utf-8"
                         },
-                        "body": "{\"results\":[{\"name\":\"Three\",\"value\":3},{\"name\":\"One\",\"value\":1},{\"name\":\"Four\",\"value\":4},{\"name\":\"One\",\"value\":1},{\"name\":\"Five\",\"value\":5}]}"
+                        "body": "{\"results\":[{\"name\":\"Six\",\"value\":6},{\"name\":\"Six\",\"value\":6},{\"name\":\"Four\",\"value\":4},{\"name\":\"One\",\"value\":1},{\"name\":\"Five\",\"value\":5}]}"
+                    }
+                }
+            ]
+        },
+        {
+            "predicates": [
+                {
+                    "equals": {
+                        "method": "POST",
+                        "path": "/dicepool",
+                        "body": { "numberOfDice": 2 }
+                    }
+                }
+            ],
+            "responses": [
+                {
+                    "is": {
+                        "statusCode": 200,
+                        "headers": {
+                            "Content-Type": "application/json; charset=utf-8"
+                        },
+                        "body": "{\"results\":[{\"name\":\"Six\",\"value\":6},{\"name\":\"Five\",\"value\":5}]}"
                     }
                 }
             ]
