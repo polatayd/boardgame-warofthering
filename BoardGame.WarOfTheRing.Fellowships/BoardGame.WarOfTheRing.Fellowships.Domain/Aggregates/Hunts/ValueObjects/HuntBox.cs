@@ -5,7 +5,7 @@ namespace BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts.ValueObject
 public class HuntBox : ValueObject
 {
     private const int MaximumNumberOfDiceToRoll = 5;
-    
+
     public int NumberOfEyeResultDice { get; private set; }
     public int NumberOfCharacterResultDice { get; private set; }
 
@@ -28,28 +28,33 @@ public class HuntBox : ValueObject
 
     public HuntBox PlaceEyeDie()
     {
+        //TODO: Restriction of number of characters in fellowship.
         return new HuntBox(NumberOfEyeResultDice + 1, NumberOfCharacterResultDice);
     }
-    
+
     public HuntBox PlaceCharacterDie()
     {
         return new HuntBox(NumberOfEyeResultDice, NumberOfCharacterResultDice + 1);
     }
-    
+
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return NumberOfEyeResultDice;
         yield return NumberOfCharacterResultDice;
     }
 
-    public int GetDiceToRollCount(int numberOfSuccessDiceResult)
+    public int GetDiceToRollCountForRoll()
     {
-        var numberOfDiceToRoll = NumberOfEyeResultDice >= MaximumNumberOfDiceToRoll
+        return NumberOfEyeResultDice >= MaximumNumberOfDiceToRoll
             ? MaximumNumberOfDiceToRoll
             : NumberOfEyeResultDice;
+    }
+    
+    public int GetDiceToRollCountForReRoll(int rerollCount, int numberOfSuccessDiceResult)
+    {
+        var availableRollCount = GetDiceToRollCountForRoll();
+        availableRollCount -= numberOfSuccessDiceResult;
 
-        numberOfDiceToRoll -= numberOfSuccessDiceResult;
-
-        return numberOfDiceToRoll >= 0 ? numberOfDiceToRoll : 0;
+        return Math.Max(0, Math.Min(availableRollCount, rerollCount));
     }
 }

@@ -9,23 +9,27 @@ public class Hunt : ValueObject
     
     public HuntState State { get; init; }
     public int NumberOfSuccessfulDiceResult { get; set; }
+    public int NumberOfRerollCount { get; set; }
     
     public Hunt()
     {
         State = HuntState.Empty;
         NumberOfSuccessfulDiceResult = 0;
+        NumberOfRerollCount = 0;
     }
 
-    private Hunt(HuntState huntState, int numberOfSuccessfulDiceResult)
+    private Hunt(HuntState huntState, int numberOfSuccessfulDiceResult, int numberOfRerollCount)
     {
         State = huntState;
         if (huntState == HuntState.Empty)
         {
             NumberOfSuccessfulDiceResult = 0;
+            NumberOfRerollCount = 0;
         }
         else
         {
             NumberOfSuccessfulDiceResult = numberOfSuccessfulDiceResult;
+            NumberOfRerollCount = numberOfRerollCount;
         }
     }
     
@@ -57,7 +61,7 @@ public class Hunt : ValueObject
             throw new HuntStateException("Hunt can not be started if it's already active");
         }
         
-        return new Hunt(HuntState.RollDice, NumberOfSuccessfulDiceResult);
+        return new Hunt(HuntState.RollDice, NumberOfSuccessfulDiceResult, NumberOfRerollCount);
     }
 
     public Hunt CalculateSuccessRolls(IEnumerable<int> diceResults, int huntBoxNumberOfCharacterResultDice)
@@ -72,22 +76,22 @@ public class Hunt : ValueObject
 
         var successCount = diceResults.Count(x => x >= successResult);
 
-        return new Hunt(State, NumberOfSuccessfulDiceResult + successCount);
+        return new Hunt(State, NumberOfSuccessfulDiceResult + successCount, NumberOfRerollCount);
     }
 
-    public Hunt CalculateNextHuntMoveAfterRoll(int diceToRollCount, bool rerollIsAvailable)
+    public Hunt CalculateNextHuntMoveAfterRoll(int diceToReRollCount, int rerollCount)
     {
         if (!IsInRollState())
         {
             throw new HuntStateException("Hunt is not available for roll");
         }
 
-        if (diceToRollCount != 0 && rerollIsAvailable)
+        if (diceToReRollCount != 0)
         {
-            return new Hunt(HuntState.ReRollDice, NumberOfSuccessfulDiceResult);
+            return new Hunt(HuntState.ReRollDice, NumberOfSuccessfulDiceResult, rerollCount);
         }
         
-        return NumberOfSuccessfulDiceResult > 0 ? new Hunt(HuntState.DrawHuntTile, NumberOfSuccessfulDiceResult) : new Hunt();
+        return NumberOfSuccessfulDiceResult > 0 ? new Hunt(HuntState.DrawHuntTile, NumberOfSuccessfulDiceResult, NumberOfRerollCount) : new Hunt();
     }
     
     public Hunt CalculateNextHuntMoveAfterReRoll()
@@ -97,6 +101,6 @@ public class Hunt : ValueObject
             throw new HuntStateException("Hunt is not available for roll");
         }
         
-        return NumberOfSuccessfulDiceResult > 0 ? new Hunt(HuntState.DrawHuntTile, NumberOfSuccessfulDiceResult) : new Hunt();
+        return NumberOfSuccessfulDiceResult > 0 ? new Hunt(HuntState.DrawHuntTile, NumberOfSuccessfulDiceResult, NumberOfRerollCount) : new Hunt();
     }
 }

@@ -6,10 +6,14 @@ public static class HuntEndpointMappings
 {
     public static void RegisterHuntEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
     {
-        var huntEndpoints = endpointRouteBuilder.MapGroup("/hunts");
+        var huntEndpoints = endpointRouteBuilder.MapGroup("/hunts/{gameId}");
 
-        huntEndpoints.MapPost("", HuntHandlers.RollDice)
+        huntEndpoints.MapPost("/roll", HuntHandlers.RollDice)
             .WithName("RollDice")
+            .WithOpenApi();
+        
+        huntEndpoints.MapPost("/reroll", HuntHandlers.ReRollDice)
+            .WithName("ReRollDice")
             .WithOpenApi();
     }
 }

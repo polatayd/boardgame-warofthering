@@ -33,14 +33,24 @@ public class Hunting : EntityBase, IAggregateRoot
         ActiveHunt = ActiveHunt.Start();
     }
 
-    public int GetDiceToRollCount()
+    public int GetDiceToRollCountForRoll()
     {
-        if (!ActiveHunt.IsInAnyRollState())
+        if (!ActiveHunt.IsInRollState())
         {
             throw new HuntStateException("Hunt is not available for roll");
         }
 
-        return HuntBox.GetDiceToRollCount(ActiveHunt.NumberOfSuccessfulDiceResult);
+        return HuntBox.GetDiceToRollCountForRoll();
+    }
+    
+    public int GetDiceToRollCountForReRoll()
+    {
+        if (!ActiveHunt.IsInReRollState())
+        {
+            throw new HuntStateException("Hunt is not available for roll");
+        }
+
+        return HuntBox.GetDiceToRollCountForReRoll(ActiveHunt.NumberOfRerollCount, ActiveHunt.NumberOfSuccessfulDiceResult);
     }
 
     public void CalculateSuccessRolls(IEnumerable<int> diceResults)
@@ -48,10 +58,10 @@ public class Hunting : EntityBase, IAggregateRoot
         ActiveHunt = ActiveHunt.CalculateSuccessRolls(diceResults, HuntBox.NumberOfCharacterResultDice);
     }
 
-    public void CalculateNextHuntMoveAfterRoll(bool rerollIsAvailable)
+    public void CalculateNextHuntMoveAfterRoll(int rerollCount)
     {
-        var diceToRollCount = HuntBox.GetDiceToRollCount(ActiveHunt.NumberOfSuccessfulDiceResult);
-        ActiveHunt = ActiveHunt.CalculateNextHuntMoveAfterRoll(diceToRollCount, rerollIsAvailable);
+        var diceToRollCount = HuntBox.GetDiceToRollCountForReRoll(rerollCount, ActiveHunt.NumberOfSuccessfulDiceResult);
+        ActiveHunt = ActiveHunt.CalculateNextHuntMoveAfterRoll(diceToRollCount, rerollCount);
     }
     
     public void CalculateNextHuntMoveAfterReRoll()

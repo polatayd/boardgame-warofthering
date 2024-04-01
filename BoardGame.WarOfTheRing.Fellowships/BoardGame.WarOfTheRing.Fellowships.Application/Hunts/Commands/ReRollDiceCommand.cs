@@ -6,9 +6,9 @@ using MediatR;
 
 namespace BoardGame.WarOfTheRing.Fellowships.Application.Hunts.Commands;
 
-public class RollDiceCommand : IRequest<RollDiceCommandOutput>
+public class ReRollDiceCommand : IRequest<RollDiceCommandOutput>
 {
-    public RollDiceCommand(RollDiceCommandInput input)
+    public ReRollDiceCommand(RollDiceCommandInput input)
     {
         Input = input;
     }
@@ -16,14 +16,14 @@ public class RollDiceCommand : IRequest<RollDiceCommandOutput>
     public RollDiceCommandInput Input { get; set; }
 }
 
-public class RollDiceCommandHandler : IRequestHandler<RollDiceCommand, RollDiceCommandOutput>
+public class ReRollDiceCommandHandler : IRequestHandler<ReRollDiceCommand, RollDiceCommandOutput>
 {
     private readonly IDiceService diceService;
     private readonly IMapService mapService;
     private readonly IHuntRepository huntRepository;
     private readonly IUnitOfWork unitOfWork;
 
-    public RollDiceCommandHandler(IDiceService diceService, IHuntRepository huntRepository, IMapService mapService,
+    public ReRollDiceCommandHandler(IDiceService diceService, IHuntRepository huntRepository, IMapService mapService,
         IUnitOfWork unitOfWork)
     {
         this.diceService = diceService;
@@ -32,7 +32,7 @@ public class RollDiceCommandHandler : IRequestHandler<RollDiceCommand, RollDiceC
         this.unitOfWork = unitOfWork;
     }
 
-    public async Task<RollDiceCommandOutput> Handle(RollDiceCommand request, CancellationToken cancellationToken)
+    public async Task<RollDiceCommandOutput> Handle(ReRollDiceCommand request, CancellationToken cancellationToken)
     {
         var hunting = huntRepository.GetByGameId(request.Input.GameId);
         if (hunting is null)
@@ -40,17 +40,16 @@ public class RollDiceCommandHandler : IRequestHandler<RollDiceCommand, RollDiceC
             throw new HuntingNotFoundException("Hunting is not found");
         }
 
-        var diceToRollCount = hunting.GetDiceToRollCountForRoll();
+        var diceToRollCount = hunting.GetDiceToRollCountForReRoll();
         if (diceToRollCount == 0)
         {
             return new RollDiceCommandOutput();
         }
-            
+
         var diceResults = await diceService.SendRollDiceRequestAsync(diceToRollCount);
         hunting.CalculateSuccessRolls(diceResults);
-            
-        var rerollCount = await mapService.SendRerollIsAvailableRequestAsync(hunting.FellowshipId);
-        hunting.CalculateNextHuntMoveAfterRoll(rerollCount);
+
+        hunting.CalculateNextHuntMoveAfterReRoll();
 
         await unitOfWork.SaveChangesAsync();
 
