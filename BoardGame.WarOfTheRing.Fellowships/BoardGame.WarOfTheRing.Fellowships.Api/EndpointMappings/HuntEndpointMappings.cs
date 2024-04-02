@@ -15,5 +15,9 @@ public static class HuntEndpointMappings
         huntEndpoints.MapPost("/reroll", HuntHandlers.ReRollDice)
             .WithName("ReRollDice")
             .WithOpenApi();
+        
+        huntEndpoints.MapPost("/hunttile", HuntHandlers.DrawHuntTile)
+            .WithName("DrawHuntTile")
+            .WithOpenApi();
     }
 }

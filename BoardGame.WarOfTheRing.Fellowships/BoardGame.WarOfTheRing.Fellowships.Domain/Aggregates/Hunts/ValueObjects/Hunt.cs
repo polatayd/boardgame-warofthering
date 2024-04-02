@@ -8,28 +8,32 @@ public class Hunt : ValueObject
     private const int InitialSuccessDiceResultOfHunt = 6;
 
     public HuntState State { get; init; }
-    public int NumberOfSuccessfulDiceResult { get; set; }
-    public int AvailableReRollCount { get; set; }
+    public int NumberOfSuccessfulDiceResult { get; init; }
+    public int AvailableReRollCount { get; init; }
+    public HuntTile DrawnHuntTile { get; init; }
 
     private Hunt()
     {
         State = HuntState.Empty;
         NumberOfSuccessfulDiceResult = 0;
         AvailableReRollCount = 0;
+        DrawnHuntTile = HuntTile.CreateNumberedTile(0);
     }
 
-    private Hunt(HuntState huntState, int numberOfSuccessfulDiceResult, int availableReRollCount)
+    private Hunt(HuntState huntState, int numberOfSuccessfulDiceResult, int availableReRollCount, HuntTile drawnHuntTile)
     {
         State = huntState;
         if (huntState == HuntState.Empty)
         {
             NumberOfSuccessfulDiceResult = 0;
             AvailableReRollCount = 0;
+            DrawnHuntTile = HuntTile.CreateNumberedTile(0);
         }
         else
         {
             NumberOfSuccessfulDiceResult = numberOfSuccessfulDiceResult;
             AvailableReRollCount = availableReRollCount;
+            DrawnHuntTile = drawnHuntTile;
         }
     }
 
@@ -38,6 +42,7 @@ public class Hunt : ValueObject
         yield return State;
         yield return NumberOfSuccessfulDiceResult;
         yield return AvailableReRollCount;
+        yield return DrawnHuntTile;
     }
 
     public bool IsInAnyRollState()
@@ -54,6 +59,11 @@ public class Hunt : ValueObject
     {
         return State == HuntState.ReRollDice;
     }
+    
+    public bool IsInDrawHuntTileState()
+    {
+        return State == HuntState.DrawHuntTile;
+    }
 
     public bool IsInEndedState()
     {
@@ -67,7 +77,7 @@ public class Hunt : ValueObject
             throw new HuntStateException("Hunt can not be started if it's already active");
         }
 
-        return new Hunt(HuntState.RollDice, NumberOfSuccessfulDiceResult, AvailableReRollCount);
+        return new Hunt(HuntState.RollDice, NumberOfSuccessfulDiceResult, AvailableReRollCount, DrawnHuntTile);
     }
 
     public Hunt CalculateSuccessRolls(IEnumerable<int> diceResults, int huntBoxNumberOfCharacterResultDice)
@@ -82,7 +92,7 @@ public class Hunt : ValueObject
 
         var successCount = diceResults.Count(x => x >= successResult);
 
-        return new Hunt(State, NumberOfSuccessfulDiceResult + successCount, AvailableReRollCount);
+        return new Hunt(State, NumberOfSuccessfulDiceResult + successCount, AvailableReRollCount, DrawnHuntTile);
     }
 
     public Hunt CalculateNextHuntMoveAfterRoll(int diceToReRollCount, int availableReRollCount)
@@ -93,7 +103,7 @@ public class Hunt : ValueObject
         }
 
         return diceToReRollCount != 0
-            ? new Hunt(HuntState.ReRollDice, NumberOfSuccessfulDiceResult, availableReRollCount)
+            ? new Hunt(HuntState.ReRollDice, NumberOfSuccessfulDiceResult, availableReRollCount, DrawnHuntTile)
             : EndRollState();
     }
 
@@ -110,8 +120,28 @@ public class Hunt : ValueObject
     private Hunt EndRollState()
     {
         return NumberOfSuccessfulDiceResult > 0
-            ? new Hunt(HuntState.DrawHuntTile, NumberOfSuccessfulDiceResult, AvailableReRollCount)
-            : new Hunt(HuntState.Ended, NumberOfSuccessfulDiceResult, AvailableReRollCount);
+            ? new Hunt(HuntState.DrawHuntTile, NumberOfSuccessfulDiceResult, AvailableReRollCount, DrawnHuntTile)
+            : new Hunt(HuntState.Ended, NumberOfSuccessfulDiceResult, AvailableReRollCount, DrawnHuntTile);
+    }
+    
+    public Hunt CalculateNextHuntMoveAfterDrawTile(HuntTile drawnHuntTile)
+    {
+        if (!IsInDrawHuntTileState())
+        {
+            throw new HuntStateException("Hunt is not available for draw hunt tile");
+        }
+
+        if (drawnHuntTile.HuntDamage > 0 || drawnHuntTile.HasEyeIcon)
+        {
+            return new Hunt(HuntState.TakeCasualty, NumberOfSuccessfulDiceResult, AvailableReRollCount, drawnHuntTile);
+        }
+
+        if (drawnHuntTile.HasRevealIcon)
+        {
+            return new Hunt(HuntState.Reveal, NumberOfSuccessfulDiceResult, AvailableReRollCount, drawnHuntTile);
+        }
+        
+        return new Hunt(HuntState.Ended, NumberOfSuccessfulDiceResult, AvailableReRollCount, drawnHuntTile);
     }
 
     public static Hunt Create()

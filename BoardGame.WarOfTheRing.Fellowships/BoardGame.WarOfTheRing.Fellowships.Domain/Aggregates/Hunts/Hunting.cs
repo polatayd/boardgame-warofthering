@@ -11,7 +11,17 @@ public class Hunting : EntityBase, IAggregateRoot
     public Guid GameId { get; private set; }
     public HuntBox HuntBox { get; private set; }
     public HuntPool HuntPool { get; private set; }
-    public Hunt ActiveHunt { get; private set; }
+
+    private Hunt activeHunt;
+    public Hunt ActiveHunt
+    {
+        get => activeHunt;
+        private set
+        {
+            activeHunt = value;
+            PlaceCharacterDieIfNecessary();
+        }
+    }
 
     [SuppressMessage("ReSharper", "UnusedMember.Local")]
     private Hunting()
@@ -62,13 +72,21 @@ public class Hunting : EntityBase, IAggregateRoot
     {
         var diceToReRollCount = HuntBox.GetDiceToRollCountForReRoll(availableReRollCount, ActiveHunt.NumberOfSuccessfulDiceResult);
         ActiveHunt = ActiveHunt.CalculateNextHuntMoveAfterRoll(diceToReRollCount, availableReRollCount);
-        PlaceCharacterDieIfNecessary();
     }
 
     public void CalculateNextHuntMoveAfterReRoll()
     {
         ActiveHunt = ActiveHunt.CalculateNextHuntMoveAfterReRoll();
-        PlaceCharacterDieIfNecessary();
+    }
+    
+    public HuntTile DrawHuntTile()
+    {
+        var (drawnHuntTile, huntPool) = HuntPool.DrawHuntTile(); 
+        
+        HuntPool = huntPool;
+        ActiveHunt = ActiveHunt.CalculateNextHuntMoveAfterDrawTile(drawnHuntTile);
+        
+        return drawnHuntTile;
     }
     
     private void PlaceCharacterDieIfNecessary()

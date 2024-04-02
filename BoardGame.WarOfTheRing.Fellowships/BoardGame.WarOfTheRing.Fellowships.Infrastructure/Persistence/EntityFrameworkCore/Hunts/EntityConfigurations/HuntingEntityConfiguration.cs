@@ -16,6 +16,7 @@ public class HuntingEntityConfiguration : IEntityTypeConfiguration<Hunting>
         builder.ComplexProperty(x => x.ActiveHunt,y =>
         {
             y.ComplexProperty(z => z.State, t => t.IsRequired());
+            y.ComplexProperty(z => z.DrawnHuntTile, t => t.IsRequired());
             y.IsRequired();
         });
         builder.OwnsOne(x => x.HuntPool, huntingBuilder =>

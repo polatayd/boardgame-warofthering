@@ -11,38 +11,49 @@ public class HuntTile : ValueObject
     public bool HasEyeIcon { get; private set; }
     public bool HasDieIcon { get; private set; }
 
-    public HuntTile(int huntDamage, bool hasRevealIcon, bool hasStopIcon, bool hasEyeIcon, bool hasDieIcon)
+    private HuntTile(int huntDamage, bool hasEyeIcon, bool hasDieIcon, bool hasRevealIcon, bool hasStopIcon)
     {
-        if (huntDamage != 0)
-        {
-            if (hasEyeIcon || hasDieIcon)
-            {
-                throw new HuntTileCreationError("A Tile can not have eye or die icon if it has damage");
-            }
-        }
-        else
-        {
-            if (!hasEyeIcon && !hasDieIcon)
-            {
-                throw new HuntTileCreationError("A Tile must have eye or die icon if it has no damage");
-            }
-        }
-        
         if (hasRevealIcon && hasStopIcon)
         {
             throw new HuntTileCreationError("A Tile can not have both reveal and stop icon");
         }
 
-        if (hasEyeIcon && hasDieIcon)
-        {
-            throw new HuntTileCreationError("A Tile can not have both eye and die icon");
-        }
-
         HuntDamage = huntDamage;
-        HasRevealIcon = hasRevealIcon;
-        HasStopIcon = hasStopIcon;
         HasEyeIcon = hasEyeIcon;
         HasDieIcon = hasDieIcon;
+        HasRevealIcon = hasRevealIcon;
+        HasStopIcon = hasStopIcon;
+    }
+
+    internal static HuntTile CreateFromHuntTile(HuntTile huntTile)
+    {
+        return new HuntTile(huntTile.HuntDamage, huntTile.HasEyeIcon, huntTile.HasDieIcon, huntTile.HasRevealIcon,
+            huntTile.HasStopIcon);
+    }
+
+    public static HuntTile CreateNumberedTile(int huntDamage)
+    {
+        return new HuntTile(huntDamage, false, false, false, false);
+    }
+    
+    public static HuntTile CreateEyeTile()
+    {
+        return new HuntTile(0, true, false, false, false);
+    }
+    
+    public static HuntTile CreateDieTile()
+    {
+        return new HuntTile(0, false, true, false, false);
+    }
+
+    public HuntTile WithRevealIcon()
+    {
+        return new HuntTile(HuntDamage, HasEyeIcon, HasDieIcon, true, HasStopIcon);
+    }
+    
+    public HuntTile WithStopIcon()
+    {
+        return new HuntTile(HuntDamage, HasEyeIcon, HasDieIcon, HasRevealIcon, true);
     }
 
     public int GetDamage()

@@ -19,16 +19,14 @@ public class ReRollDiceCommand : IRequest<RollDiceCommandOutput>
 public class ReRollDiceCommandHandler : IRequestHandler<ReRollDiceCommand, RollDiceCommandOutput>
 {
     private readonly IDiceService diceService;
-    private readonly IMapService mapService;
     private readonly IHuntRepository huntRepository;
     private readonly IUnitOfWork unitOfWork;
 
-    public ReRollDiceCommandHandler(IDiceService diceService, IHuntRepository huntRepository, IMapService mapService,
+    public ReRollDiceCommandHandler(IDiceService diceService, IHuntRepository huntRepository,
         IUnitOfWork unitOfWork)
     {
         this.diceService = diceService;
         this.huntRepository = huntRepository;
-        this.mapService = mapService;
         this.unitOfWork = unitOfWork;
     }
 

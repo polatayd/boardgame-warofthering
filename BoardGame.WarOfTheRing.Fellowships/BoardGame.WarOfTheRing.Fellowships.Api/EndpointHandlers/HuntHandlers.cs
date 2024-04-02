@@ -103,4 +103,40 @@ public static class HuntHandlers
 
         return TypedResults.Ok(result);
     }
+    
+    public static async Task<Results<ProblemHttpResult, Ok<DrawHuntTileCommandOutput>>> DrawHuntTile(
+        [FromRoute] Guid gameId,
+        [FromServices] IMediator mediator)
+    {
+        DrawHuntTileCommandOutput result;
+        try
+        {
+            result = await mediator.Send(new DrawHuntTileCommand(new DrawHuntTileCommandInput()
+            {
+                GameId = gameId
+            }));
+        }
+        catch (HuntStateException e)
+        {
+            return TypedResults.Problem(new ProblemDetails()
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Type = nameof(HuntStateException),
+                Title = "Hunt Exception",
+                Detail = e.Message,
+            });
+        }
+        catch (HuntingNotFoundException e)
+        {
+            return TypedResults.Problem(new ProblemDetails()
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Type = nameof(HuntingNotFoundException),
+                Title = "Hunt Exception",
+                Detail = e.Message,
+            });
+        }
+
+        return TypedResults.Ok(result);
+    }
 }

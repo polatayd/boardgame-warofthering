@@ -186,7 +186,7 @@ public class HuntTests
     public void Should_Change_State_To_Ended_From_ReRoll()
     {
         //Arrange
-        var sut = Hunt.Create().Start().CalculateNextHuntMoveAfterRoll(5, 3);;
+        var sut = Hunt.Create().Start().CalculateNextHuntMoveAfterRoll(5, 3);
         
         //Act
         var sut2 = sut.CalculateNextHuntMoveAfterReRoll();
@@ -201,7 +201,7 @@ public class HuntTests
         //Arrange
         var results = new List<int> { 1, 5, 6, 3, 6 };
         var sut = Hunt.Create().Start().CalculateSuccessRolls(results, 0)
-            .CalculateNextHuntMoveAfterRoll(3, 3);;
+            .CalculateNextHuntMoveAfterRoll(3, 3);
 
         //Act
         var sut2 = sut.CalculateNextHuntMoveAfterReRoll();
