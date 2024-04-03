@@ -45,9 +45,7 @@ public class ReRollDiceCommandHandler : IRequestHandler<ReRollDiceCommand, RollD
         }
 
         var diceResults = await diceService.SendRollDiceRequestAsync(diceToRollCount);
-        hunting.CalculateSuccessRolls(diceResults);
-
-        hunting.CalculateNextHuntMoveAfterReRoll();
+        hunting.CalculateSuccessRollsForReRollDice(diceResults);
 
         await unitOfWork.SaveChangesAsync();
 

@@ -11,5 +11,10 @@ public class FellowshipEntityConfiguration : IEntityTypeConfiguration<Fellowship
         builder.HasIndex(x => x.GameId).IsUnique();
         builder.ComplexProperty(x => x.ProgressCounter, y => y.IsRequired());
         builder.ComplexProperty(x => x.CorruptionCounter, y=>y.IsRequired());
+        builder.OwnsMany(x => x.Characters, fellowshipBuilder =>
+        {
+            fellowshipBuilder.ToJson();
+        });
+        builder.Ignore(x => x.Guide);
     }
 }

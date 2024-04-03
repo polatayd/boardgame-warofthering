@@ -16,5 +16,13 @@ public static class FellowshipEndpointMappings
         fellowshipEndpoints.MapPost("/forward", FellowshipHandlers.ForwardFellowship)
             .WithName("ForwardFellowship")
             .WithOpenApi();
+        
+        fellowshipEndpoints.MapGet("", FellowshipHandlers.GetFellowship)
+            .WithName("GetFellowship")
+            .WithOpenApi();
+        
+        fellowshipEndpoints.MapPost("/casualty", FellowshipHandlers.TakeCasualty)
+            .WithName("TakeCasualty")
+            .WithOpenApi();
     }
 }

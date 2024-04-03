@@ -20,7 +20,8 @@ public class Hunt : ValueObject
         DrawnHuntTile = HuntTile.CreateNumberedTile(0);
     }
 
-    private Hunt(HuntState huntState, int numberOfSuccessfulDiceResult, int availableReRollCount, HuntTile drawnHuntTile)
+    private Hunt(HuntState huntState, int numberOfSuccessfulDiceResult, int availableReRollCount,
+        HuntTile drawnHuntTile)
     {
         State = huntState;
         if (huntState == HuntState.Empty)
@@ -36,6 +37,11 @@ public class Hunt : ValueObject
             DrawnHuntTile = drawnHuntTile;
         }
     }
+    
+    public static Hunt Create()
+    {
+        return new Hunt();
+    }
 
     protected override IEnumerable<object> GetEqualityComponents()
     {
@@ -43,11 +49,6 @@ public class Hunt : ValueObject
         yield return NumberOfSuccessfulDiceResult;
         yield return AvailableReRollCount;
         yield return DrawnHuntTile;
-    }
-
-    public bool IsInAnyRollState()
-    {
-        return IsInRollState() || IsInReRollState();
     }
 
     public bool IsInRollState()
@@ -59,7 +60,7 @@ public class Hunt : ValueObject
     {
         return State == HuntState.ReRollDice;
     }
-    
+
     public bool IsInDrawHuntTileState()
     {
         return State == HuntState.DrawHuntTile;
@@ -68,6 +69,28 @@ public class Hunt : ValueObject
     public bool IsInEndedState()
     {
         return State == HuntState.Ended;
+    }
+    
+    public bool IsInTakeCasualtyState()
+    {
+        return State == HuntState.TakeCasualty;
+    }
+    
+    private int CalculateSuccessRolls(IEnumerable<int> diceResults, int huntBoxNumberOfCharacterResultDice)
+    {
+        var successResult = InitialSuccessDiceResultOfHunt - huntBoxNumberOfCharacterResultDice;
+        successResult = successResult > 1 ? successResult : 1;
+
+        var successCount = diceResults.Count(x => x >= successResult);
+
+        return NumberOfSuccessfulDiceResult + successCount;
+    }
+    
+    private Hunt EndRollState(int numberOfSuccessDiceResult)
+    {
+        return numberOfSuccessDiceResult > 0
+            ? new Hunt(HuntState.DrawHuntTile, numberOfSuccessDiceResult, AvailableReRollCount, DrawnHuntTile)
+            : new Hunt(HuntState.Ended, numberOfSuccessDiceResult, AvailableReRollCount, DrawnHuntTile);
     }
 
     public Hunt Start()
@@ -80,50 +103,33 @@ public class Hunt : ValueObject
         return new Hunt(HuntState.RollDice, NumberOfSuccessfulDiceResult, AvailableReRollCount, DrawnHuntTile);
     }
 
-    public Hunt CalculateSuccessRolls(IEnumerable<int> diceResults, int huntBoxNumberOfCharacterResultDice)
-    {
-        if (!IsInAnyRollState())
-        {
-            throw new HuntStateException("Hunt is not available for roll");
-        }
-
-        var successResult = InitialSuccessDiceResultOfHunt - huntBoxNumberOfCharacterResultDice;
-        successResult = successResult > 1 ? successResult : 1;
-
-        var successCount = diceResults.Count(x => x >= successResult);
-
-        return new Hunt(State, NumberOfSuccessfulDiceResult + successCount, AvailableReRollCount, DrawnHuntTile);
-    }
-
-    public Hunt CalculateNextHuntMoveAfterRoll(int diceToReRollCount, int availableReRollCount)
+    public Hunt CalculateNextHuntMoveAfterRollDice(IEnumerable<int> diceResults, int huntBoxNumberOfCharacterResultDice,
+        int diceToReRollCount, int availableReRollCount)
     {
         if (!IsInRollState())
         {
             throw new HuntStateException("Hunt is not available for roll");
         }
 
+        var numberOfSuccessDiceResult = CalculateSuccessRolls(diceResults, huntBoxNumberOfCharacterResultDice);
+        
         return diceToReRollCount != 0
-            ? new Hunt(HuntState.ReRollDice, NumberOfSuccessfulDiceResult, availableReRollCount, DrawnHuntTile)
-            : EndRollState();
+            ? new Hunt(HuntState.ReRollDice, numberOfSuccessDiceResult, availableReRollCount, DrawnHuntTile)
+            : EndRollState(numberOfSuccessDiceResult);
     }
 
-    public Hunt CalculateNextHuntMoveAfterReRoll()
+    public Hunt CalculateNextHuntMoveAfterReRollDice(IEnumerable<int> diceResults, int huntBoxNumberOfCharacterResultDice)
     {
         if (!IsInReRollState())
         {
             throw new HuntStateException("Hunt is not available for roll");
         }
+        
+        var numberOfSuccessDiceResult = CalculateSuccessRolls(diceResults, huntBoxNumberOfCharacterResultDice);
 
-        return EndRollState();
+        return EndRollState(numberOfSuccessDiceResult);
     }
 
-    private Hunt EndRollState()
-    {
-        return NumberOfSuccessfulDiceResult > 0
-            ? new Hunt(HuntState.DrawHuntTile, NumberOfSuccessfulDiceResult, AvailableReRollCount, DrawnHuntTile)
-            : new Hunt(HuntState.Ended, NumberOfSuccessfulDiceResult, AvailableReRollCount, DrawnHuntTile);
-    }
-    
     public Hunt CalculateNextHuntMoveAfterDrawTile(HuntTile drawnHuntTile)
     {
         if (!IsInDrawHuntTileState())
@@ -140,12 +146,32 @@ public class Hunt : ValueObject
         {
             return new Hunt(HuntState.Reveal, NumberOfSuccessfulDiceResult, AvailableReRollCount, drawnHuntTile);
         }
-        
+
         return new Hunt(HuntState.Ended, NumberOfSuccessfulDiceResult, AvailableReRollCount, drawnHuntTile);
     }
 
-    public static Hunt Create()
+    public Hunt CalculateNextHuntMoveAfterTakeCasualty()
     {
-        return new Hunt();
+        if (!IsInTakeCasualtyState())
+        {
+            throw new HuntStateException("Hunt is not available for take casualty");
+        }
+        
+        if (DrawnHuntTile.HasRevealIcon)
+        {
+            return new Hunt(HuntState.Reveal, NumberOfSuccessfulDiceResult, AvailableReRollCount, DrawnHuntTile);
+        }
+
+        return new Hunt(HuntState.Ended, NumberOfSuccessfulDiceResult, AvailableReRollCount, DrawnHuntTile);
+    }
+    
+    public int GetDamage()
+    {
+        if (DrawnHuntTile.HasEyeIcon)
+        {
+            return DrawnHuntTile.GetEyeDamage(NumberOfSuccessfulDiceResult);
+        }
+
+        return DrawnHuntTile.GetDamage();
     }
 }

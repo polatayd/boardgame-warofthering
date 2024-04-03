@@ -46,11 +46,10 @@ public class RollDiceCommandHandler : IRequestHandler<RollDiceCommand, RollDiceC
             return new RollDiceCommandOutput();
         }
             
+        var availableReRollCount = await mapService.SendReRollCountRequestAsync(hunting.GameId);
         var diceResults = await diceService.SendRollDiceRequestAsync(diceToRollCount);
-        hunting.CalculateSuccessRolls(diceResults);
-            
-        var availableReRollCount = await mapService.SendReRollCountRequestAsync(hunting.FellowshipId);
-        hunting.CalculateNextHuntMoveAfterRoll(availableReRollCount);
+        
+        hunting.CalculateSuccessRollsForRollDice(diceResults, availableReRollCount);
 
         await unitOfWork.SaveChangesAsync();
 
