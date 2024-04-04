@@ -9,6 +9,7 @@ using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Persistence.EntityFramew
 using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Persistence.EntityFrameworkCore.Fellowships;
 using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Persistence.EntityFrameworkCore.Hunts;
 using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Services;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,11 @@ public static class FellowshipServiceRegistration
     {
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+        services.AddHttpLogging(options =>
+        {
+            options.LoggingFields = HttpLoggingFields.All;
+            options.CombineLogs = true;
+        });
 
         services.ConfigureHttpJsonOptions(options =>
             options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));

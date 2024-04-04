@@ -1,4 +1,5 @@
 using BoardGame.WarOfTheRing.Fellowships.Application.Services;
+using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Services;
 using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Services.Dice;
 using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Services.Map;
 using Microsoft.Extensions.Http.Resilience;
@@ -12,22 +13,28 @@ public static class HttpClientServiceRegistration
         IConfiguration configuration)
     {
         var servicesOptions = configuration.GetSection(ServicesOptions.Services).Get<ServicesOptions>();
-        
+
+        services.AddTransient<LoggingDelegatingHandler>();
+
         var diceOptions = servicesOptions.Dice;
         services.AddHttpClient<IDiceService, DiceApiClient>().ConfigureHttpClient(client =>
-        {
-            client.BaseAddress = new Uri(diceOptions.BaseAddress);
-            client.Timeout = TimeSpan.FromMilliseconds(diceOptions.Timeout);
-        }).AddResilienceHandler("dice-pipeline",
-            pb => ApiClientResilienceHandler(pb, diceOptions));
-        
+            {
+                client.BaseAddress = new Uri(diceOptions.BaseAddress);
+                client.Timeout = TimeSpan.FromMilliseconds(diceOptions.Timeout);
+            })
+            .AddHttpMessageHandler<LoggingDelegatingHandler>()
+            .AddResilienceHandler("dice-pipeline",
+                pb => ApiClientResilienceHandler(pb, diceOptions));
+
         var mapOptions = servicesOptions.Map;
         services.AddHttpClient<IMapService, MapApiClient>().ConfigureHttpClient(client =>
-        {
-            client.BaseAddress = new Uri(mapOptions.BaseAddress);
-            client.Timeout = TimeSpan.FromMilliseconds(mapOptions.Timeout);
-        }).AddResilienceHandler("map-pipeline",
-            pb => ApiClientResilienceHandler(pb, mapOptions));
+            {
+                client.BaseAddress = new Uri(mapOptions.BaseAddress);
+                client.Timeout = TimeSpan.FromMilliseconds(mapOptions.Timeout);
+            })
+            .AddHttpMessageHandler<LoggingDelegatingHandler>()
+            .AddResilienceHandler("map-pipeline",
+                pb => ApiClientResilienceHandler(pb, mapOptions));
 
         return services;
     }

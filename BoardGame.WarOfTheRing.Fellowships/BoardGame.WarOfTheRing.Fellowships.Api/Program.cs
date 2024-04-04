@@ -2,20 +2,28 @@ using BoardGame.WarOfTheRing.Fellowships.Api;
 using BoardGame.WarOfTheRing.Fellowships.Api.EndpointMappings;
 using BoardGame.WarOfTheRing.Fellowships.Api.ServiceRegistrations;
 using Serilog;
-using Serilog.Formatting.Elasticsearch;
+using Serilog.Enrichers.Sensitive;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.ClearProviders();
 builder.Host.UseSerilog((context, configuration) =>
 {
-    configuration.ReadFrom.Configuration(context.Configuration);
+    configuration.ReadFrom.Configuration(context.Configuration)
+        .Enrich.WithSensitiveDataMasking(options =>
+        {
+            options.MaskingOperators =
+            [
+                new FellowshipMaskingOperator()
+            ];
+        });
 });
 
 builder.Services.RegisterFellowshipServices(builder.Configuration);
 
 var app = builder.Build();
 app.UseSerilogRequestLogging();
+app.UseHttpLogging();
 
 if (app.Environment.ApplicationIsDevelopment())
 {
