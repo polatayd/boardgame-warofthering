@@ -60,6 +60,16 @@
     networks:
       - backend
     command: --configfile /imposters/imposters.ejs --allowInjection
+    
+  seq:
+    image: datalust/seq:latest
+    volumes:
+      - ~/apps/seq-warofthering:/data
+    restart: unless-stopped
+    ports:
+      - 5341:80
+    environment:
+      - ACCEPT_EULA=Y
   
 networks:
   backend:

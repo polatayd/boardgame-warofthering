@@ -4,18 +4,18 @@ using BoardGame.WarOfTheRing.Fellowships.Api.ServiceRegistrations;
 using Serilog;
 using Serilog.Formatting.Elasticsearch;
 
-var logger = new LoggerConfiguration()
-    .WriteTo.Console(new ElasticsearchJsonFormatter())
-    .CreateLogger();
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.ClearProviders();
-builder.Host.UseSerilog(logger);
+builder.Host.UseSerilog((context, configuration) =>
+{
+    configuration.ReadFrom.Configuration(context.Configuration);
+});
 
 builder.Services.RegisterFellowshipServices(builder.Configuration);
 
 var app = builder.Build();
+app.UseSerilogRequestLogging();
 
 if (app.Environment.ApplicationIsDevelopment())
 {

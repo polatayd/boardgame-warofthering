@@ -19,6 +19,7 @@ var app = builder.Build();
 
 if (app.Environment.ApplicationIsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
