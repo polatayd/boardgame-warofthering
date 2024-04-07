@@ -132,8 +132,26 @@ public class Fellowship : EntityBase, IAggregateRoot
         RegisterDomainEvent(new FellowshipRevealed(HuntingId));
     }
 
-    public void ResetProgressCounter()
+    public void Declare(Region declaredRegion)
     {
+        if (!ProgressCounter.IsHidden)
+        {
+            throw new FellowshipDeclareException("Fellowship can not be declared if it's revealed");
+        }
+        
         ProgressCounter = ProgressCounter.MoveToZero();
+
+        var freePeoplesCityOrStrongholdSpecification = new RegionIsFreePeoplesCityOrStronghold(declaredRegion);
+        var shadowControlledSpecification = new RegionIsShadowControlled(declaredRegion);
+        
+        if (freePeoplesCityOrStrongholdSpecification.And(shadowControlledSpecification.Not()).IsSatisfiedBy(this))
+        {
+            CorruptionCounter = CorruptionCounter.Heal(1);
+        }
+
+        if (freePeoplesCityOrStrongholdSpecification.IsSatisfiedBy(this))
+        {
+            RegisterDomainEvent(new FellowshipDeclaredInCityOrStronghold(GameId));
+        }
     }
 }

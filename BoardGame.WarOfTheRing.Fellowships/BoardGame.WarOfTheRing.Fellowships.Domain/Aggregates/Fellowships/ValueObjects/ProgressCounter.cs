@@ -47,7 +47,7 @@ public class ProgressCounter : ValueObject
     
     public ProgressCounter Reveal()
     {
-        return new ProgressCounter(Value, false);
+        return new ProgressCounter(0, false);
     }
 
     protected override IEnumerable<object> GetEqualityComponents()

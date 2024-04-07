@@ -196,6 +196,41 @@ public static class FellowshipHandlers
 
         return TypedResults.Ok();
     }
+    
+    public static async Task<Results<ProblemHttpResult, Ok>> Declare(
+        [FromRoute] Guid gameId,
+        [FromServices] IMediator mediator)
+    {
+        try
+        {
+            await mediator.Send(new DeclareCommand(new DeclareCommandInput()
+            {
+                GameId = gameId,
+            }));
+        }
+        catch (FellowshipNotFoundException e)
+        {
+            return TypedResults.Problem(new ProblemDetails()
+            {
+                Status = StatusCodes.Status404NotFound,
+                Type = nameof(FellowshipNotFoundException),
+                Title = "Fellowship Exception",
+                Detail = e.Message,
+            });
+        }
+        catch (FellowshipDeclareException e)
+        {
+            return TypedResults.Problem(new ProblemDetails()
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Type = nameof(FellowshipDeclareException),
+                Title = "Fellowship Exception",
+                Detail = e.Message,
+            });
+        }
+
+        return TypedResults.Ok();
+    }
 }
 
 public class TakeCasualtyInput

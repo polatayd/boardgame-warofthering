@@ -1,7 +1,7 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Text.Json;
 using BoardGame.WarOfTheRing.Fellowships.Application.Services;
+using BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Fellowships.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -51,7 +51,7 @@ public class MapApiClient : IMapService
         }
     }
 
-    public async Task SendMoveFellowshipRequestAsync(Guid gameId)
+    public async Task<Region> SendMoveFellowshipRequestAsync(Guid gameId)
     {
         var request = new HttpRequestMessage(HttpMethod.Post, $"fellowships/{gameId}/movement");
 
@@ -68,6 +68,9 @@ public class MapApiClient : IMapService
 
                 throw new MapServiceException($"Map services returned error with status code {response.StatusCode}");
             }
+
+            //TODO: This information should come from map service.
+            return new Region(RegionPlayer.FreePeoples, RegionPlayer.FreePeoples, RegionType.City);
         }
         catch (OperationCanceledException e)
         {

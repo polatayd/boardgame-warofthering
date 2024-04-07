@@ -28,5 +28,9 @@ public static class FellowshipEndpointMappings
         fellowshipEndpoints.MapPost("/reveal", FellowshipHandlers.Reveal)
             .WithName("Reveal")
             .WithOpenApi();
+        
+        fellowshipEndpoints.MapPost("/declare", FellowshipHandlers.Declare)
+            .WithName("Declare")
+            .WithOpenApi();
     }
 }

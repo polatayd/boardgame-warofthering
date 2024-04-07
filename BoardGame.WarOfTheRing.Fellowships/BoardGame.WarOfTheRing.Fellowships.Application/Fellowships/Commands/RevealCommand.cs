@@ -1,6 +1,5 @@
 using BoardGame.WarOfTheRing.Fellowships.Application.Fellowships.Exceptions;
 using BoardGame.WarOfTheRing.Fellowships.Application.Fellowships.Inputs;
-using BoardGame.WarOfTheRing.Fellowships.Application.Fellowships.Outputs;
 using BoardGame.WarOfTheRing.Fellowships.Application.Hunts;
 using BoardGame.WarOfTheRing.Fellowships.Application.Hunts.Exceptions;
 using BoardGame.WarOfTheRing.Fellowships.Application.Services;
@@ -47,12 +46,10 @@ public class RevealCommandHandler : IRequestHandler<RevealCommand>
         {
             throw new HuntStateException("Can not be revealed");
         }
-
-        fellowship.Reveal();
-
+        
         await mapService.SendMoveFellowshipRequestAsync(fellowship.GameId);
 
-        fellowship.ResetProgressCounter();
+        fellowship.Reveal();
 
         await unitOfWork.SaveChangesAsync();
     }
