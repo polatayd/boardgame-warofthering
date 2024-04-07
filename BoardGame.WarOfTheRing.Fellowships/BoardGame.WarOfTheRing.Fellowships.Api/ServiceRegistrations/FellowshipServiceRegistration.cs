@@ -4,7 +4,9 @@ using BoardGame.WarOfTheRing.Fellowships.Application;
 using BoardGame.WarOfTheRing.Fellowships.Application.Fellowships;
 using BoardGame.WarOfTheRing.Fellowships.Application.Fellowships.Commands;
 using BoardGame.WarOfTheRing.Fellowships.Application.Hunts;
+using BoardGame.WarOfTheRing.Fellowships.Application.Services;
 using BoardGame.WarOfTheRing.Fellowships.Infrastructure.DomainEventDispatcher;
+using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Messaging.NServiceBus;
 using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Persistence.EntityFrameworkCore;
 using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Persistence.EntityFrameworkCore.Fellowships;
 using BoardGame.WarOfTheRing.Fellowships.Infrastructure.Persistence.EntityFrameworkCore.Hunts;
@@ -43,6 +45,8 @@ public static class FellowshipServiceRegistration
             .AddScoped<IUnitOfWork, FellowshipDbContext>(x => x.GetRequiredService<FellowshipDbContext>());
 
         services.RegisterHttpClientServices(configuration);
+
+        services.AddSingleton<IMessageService, NServiceBusMessageService>();
 
         services.AddScoped<IFellowshipRepository, FellowshipRepository>();
         services.AddScoped<IHuntRepository, HuntRepository>();

@@ -1,6 +1,7 @@
 using BoardGame.WarOfTheRing.Fellowships.Api;
 using BoardGame.WarOfTheRing.Fellowships.Api.EndpointMappings;
 using BoardGame.WarOfTheRing.Fellowships.Api.ServiceRegistrations;
+using NServiceBus;
 using Serilog;
 using Serilog.Enrichers.Sensitive;
 
@@ -17,6 +18,19 @@ builder.Host.UseSerilog((context, configuration) =>
                 new FellowshipMaskingOperator()
             ];
         });
+});
+
+builder.Host.UseNServiceBus(_ =>
+{
+    var endpointConfiguration = new EndpointConfiguration("Fellowship.Integration");
+
+    var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
+    transport.ConnectionString(builder.Configuration.GetConnectionString("rabbitmq"));
+    transport.UseConventionalRoutingTopology(QueueType.Quorum);
+
+    endpointConfiguration.SendOnly();
+    endpointConfiguration.EnableInstallers();
+    return endpointConfiguration;
 });
 
 builder.Services.RegisterFellowshipServices(builder.Configuration);

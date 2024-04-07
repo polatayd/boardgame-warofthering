@@ -4,22 +4,25 @@ namespace BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Fellowships.Value
 
 public class Region : ValueObject
 {
-    public Region(RegionPlayer ownedBy, RegionPlayer controlledBy, RegionType type)
+    public Region(RegionPlayer ownedBy, RegionPlayer controlledBy, RegionType type, string ownedNationName)
     {
         OwnedBy = ownedBy;
         ControlledBy = controlledBy;
         Type = type;
+        OwnedNationName = ownedNationName;
     }
 
     public RegionPlayer OwnedBy { get; init; }
     public RegionPlayer ControlledBy { get; init; }
     public RegionType Type { get; init; }
+    public string OwnedNationName { get; init; }
     
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return OwnedBy;
         yield return ControlledBy;
         yield return Type;
+        yield return OwnedNationName;
     }
 }
 

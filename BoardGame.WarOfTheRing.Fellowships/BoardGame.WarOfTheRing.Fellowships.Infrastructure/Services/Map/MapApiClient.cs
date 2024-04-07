@@ -70,7 +70,7 @@ public class MapApiClient : IMapService
             }
 
             //TODO: This information should come from map service.
-            return new Region(RegionPlayer.FreePeoples, RegionPlayer.FreePeoples, RegionType.City);
+            return new Region(RegionPlayer.FreePeoples, RegionPlayer.FreePeoples, RegionType.City, "Elves");
         }
         catch (OperationCanceledException e)
         {

@@ -81,6 +81,18 @@
       - backend
     command: [ "run", "-dc", "krakend.json" ]
   
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/apps/rabbitmq-warofthering/data/:/var/lib/rabbitmq/
+        - ~/apps/rabbitmq-warofthering/log/:/var/log/rabbitmq
+    networks:
+        - backend
+  
 networks:
   backend:
     

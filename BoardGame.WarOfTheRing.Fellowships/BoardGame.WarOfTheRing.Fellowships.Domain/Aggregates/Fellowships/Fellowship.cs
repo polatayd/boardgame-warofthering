@@ -151,7 +151,7 @@ public class Fellowship : EntityBase, IAggregateRoot
 
         if (freePeoplesCityOrStrongholdSpecification.IsSatisfiedBy(this))
         {
-            RegisterDomainEvent(new FellowshipDeclaredInCityOrStronghold(GameId));
+            RegisterDomainEvent(new FellowshipDeclaredInCityOrStronghold(GameId, declaredRegion.OwnedNationName));
         }
     }
 }

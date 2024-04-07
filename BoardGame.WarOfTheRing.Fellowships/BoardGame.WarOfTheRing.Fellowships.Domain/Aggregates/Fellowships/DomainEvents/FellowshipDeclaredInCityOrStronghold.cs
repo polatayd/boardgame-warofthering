@@ -5,9 +5,11 @@ namespace BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Fellowships.Domai
 public class FellowshipDeclaredInCityOrStronghold : DomainEvent
 {
     public Guid GameId { get; }
+    public string NationName { get; set; }
 
-    public FellowshipDeclaredInCityOrStronghold(Guid gameId)
+    public FellowshipDeclaredInCityOrStronghold(Guid gameId, string nationName)
     {
         GameId = gameId;
+        NationName = nationName;
     }
 }
