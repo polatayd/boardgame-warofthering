@@ -124,4 +124,16 @@ public class Fellowship : EntityBase, IAggregateRoot
         
         //TODO: Register damageTaken event, handle it and raise integration event if it reaches max level.
     }
+
+    public void Reveal()
+    {
+        ProgressCounter = ProgressCounter.Reveal();
+        
+        RegisterDomainEvent(new FellowshipRevealed(HuntingId));
+    }
+
+    public void ResetProgressCounter()
+    {
+        ProgressCounter = ProgressCounter.MoveToZero();
+    }
 }

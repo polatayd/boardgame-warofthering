@@ -1,4 +1,5 @@
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text.Json;
 using BoardGame.WarOfTheRing.Fellowships.Application.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -32,22 +33,41 @@ public class MapApiClient : IMapService
             var response = await client.SendAsync(request);
             if (!response.IsSuccessStatusCode)
             {
-                var errorContent = await response.Content.ReadAsStringAsync();
-                var errorAsProblemDetails =
-                    JsonSerializer.Deserialize<ValidationProblemDetails>(errorContent,
-                        jsonSerializerOptionsWrapper.Options);
+                var errorAsProblemDetails = await response.Content.ReadFromJsonAsync<ValidationProblemDetails>(jsonSerializerOptionsWrapper.Options);
 
                 errorAsProblemDetails.LogValidationProblemDetails(logger);
 
                 throw new MapServiceException($"Map services returned error with status code {response.StatusCode}");
             }
 
-            var content = await response.Content.ReadAsStringAsync();
-            var output =
-                JsonSerializer.Deserialize<RerollIsAvailableRequestOutput>(content,
-                    jsonSerializerOptionsWrapper.Options);
+            var output = await response.Content.ReadFromJsonAsync<RerollIsAvailableRequestOutput>(jsonSerializerOptionsWrapper.Options);
 
             return output.ReRollCount;
+        }
+        catch (OperationCanceledException e)
+        {
+            logger.LogError("Message:{Message}", e.Message);
+            throw new MapServiceException($"Map service operation canceled");
+        }
+    }
+
+    public async Task SendMoveFellowshipRequestAsync(Guid gameId)
+    {
+        var request = new HttpRequestMessage(HttpMethod.Post, $"fellowships/{gameId}/movement");
+
+        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        try
+        {
+            var response = await client.SendAsync(request);
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorAsProblemDetails = await response.Content.ReadFromJsonAsync<ValidationProblemDetails>(jsonSerializerOptionsWrapper.Options);
+
+                errorAsProblemDetails.LogValidationProblemDetails(logger);
+
+                throw new MapServiceException($"Map services returned error with status code {response.StatusCode}");
+            }
         }
         catch (OperationCanceledException e)
         {

@@ -3,12 +3,12 @@ using MediatR;
 
 namespace BoardGame.WarOfTheRing.Fellowships.Application.Hunts.Handlers;
 
-public class TakeCasualtyDamageNotificationHandler : INotificationHandler<DomainEventNotification<CasualtyTaken>>
+public class CasualtyTakenNotificationHandler : INotificationHandler<DomainEventNotification<CasualtyTaken>>
 {
     private readonly IUnitOfWork unitOfWork;
     private readonly IHuntRepository huntRepository;
 
-    public TakeCasualtyDamageNotificationHandler(IUnitOfWork unitOfWork, IHuntRepository huntRepository)
+    public CasualtyTakenNotificationHandler(IUnitOfWork unitOfWork, IHuntRepository huntRepository)
     {
         this.unitOfWork = unitOfWork;
         this.huntRepository = huntRepository;

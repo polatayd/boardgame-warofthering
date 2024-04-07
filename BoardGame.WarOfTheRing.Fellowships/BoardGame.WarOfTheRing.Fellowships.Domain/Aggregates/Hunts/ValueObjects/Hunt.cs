@@ -76,6 +76,11 @@ public class Hunt : ValueObject
         return State == HuntState.TakeCasualty;
     }
     
+    public bool IsInRevealState()
+    {
+        return State == HuntState.Reveal;
+    }
+    
     private int CalculateSuccessRolls(IEnumerable<int> diceResults, int huntBoxNumberOfCharacterResultDice)
     {
         var successResult = InitialSuccessDiceResultOfHunt - huntBoxNumberOfCharacterResultDice;
@@ -173,5 +178,15 @@ public class Hunt : ValueObject
         }
 
         return DrawnHuntTile.GetDamage();
+    }
+
+    public Hunt CalculateNextHuntMoveAfterReveal()
+    {
+        if (!IsInRevealState())
+        {
+            throw new HuntStateException("Hunt is not available for reveal");
+        }
+        
+        return new Hunt(HuntState.Ended, NumberOfSuccessfulDiceResult, AvailableReRollCount, DrawnHuntTile);
     }
 }

@@ -151,6 +151,51 @@ public static class FellowshipHandlers
 
         return TypedResults.Ok(output);
     }
+    
+    public static async Task<Results<ProblemHttpResult, Ok>> Reveal(
+        [FromRoute] Guid gameId,
+        [FromServices] IMediator mediator)
+    {
+        try
+        {
+            await mediator.Send(new RevealCommand(new RevealCommandInput()
+            {
+                GameId = gameId,
+            }));
+        }
+        catch (FellowshipNotFoundException e)
+        {
+            return TypedResults.Problem(new ProblemDetails()
+            {
+                Status = StatusCodes.Status404NotFound,
+                Type = nameof(FellowshipNotFoundException),
+                Title = "Fellowship Exception",
+                Detail = e.Message,
+            });
+        }
+        catch (HuntingNotFoundException e)
+        {
+            return TypedResults.Problem(new ProblemDetails()
+            {
+                Status = StatusCodes.Status404NotFound,
+                Type = nameof(HuntingNotFoundException),
+                Title = "Fellowship Exception",
+                Detail = e.Message,
+            });
+        }
+        catch (HuntStateException e)
+        {
+            return TypedResults.Problem(new ProblemDetails()
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Type = nameof(HuntStateException),
+                Title = "Fellowship Exception",
+                Detail = e.Message,
+            });
+        }
+
+        return TypedResults.Ok();
+    }
 }
 
 public class TakeCasualtyInput

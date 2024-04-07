@@ -109,4 +109,9 @@ public class Hunting : EntityBase, IAggregateRoot
     {
         return ActiveHunt.GetDamage();
     }
+
+    public void CompleteReveal()
+    {
+        ActiveHunt = ActiveHunt.CalculateNextHuntMoveAfterReveal();
+    }
 }
