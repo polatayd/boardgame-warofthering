@@ -1,0 +1,19 @@
+{
+  "$schema": "https://www.krakend.io/schema/krakend.json",
+  "version": 3,
+  "name": "KrakenD - API Gateway",
+  "timeout": "3000ms",
+  "cache_ttl": "300s",
+  "endpoints": [{
+    "endpoint": "/api/fellowships/{gameId}",
+    "backend": [
+      {
+        "host": [
+          "http://boardgame.warofthering.fellowships.api:8080"
+        ],
+        "url_pattern": "/fellowships/{gameId}",
+        "method": "GET"
+      }
+    ]
+  }]
+}

@@ -71,6 +71,16 @@
     environment:
       - ACCEPT_EULA=Y
   
+  krakend:
+    image: devopsfaith/krakend:latest
+    volumes:
+      - "./BoardGame.WarOfTheRing.Gateway:/etc/krakend"
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+    command: [ "run", "-dc", "krakend.json" ]
+  
 networks:
   backend:
     
