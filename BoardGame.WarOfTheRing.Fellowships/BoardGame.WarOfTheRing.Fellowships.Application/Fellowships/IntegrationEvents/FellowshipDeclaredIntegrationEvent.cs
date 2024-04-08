@@ -1,8 +1,8 @@
 namespace BoardGame.WarOfTheRing.Fellowships.Application.Fellowships.IntegrationEvents;
 
-public class FellowshipDeclaredInCityOrStrongholdIntegrationEvent : IntegrationEvent
+public class FellowshipDeclaredIntegrationEvent : IntegrationEvent
 {
-    public FellowshipDeclaredInCityOrStrongholdIntegrationEvent(Guid gameId, string nationName)
+    public FellowshipDeclaredIntegrationEvent(Guid gameId, string nationName)
     {
         GameId = gameId;
         NationName = nationName;

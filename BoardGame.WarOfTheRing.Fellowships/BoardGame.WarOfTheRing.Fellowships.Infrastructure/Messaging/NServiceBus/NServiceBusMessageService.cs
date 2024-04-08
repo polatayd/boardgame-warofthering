@@ -15,8 +15,8 @@ public class NServiceBusMessageService : IMessageService
 
     public async Task SendAsync(IntegrationEvent integrationEvent)
     {
-        var nservicebusEvent = EventMapper.MapEvent(integrationEvent);
+        var nServiceBusEvent = EventMapper.MapEvent(integrationEvent);
         
-        await messageSession.Publish(nservicebusEvent);
+        await messageSession.Publish(nServiceBusEvent);
     }
 }

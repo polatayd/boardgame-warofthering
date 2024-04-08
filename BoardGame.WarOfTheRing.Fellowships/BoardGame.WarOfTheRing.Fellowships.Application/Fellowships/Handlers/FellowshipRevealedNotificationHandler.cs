@@ -5,20 +5,20 @@ using MediatR;
 
 namespace BoardGame.WarOfTheRing.Fellowships.Application.Fellowships.Handlers;
 
-public class FellowshipDeclaredInCityOrStrongholdNotificationHandler : INotificationHandler<DomainEventNotification<FellowshipDeclaredInCityOrStronghold>>
+public class FellowshipDeclaredNotificationHandler : INotificationHandler<DomainEventNotification<FellowshipDeclared>>
 {
     private readonly IMessageService messageService;
 
-    public FellowshipDeclaredInCityOrStrongholdNotificationHandler(IMessageService messageService)
+    public FellowshipDeclaredNotificationHandler(IMessageService messageService)
     {
         this.messageService = messageService;
     }
 
-    public Task Handle(DomainEventNotification<FellowshipDeclaredInCityOrStronghold> notification, CancellationToken cancellationToken)
+    public Task Handle(DomainEventNotification<FellowshipDeclared> notification, CancellationToken cancellationToken)
     {
         var fellowshipDeclared = notification.DomainEvent;
 
-        messageService.SendAsync(new FellowshipDeclaredInCityOrStrongholdIntegrationEvent(fellowshipDeclared.GameId, fellowshipDeclared.NationName));
+        messageService.SendAsync(new FellowshipDeclaredIntegrationEvent(fellowshipDeclared.GameId, fellowshipDeclared.NationName));
         
         return Task.CompletedTask;
     }

@@ -6,16 +6,16 @@ using NServiceBus;
 
 namespace BoardGame.WarOfTheRing.PoliticalTrack.Infrastructure.Messaging.NServiceBus;
 
-public class FellowshipDeclaredInCityOrStrongholdNServiceBusEventHandler : IHandleMessages<FellowshipDeclaredInCityOrStrongholdNServiceBusEvent>
+public class FellowshipDeclaredMassTransitEventHandler : IHandleMessages<FellowshipDeclaredEvent>
 {
     private readonly IMediator mediator;
 
-    public FellowshipDeclaredInCityOrStrongholdNServiceBusEventHandler(IMediator mediator)
+    public FellowshipDeclaredMassTransitEventHandler(IMediator mediator)
     {
         this.mediator = mediator;
     }
 
-    public async Task Handle(FellowshipDeclaredInCityOrStrongholdNServiceBusEvent message, IMessageHandlerContext context)
+    public async Task Handle(FellowshipDeclaredEvent message, IMessageHandlerContext context)
     {
         await mediator.Send(new ActivateNationCommand(new ActivateNationCommandInput()
         {
