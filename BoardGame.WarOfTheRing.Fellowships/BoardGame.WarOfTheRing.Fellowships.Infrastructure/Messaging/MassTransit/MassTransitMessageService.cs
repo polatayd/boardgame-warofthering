@@ -7,6 +7,7 @@ namespace BoardGame.WarOfTheRing.Fellowships.Infrastructure.Messaging.MassTransi
 public class MassTransitMessageService : IMessageService
 {
     private readonly IPublishEndpoint publishEndpoint;
+    private readonly TimeSpan timeout = TimeSpan.FromSeconds(1);
 
     public MassTransitMessageService(IPublishEndpoint publishEndpoint)
     {
@@ -17,6 +18,7 @@ public class MassTransitMessageService : IMessageService
     {
         var massTransitEvent = EventMapper.MapEvent(integrationEvent);
         
-        await publishEndpoint.Publish((dynamic)massTransitEvent);
+        using var source = new CancellationTokenSource(timeout);
+        await publishEndpoint.Publish((dynamic)massTransitEvent, source.Token);
     }
 }

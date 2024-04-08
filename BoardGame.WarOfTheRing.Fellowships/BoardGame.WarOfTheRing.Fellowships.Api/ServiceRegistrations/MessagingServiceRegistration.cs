@@ -37,7 +37,7 @@ public static class MessagingServiceRegistration
                 x.UsingRabbitMq((context, configurator) =>
                 {
                     configurator.Host(messagingOptions.MassTransit.Host);
-        
+                    
                     configurator.ConfigureEndpoints(context);
                 });
             });

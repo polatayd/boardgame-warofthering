@@ -1,4 +1,5 @@
 using BoardGame.WarOfTheRing.Fellowships.Application;
+using BoardGame.WarOfTheRing.Fellowships.Application.OutboxMessages;
 using BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Fellowships;
 using BoardGame.WarOfTheRing.Fellowships.Domain.Aggregates.Hunts;
 using BoardGame.WarOfTheRing.Fellowships.Domain.Base;
@@ -12,6 +13,7 @@ public class FellowshipDbContext : DbContext, IUnitOfWork
     private readonly IDomainEventDispatcher domainEventDispatcher;
     public DbSet<Fellowship> Fellowships { get; set; }
     public DbSet<Hunting> Huntings { get; set; }
+    public DbSet<OutboxMessage> OutboxMessages { get; set; }
 
     public FellowshipDbContext(DbContextOptions<FellowshipDbContext> options,
         IDomainEventDispatcher domainEventDispatcher) : base(options)
