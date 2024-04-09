@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.Maps.Domain", "BoardGame.WarOfTheRing.Maps.Domain\BoardGame.WarOfTheRing.Maps.Domain.csproj", "{52BC30EA-565C-44A0-992A-2D4B59AF5A39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.Maps.Tests", "BoardGame.WarOfTheRing.Maps.Tests\BoardGame.WarOfTheRing.Maps.Tests.csproj", "{FE4EB975-666F-4BC2-90B7-8A6E766CC00B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.Maps.Application", "BoardGame.WarOfTheRing.Maps.Application\BoardGame.WarOfTheRing.Maps.Application.csproj", "{A875D460-7003-42C1-A13D-4A9F4606B4AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.Maps.Infrastructure", "BoardGame.WarOfTheRing.Maps.Infrastructure\BoardGame.WarOfTheRing.Maps.Infrastructure.csproj", "{384876E0-3189-456C-921B-F136C2C2335D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.Maps.Api", "BoardGame.WarOfTheRing.Maps.Api\BoardGame.WarOfTheRing.Maps.Api.csproj", "{C5A63370-2DC9-47D5-BF4E-2B49522CD2C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52BC30EA-565C-44A0-992A-2D4B59AF5A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52BC30EA-565C-44A0-992A-2D4B59AF5A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52BC30EA-565C-44A0-992A-2D4B59AF5A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52BC30EA-565C-44A0-992A-2D4B59AF5A39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE4EB975-666F-4BC2-90B7-8A6E766CC00B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE4EB975-666F-4BC2-90B7-8A6E766CC00B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE4EB975-666F-4BC2-90B7-8A6E766CC00B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE4EB975-666F-4BC2-90B7-8A6E766CC00B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A875D460-7003-42C1-A13D-4A9F4606B4AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A875D460-7003-42C1-A13D-4A9F4606B4AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A875D460-7003-42C1-A13D-4A9F4606B4AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A875D460-7003-42C1-A13D-4A9F4606B4AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{384876E0-3189-456C-921B-F136C2C2335D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{384876E0-3189-456C-921B-F136C2C2335D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{384876E0-3189-456C-921B-F136C2C2335D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{384876E0-3189-456C-921B-F136C2C2335D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5A63370-2DC9-47D5-BF4E-2B49522CD2C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5A63370-2DC9-47D5-BF4E-2B49522CD2C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5A63370-2DC9-47D5-BF4E-2B49522CD2C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5A63370-2DC9-47D5-BF4E-2B49522CD2C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

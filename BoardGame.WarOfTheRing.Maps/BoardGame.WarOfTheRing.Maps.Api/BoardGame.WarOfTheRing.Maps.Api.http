@@ -1,0 +1,6 @@
+@BoardGame.WarOfTheRing.Maps.Api_HostAddress = http://localhost:5048
+
+GET {{BoardGame.WarOfTheRing.Maps.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
