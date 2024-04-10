@@ -20,12 +20,15 @@ public class Nation : EntityBase
     public string Name { get; init; }
     public Force BelongsTo { get; init; }
     public bool IsAtWar { get; init; }
+    public Guid MapId { get; init; }
     
-    public Nation(string name, Force belongsTo)
+    private Nation() {}
+    public Nation(string name, Force belongsTo, Guid mapId)
     {
         Id = Guid.NewGuid();
         Name = name;
         BelongsTo = belongsTo;
+        MapId = mapId;
     }
 
     public void AddToReinforcement(List<Unit> units)

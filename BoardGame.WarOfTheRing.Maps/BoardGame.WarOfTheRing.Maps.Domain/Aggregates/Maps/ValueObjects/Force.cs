@@ -4,13 +4,25 @@ namespace BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.ValueObjects;
 
 public class Force : ValueObject
 {
-    public static Force None { get; } = new Force(nameof(None));
-    public static Force Shadow { get; } = new Force(nameof(Shadow));
-    public static Force FreePeoples { get; } = new Force(nameof(FreePeoples));
-    
+    private Force() {}
     private Force(string name)
     {
         Name = name;
+    }
+
+    public static Force None()
+    {
+        return new Force("None");
+    }
+    
+    public static Force Shadow()
+    {
+        return new Force("Shadow");
+    }
+    
+    public static Force FreePeoples()
+    {
+        return new Force("FreePeoples");
     }
 
     public string Name { get; init; }

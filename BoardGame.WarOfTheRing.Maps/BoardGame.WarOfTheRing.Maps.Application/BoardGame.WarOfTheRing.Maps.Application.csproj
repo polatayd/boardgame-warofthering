@@ -6,4 +6,8 @@
         <Nullable>disable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\BoardGame.WarOfTheRing.Maps.Domain\BoardGame.WarOfTheRing.Maps.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -4,12 +4,25 @@ namespace BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.ValueObjects;
 
 public class UnitType : ValueObject
 {
-    public static UnitType Regular { get; } = new UnitType(nameof(Regular));
-    public static UnitType Elite { get; } = new UnitType(nameof(Elite));
-    
+    private UnitType() {}
     private UnitType(string value)
     {
         Value = value;
+    }
+
+    public static UnitType Regular()
+    {
+        return new UnitType("Regular");
+    }
+    
+    public static UnitType Elite()
+    {
+        return new UnitType("Elite");
+    }
+
+    public static UnitType Create(string value)
+    {
+        return new UnitType(value);
     }
 
     public string Value { get; init; }

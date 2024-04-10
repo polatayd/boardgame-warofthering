@@ -10,6 +10,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.Maps
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.WarOfTheRing.Maps.Api", "BoardGame.WarOfTheRing.Maps.Api\BoardGame.WarOfTheRing.Maps.Api.csproj", "{C5A63370-2DC9-47D5-BF4E-2B49522CD2C2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D1070E82-ED7B-4D4F-A451-61EBB9212880}"
+    ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = ./../docker-compose.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,11 +1,11 @@
-using BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.Entities;
 using BoardGame.WarOfTheRing.Maps.Domain.Base;
 
 namespace BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.ValueObjects;
 
 public class Unit : ValueObject
 {
-    public Unit(string nationName, UnitType type)
+    private Unit() {}
+    private Unit(string nationName, UnitType type)
     {
         NationName = nationName;
         Type = type;
@@ -13,6 +13,11 @@ public class Unit : ValueObject
 
     public string NationName { get; init; }
     public UnitType Type { get; init; }
+
+    public static Unit Create(string nationName, UnitType type)
+    {
+        return new Unit(nationName, UnitType.Create(type.Value));
+    }
     
     protected override IEnumerable<object> GetEqualityComponents()
     {

@@ -7,6 +7,6 @@ public class MapTests
     [Fact]
     public void CreateMap()
     {
-        var map = new Map();
+        var map = Map.Create();
     }
 }

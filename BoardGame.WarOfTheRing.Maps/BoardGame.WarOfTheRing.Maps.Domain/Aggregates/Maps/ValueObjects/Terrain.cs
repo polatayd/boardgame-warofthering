@@ -4,6 +4,7 @@ namespace BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.ValueObjects;
 
 public class Terrain : ValueObject
 {
+    private Terrain() {}
     private Terrain(bool isEmpty, bool hasFortification, Settlement settlement)
     {
         IsEmpty = isEmpty;
@@ -17,12 +18,12 @@ public class Terrain : ValueObject
 
     public static Terrain CreateEmpty()
     {
-        return new Terrain(true, false, Settlement.None);
+        return new Terrain(true, false, Settlement.None());
     }
     
     public static Terrain CreateFortification()
     {
-        return new Terrain(false, true, Settlement.None);
+        return new Terrain(false, true, Settlement.None());
     }
     
     public static Terrain CreateSettlement(Settlement settlement)

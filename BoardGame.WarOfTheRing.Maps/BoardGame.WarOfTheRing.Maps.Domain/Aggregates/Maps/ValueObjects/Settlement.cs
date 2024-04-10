@@ -4,8 +4,7 @@ namespace BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.ValueObjects;
 
 public class Settlement : ValueObject
 {
-    public static Settlement None { get; } = new Settlement(nameof(None), 0, Force.None);
-    
+    private Settlement() {}
     private Settlement(string type, int victoryPoint, Force controlledBy)
     {
         Type = type;
@@ -16,6 +15,11 @@ public class Settlement : ValueObject
     public string Type { get; init; }
     public int VictoryPoint { get; init; }
     public Force ControlledBy { get; init; }
+    
+    public static Settlement None()
+    {
+        return new Settlement("None", 0, Force.None());
+    }
 
     public static Settlement Town(Force controlledBy)
     {

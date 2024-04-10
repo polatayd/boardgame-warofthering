@@ -11,15 +11,18 @@ public class Region : EntityBase
     public string Name { get; init; }
     public Terrain Terrain { get; init; }
     public Nation InBorderOf { get; init; }
-    public Army Army { get; init; }
-    
-    public Region(string name, Terrain terrain, Nation inBorderOf)
+    public Army Army { get; private set; }
+    public Guid MapId { get; init; }
+
+    private Region() {}
+    public Region(string name, Terrain terrain, Nation inBorderOf, Guid mapId)
     {
         Id = Guid.NewGuid();
         Name = name;
         Terrain = terrain;
         InBorderOf = inBorderOf;
-        Army = Army.Empty;
+        MapId = mapId;
+        Army = Army.Create();
     }
     
     public void AssignNeighbors(List<Region> regions)
