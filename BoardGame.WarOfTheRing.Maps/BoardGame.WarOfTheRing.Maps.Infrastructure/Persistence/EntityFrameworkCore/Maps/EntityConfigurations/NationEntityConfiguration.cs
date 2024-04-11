@@ -14,7 +14,6 @@ public class NationEntityConfiguration : IEntityTypeConfiguration<Nation>
         
         builder.OwnsMany(x => x.Reinforcements, unitBuilder =>
         {
-            unitBuilder.UsePropertyAccessMode(PropertyAccessMode.Field);
             unitBuilder.ToJson();
             
             unitBuilder.OwnsOne(y => y.Type);

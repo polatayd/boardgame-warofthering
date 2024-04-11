@@ -1,5 +1,9 @@
+using System.Text.Json;
+using BoardGame.WarOfTheRing.Maps.Application.Maps.Commands;
+using BoardGame.WarOfTheRing.Maps.Application.Maps.Inputs;
+using BoardGame.WarOfTheRing.Maps.Application.Maps.Queries;
 using BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps;
-using BoardGame.WarOfTheRing.Maps.Infrastructure.Persistence.EntityFrameworkCore;
+using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,14 +11,33 @@ namespace BoardGame.WarOfTheRing.Maps.Api.EndpointHandlers;
 
 public static class MapHandlers
 {
-    public static async Task<Results<ProblemHttpResult, Created>> CreateMap([FromServices] MapDbContext dbContext)
+    public static async Task<Results<ProblemHttpResult, Ok>> CreateMap([FromServices] IMediator mediator)
     {
-        var map = Map.Create();
+        CreateNationsCommandInput createNationsCommandInput;
+        using (var reader = new StreamReader("CreateConfig/nations.json"))
+        {
+            var nationsContent = await reader.ReadToEndAsync();
+            createNationsCommandInput = JsonSerializer.Deserialize<CreateNationsCommandInput>(nationsContent);
+        }
 
-        dbContext.Add(map);
+        CreateRegionsCommandInput createRegionsCommandInput;
+        using (var reader = new StreamReader("CreateConfig/regions.json"))
+        {
+            var regionsContent = await reader.ReadToEndAsync();
+            createRegionsCommandInput = JsonSerializer.Deserialize<CreateRegionsCommandInput>(regionsContent);
+        }
 
-        await dbContext.SaveChangesAsync();
+        await mediator.Send(
+            new CreateMapCommand(new CreateMapCommandInput(createNationsCommandInput, createRegionsCommandInput)));
 
-        return TypedResults.Created();
+        return TypedResults.Ok();
+    }
+    
+    public static async Task<Results<ProblemHttpResult, Ok<Map>>> GetMap([FromServices] IMediator mediator)
+    {
+        var map = await mediator.Send(
+            new GetMapQuery());
+
+        return TypedResults.Ok(map);
     }
 }

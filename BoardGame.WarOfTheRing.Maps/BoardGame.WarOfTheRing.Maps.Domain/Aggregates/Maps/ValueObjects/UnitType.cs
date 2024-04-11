@@ -20,9 +20,19 @@ public class UnitType : ValueObject
         return new UnitType("Elite");
     }
 
-    public static UnitType Create(string value)
+    public static UnitType FromValue(string value)
     {
-        return new UnitType(value);
+        if (value == "Regular")
+        {
+            return Regular();
+        }
+
+        if (value == "Elite")
+        {
+            return Elite();
+        }
+
+        throw new ArgumentException();
     }
 
     public string Value { get; init; }

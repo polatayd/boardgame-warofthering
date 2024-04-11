@@ -12,7 +12,7 @@ public class Nation : EntityBase
     public const string Rohan = "Rohan";
     public const string Isengard = "Isengard";
     public const string Sauron  = "Sauron";
-    public const string Sauthorns = "Sauthorns";
+    public const string Sauthrons = "Sauthrons";
     
     private List<Unit> reinforcements = new();
     
@@ -23,16 +23,12 @@ public class Nation : EntityBase
     public Guid MapId { get; init; }
     
     private Nation() {}
-    public Nation(string name, Force belongsTo, Guid mapId)
+    public Nation(string name, Force belongsTo, List<Unit> reinforcements, Guid mapId)
     {
         Id = Guid.NewGuid();
         Name = name;
         BelongsTo = belongsTo;
         MapId = mapId;
-    }
-
-    public void AddToReinforcement(List<Unit> units)
-    {
-        reinforcements.AddRange(units);
+        this.reinforcements = reinforcements;
     }
 }

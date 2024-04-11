@@ -1,0 +1,1624 @@
+{
+  "Regions": [
+    {
+      "Name": "Forlindon",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "GreyHavens"
+      ]
+    },
+    {
+      "Name": "Harlindon",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "GreyHavens",
+        "SouthEredLuin"
+      ]
+    },
+    {
+      "Name": "SouthEredLuin",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Harlindon",
+        "TowerHills",
+        "TheShire",
+        "OldForest",
+        "Cardolan",
+        "Minhiriath"
+      ]
+    },
+    {
+      "Name": "TowerHills",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "GreyHavens",
+        "SouthEredLuin",
+        "TheShire",
+        "Evendim",
+        "EredLuin"
+      ]
+    },
+    {
+      "Name": "Evendim",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "NorthEredLuin",
+        "EredLuin",
+        "TowerHills",
+        "Arnor",
+        "NorthDowns",
+        "TheShire"
+      ]
+    },
+    {
+      "Name": "EredLuin",
+      "Terrain": "Town",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Dwarves",
+      "Army": {
+        "RegularCount": 1,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "GreyHavens",
+        "NorthEredLuin",
+        "TowerHills",
+        "Evendim"
+      ]
+    },
+    {
+      "Name": "NorthEredLuin",
+      "Terrain": "Empty",
+      "InBorderOf": "Dwarves",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Evendim",
+        "EredLuin"
+      ]
+    },
+    {
+      "Name": "GreyHavens",
+      "Terrain": "Stronghold",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Elves",
+      "Army": {
+        "RegularCount": 1,
+        "EliteCount": 1
+      },
+      "NeighborRegions": [
+        "Harlindon",
+        "Forlindon",
+        "EredLuin",
+        "TowerHills"
+      ]
+    },
+    {
+      "Name": "TheShire",
+      "Terrain": "City",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "TheNorth",
+      "Army": {
+        "RegularCount": 1,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "TowerHills",
+        "Evendim",
+        "SouthEredLuin",
+        "Buckland",
+        "OldForest"
+      ]
+    },
+    {
+      "Name": "Buckland",
+      "Terrain": "Empty",
+      "InBorderOf": "TheNorth",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "TheShire",
+        "OldForest",
+        "Bree",
+        "NorthDowns",
+        "Evendim"
+      ]
+    },
+    {
+      "Name": "Bree",
+      "Terrain": "Town",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "TheNorth",
+      "Army": {
+        "RegularCount": 1,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Buckland",
+        "NorthDowns",
+        "WeatherHills",
+        "SouthDowns"
+      ]
+    },
+    {
+      "Name": "NorthDowns",
+      "Terrain": "Empty",
+      "InBorderOf": "TheNorth",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Arnor",
+        "Evendim",
+        "Ettenmoors",
+        "WeatherHills",
+        "Bree",
+        "Buckland"
+      ]
+    },
+    {
+      "Name": "Arnor",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Angmar",
+        "Evendim",
+        "NorthDowns",
+        "Ettenmoors"
+      ]
+    },
+    {
+      "Name": "Ettenmoors",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Arnor",
+        "Angmar",
+        "MountGram",
+        "WeatherHills",
+        "NorthDowns",
+        "TrollShaws"
+      ]
+    },
+    {
+      "Name": "WeatherHills",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Bree",
+        "NorthDowns",
+        "Ettenmoors",
+        "TrollShaws",
+        "SouthDowns"
+      ]
+    },
+    {
+      "Name": "SouthDowns",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Bree",
+        "WeatherHills",
+        "TrollShaws",
+        "Cardolan",
+        "Hollin",
+        "NorthDunland",
+        "Buckland"
+      ]
+    },
+    {
+      "Name": "OldForest",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Buckland",
+        "TheShire",
+        "SouthEredLuin",
+        "SouthDowns",
+        "Cardolan"
+      ]
+    },
+    {
+      "Name": "Cardolan",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Minhiriath",
+        "SouthEredLuin",
+        "OldForest",
+        "Buckland",
+        "SouthDowns",
+        "NorthDunland",
+        "Tharbad"
+      ]
+    },
+    {
+      "Name": "Minhiriath",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "SouthEredLuin",
+        "Cardolan",
+        "Tharbad",
+        "Enedwaith"
+      ]
+    },
+    {
+      "Name": "Tharbad",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Minhiriath",
+        "Cardolan",
+        "NorthDunland",
+        "SouthDunland",
+        "Enedwaith"
+      ]
+    },
+    {
+      "Name": "Enedwaith",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Minhiriath",
+        "Tharbad",
+        "SouthDunland",
+        "GapOfRohan",
+        "DruwaithIaur"
+      ]
+    },
+    {
+      "Name": "DruwaithIaur",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "FordsOfIsen",
+        "GapOfRohan",
+        "Enedwaith",
+        "Andrast"
+      ]
+    },
+    {
+      "Name": "Andrast",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "DruwaithIaur",
+        "Anfalas"
+      ]
+    },
+    {
+      "Name": "GapOfRohan",
+      "Terrain": "Empty",
+      "InBorderOf": "Isengard",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Enedwaith",
+        "SouthDunland",
+        "Orthanc",
+        "FordsOfIsen",
+        "DruwaithIaur"
+      ]
+    },
+    {
+      "Name": "Angmar",
+      "Terrain": "City",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Sauron",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Arnor",
+        "MountGram",
+        "Ettenmoors"
+      ]
+    },
+    {
+      "Name": "MountGram",
+      "Terrain": "Empty",
+      "InBorderOf": "Sauron",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Angmar",
+        "Ettenmoors",
+        "MountGundabad"
+      ]
+    },
+    {
+      "Name": "MountGundabad",
+      "Terrain": "Stronghold",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Sauron",
+      "Army": {
+        "RegularCount": 2,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "MountGram",
+        "EaglesEyrie"
+      ]
+    },
+    {
+      "Name": "Moria",
+      "Terrain": "Stronghold",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Sauron",
+      "Army": {
+        "RegularCount": 2,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Hollin",
+        "NorthDunland",
+        "DimrillDale"
+      ]
+    },
+    {
+      "Name": "Rivendell",
+      "Terrain": "Stronghold",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Elves",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 2
+      },
+      "NeighborRegions": [
+        "TrollShaws",
+        "FordsOfBruinen"
+      ]
+    },
+    {
+      "Name": "TrollShaws",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Ettenmoors",
+        "WeatherHills",
+        "Rivendell",
+        "FordsOfBruinen",
+        "Hollin",
+        "SouthDowns"
+      ]
+    },
+    {
+      "Name": "FordsOfBruinen",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "TrollShaws",
+        "HighPass",
+        "Rivendell",
+        "Hollin"
+      ]
+    },
+    {
+      "Name": "HighPass",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "FordsOfBruinen",
+        "GoblinsGate"
+      ]
+    },
+    {
+      "Name": "Hollin",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "TrollShaws",
+        "FordsOfBruinen",
+        "SouthDowns",
+        "Moria",
+        "NorthDunland"
+      ]
+    },
+    {
+      "Name": "NorthDunland",
+      "Terrain": "Town",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Isengard",
+      "Army": {
+        "RegularCount": 1,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Moria",
+        "Hollin",
+        "SouthDowns",
+        "Cardolan",
+        "Tharbad",
+        "SouthDunland"
+      ]
+    },
+    {
+      "Name": "SouthDunland",
+      "Terrain": "Town",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Isengard",
+      "Army": {
+        "RegularCount": 1,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "NorthDunland",
+        "Tharbad",
+        "Enedwaith",
+        "GapOfRohan"
+      ]
+    },
+    {
+      "Name": "Orthanc",
+      "Terrain": "Stronghold",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Isengard",
+      "Army": {
+        "RegularCount": 4,
+        "EliteCount": 1
+      },
+      "NeighborRegions": [
+        "GapOfRohan",
+        "FordsOfIsen"
+      ]
+    },
+    {
+      "Name": "FordsOfIsen",
+      "Terrain": "Fortification",
+      "InBorderOf": "Rohan",
+      "Army": {
+        "RegularCount": 2,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Orthanc",
+        "GapOfRohan",
+        "DruwaithIaur",
+        "HelmsDeep",
+        "Fangorn",
+        "Westemnet"
+      ]
+    },
+    {
+      "Name": "HelmsDeep",
+      "Terrain": "Stronghold",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Rohan",
+      "Army": {
+        "RegularCount": 1,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "FordsOfIsen",
+        "Westemnet"
+      ]
+    },
+    {
+      "Name": "Anfalas",
+      "Terrain": "Empty",
+      "InBorderOf": "Gondor",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Andrast",
+        "Erech",
+        "DolAmroth"
+      ]
+    },
+    {
+      "Name": "Erech",
+      "Terrain": "Empty",
+      "InBorderOf": "Gondor",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Anfalas",
+        "DolAmroth",
+        "Lamedon"
+      ]
+    },
+    {
+      "Name": "DolAmroth",
+      "Terrain": "Stronghold",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Gondor",
+      "Army": {
+        "RegularCount": 3,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Erech",
+        "Lamedon",
+        "Anfalas"
+      ]
+    },
+    {
+      "Name": "Lamedon",
+      "Terrain": "Town",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Gondor",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Erech",
+        "DolAmroth",
+        "Pelargir"
+      ]
+    },
+    {
+      "Name": "Pelargir",
+      "Terrain": "Town",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Gondor",
+      "Army": {
+        "RegularCount": 1,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Lamedon",
+        "Osgiliath",
+        "Lossarnach",
+        "WestHarondor"
+      ]
+    },
+    {
+      "Name": "Lossarnach",
+      "Terrain": "Town",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Gondor",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "MinasTirith",
+        "Pelargir",
+        "Osgiliath"
+      ]
+    },
+    {
+      "Name": "MinasTirith",
+      "Terrain": "Stronghold",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Gondor",
+      "Army": {
+        "RegularCount": 3,
+        "EliteCount": 1
+      },
+      "NeighborRegions": [
+        "Osgiliath",
+        "Lossarnach",
+        "DruadanForest"
+      ]
+    },
+    {
+      "Name": "Osgiliath",
+      "Terrain": "Fortification",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 2,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "MinasTirith",
+        "Lossarnach",
+        "Pelargir",
+        "DruadanForest",
+        "WestHarondor",
+        "SouthIthilien",
+        "NorthIthilien",
+        "DeadMarshes"
+      ]
+    },
+    {
+      "Name": "DruadanForest",
+      "Terrain": "Empty",
+      "InBorderOf": "Gondor",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "MinasTirith",
+        "Osgiliath",
+        "Folde",
+        "Eastemnet",
+        "WesternEmynMuil",
+        "DeadMarshes"
+      ]
+    },
+    {
+      "Name": "Folde",
+      "Terrain": "Town",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Rohan",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "DruadanForest",
+        "Edoras",
+        "Westemnet",
+        "Eastemnet"
+      ]
+    },
+    {
+      "Name": "Edoras",
+      "Terrain": "City",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Rohan",
+      "Army": {
+        "RegularCount": 1,
+        "EliteCount": 1
+      },
+      "NeighborRegions": [
+        "Folde",
+        "Westemnet"
+      ]
+    },
+    {
+      "Name": "Westemnet",
+      "Terrain": "Town",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Rohan",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "FordsOfIsen",
+        "HelmsDeep",
+        "Edoras",
+        "Folde",
+        "Eastemnet",
+        "Fangorn"
+      ]
+    },
+    {
+      "Name": "Eastemnet",
+      "Terrain": "Empty",
+      "InBorderOf": "Rohan",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Folde",
+        "Westemnet",
+        "Fangorn",
+        "ParthCelebrant",
+        "WesternBrownLands",
+        "WesternEmynMuil",
+        "DruadanForest"
+      ]
+    },
+    {
+      "Name": "Fangorn",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "ParthCelebrant",
+        "Westemnet",
+        "Eastemnet",
+        "FordsOfIsen"
+      ]
+    },
+    {
+      "Name": "ParthCelebrant",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Fangorn",
+        "WesternBrownLands",
+        "Eastemnet",
+        "Lorien",
+        "DimrillDale",
+        "SouthAnduinVale"
+      ]
+    },
+    {
+      "Name": "SouthAnduinVale",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "ParthCelebrant",
+        "WesternBrownLands",
+        "DolGuldur",
+        "DimrillDale",
+        "NorthAnduinVale"
+      ]
+    },
+    {
+      "Name": "DimrillDale",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Lorien",
+        "SouthAnduinVale",
+        "ParthCelebrant",
+        "NorthAnduinVale",
+        "Moria",
+        "GladdenFields"
+      ]
+    },
+    {
+      "Name": "Lorien",
+      "Terrain": "Stronghold",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Elves",
+      "Army": {
+        "RegularCount": 1,
+        "EliteCount": 2
+      },
+      "NeighborRegions": [
+        "DimrillDale",
+        "ParthCelebrant"
+      ]
+    },
+    {
+      "Name": "GladdenFields",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "DimrillDale",
+        "OldFord",
+        "NorthAnduinDale",
+        "Rhosegobel"
+      ]
+    },
+    {
+      "Name": "OldFord",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "GoblinsGate",
+        "GladdenFields",
+        "Rhosegobel",
+        "Carock",
+        "EaglesEyrie"
+      ]
+    },
+    {
+      "Name": "GoblinsGate",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "EaglesEyrie",
+        "HighPass",
+        "OldForest"
+      ]
+    },
+    {
+      "Name": "EaglesEyrie",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "MountGundabad",
+        "Carock",
+        "OldFor"
+      ]
+    },
+    {
+      "Name": "Carock",
+      "Terrain": "Town",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "TheNorth",
+      "Army": {
+        "RegularCount": 1,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "EaglesEyrie",
+        "OldFord",
+        "Rhosegobel",
+        "WesternMirkwood",
+        "NorthernMirkwood"
+      ]
+    },
+    {
+      "Name": "Rhosegobel",
+      "Terrain": "Empty",
+      "InBorderOf": "TheNorth",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Carock",
+        "OldFord",
+        "GladdenFields",
+        "NorthAnduinVale",
+        "OldForestRoad",
+        "NarrowsOfTheForest"
+      ]
+    },
+    {
+      "Name": "OldForestRoad",
+      "Terrain": "Empty",
+      "InBorderOf": "TheNorth",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "WoodlandRealm",
+        "WesternMirkwood",
+        "Carock",
+        "Rhosegobel",
+        "NarrowsOfTheForest",
+        "EasternMirkwood",
+        "Dale",
+        "NorthernRhovanion"
+      ]
+    },
+    {
+      "Name": "Dale",
+      "Terrain": "City",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "TheNorth",
+      "Army": {
+        "RegularCount": 1,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Erebor",
+        "IronHills",
+        "ValeOfTheCarnen",
+        "NorthernRhovanion",
+        "OldForestRoad",
+        "WoodlandRealm",
+        "WitheredHeath"
+      ]
+    },
+    {
+      "Name": "WoodlandRealm",
+      "Terrain": "Stronghold",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Elves",
+      "Army": {
+        "RegularCount": 1,
+        "EliteCount": 1
+      },
+      "NeighborRegions": [
+        "OldForestRoad",
+        "Dale",
+        "WitheredHeath",
+        "NorthernMirkwood",
+        "WesternMirkwood"
+      ]
+    },
+    {
+      "Name": "WesternMirkwood",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "NorthernMirkwood",
+        "WoodlandRealm",
+        "Carock",
+        "OldForestRoad"
+      ]
+    },
+    {
+      "Name": "NorhernMirkwood",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "WesternMirkwood",
+        "Carock",
+        "WitheredHeath",
+        "WoodlandRealm"
+      ]
+    },
+    {
+      "Name": "WitheredHeath",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "NorthernMirkwood",
+        "WoodlandRealm",
+        "Dale",
+        "Erebor"
+      ]
+    },
+    {
+      "Name": "Erebor",
+      "Terrain": "Stronghold",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Dwarves",
+      "Army": {
+        "RegularCount": 1,
+        "EliteCount": 2
+      },
+      "NeighborRegions": [
+        "IronHills",
+        "Dale",
+        "WitheredHeath"
+      ]
+    },
+    {
+      "Name": "IronHills",
+      "Terrain": "Town",
+      "ControlledBy": "FreePeoples",
+      "InBorderOf": "Dwarves",
+      "Army": {
+        "RegularCount": 1,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Erebor",
+        "EastRhun",
+        "Dale",
+        "ValeOfTheCarnen"
+      ]
+    },
+    {
+      "Name": "ValeOfTheCarnen",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Dale",
+        "IronHills",
+        "EastRhun",
+        "NorthRhun",
+        "ValeOfTheCelduin"
+      ]
+    },
+    {
+      "Name": "ValeOfTheCelduin",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "ValeOfTheCarnen",
+        "NorthRhun",
+        "NorthernRhovanion",
+        "SouthernRhovanion",
+        "NorthernDorwinion"
+      ]
+    },
+    {
+      "Name": "NorthernRhovanion",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "SouthernRhovanion",
+        "Dale",
+        "ValeOfTheCarnen",
+        "OldForestRoad",
+        "EasternMirkwood",
+        "SouthernMirkwood",
+        "ValeOfTheCelduin"
+      ]
+    },
+    {
+      "Name": "EasternMirkwood",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "OldForestRoad",
+        "NarrowsOfTheForest",
+        "DolGuldur",
+        "SouthernMirkwood",
+        "NorthernRhovanion"
+      ]
+    },
+    {
+      "Name": "SouthernRohavinion",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "SouthernMirkwood",
+        "ValeOfTheCelduin",
+        "NorthernRhovanion",
+        "NomanLands",
+        "SouthernDorwinion",
+        "NorthernDorwinion",
+        "EasternBrownLands"
+      ]
+    },
+    {
+      "Name": "DolGuldur",
+      "Terrain": "Stronghold",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Sauron",
+      "Army": {
+        "RegularCount": 5,
+        "EliteCount": 1
+      },
+      "NeighborRegions": [
+        "SouthernMirkwood",
+        "EasternMirkwood",
+        "NarrowsOfTheForest",
+        "NorthAnduinVale",
+        "SouthAnduinVale",
+        "WesternBrownLands",
+        "EasternBrownLands"
+      ]
+    },
+    {
+      "Name": "SouthernMirkwood",
+      "Terrain": "Empty",
+      "InBorderOf": "Sauron",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "DolGuldur",
+        "EasternMirkwood",
+        "NorthernRhovanion",
+        "SouthernRhovanion",
+        "EasternBrownLands"
+      ]
+    },
+    {
+      "Name": "NorthernDorwinion",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "NorthRhun",
+        "ValeOfTheCelduin",
+        "SouthernRhovanion",
+        "SouthernDorwinion"
+      ]
+    },
+    {
+      "Name": "SouthernDorwinion",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "NorthernDorwinion",
+        "NomanLands",
+        "SouthernRhovanion",
+        "AshMountains",
+        "SouthRhun"
+      ]
+    },
+    {
+      "Name": "NomanLands",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "SouthernDorwinion",
+        "Dagorlad",
+        "SouthernRhovanion",
+        "AshMountains",
+        "EasternEmynMuil",
+        "EasternBrownLands"
+      ]
+    },
+    {
+      "Name": "EasternBrownLands",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "SouthernRhovanion",
+        "NomanLands",
+        "EasternEmynMuil",
+        "WesternBrownLands",
+        "WesternEmynMuil",
+        "DolGuldur",
+        "SoutherMirkwood"
+      ]
+    },
+    {
+      "Name": "WesternBrownLands",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "DolGuldur",
+        "EasternBrownLands",
+        "SouthAnduinVale",
+        "ParthCelebrant",
+        "Eastemnet",
+        "WesternEmynMuil"
+      ]
+    },
+    {
+      "Name": "WesternEmynMuil",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "EasternEmynMuil",
+        "WesternBrownLands",
+        "EasternBrownLands",
+        "Eastemnet",
+        "DeadMarshes",
+        "DruadanForest"
+      ]
+    },
+    {
+      "Name": "EasternEmynMuil",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "WesternEmynMuil",
+        "DeadMarshes",
+        "NorthIthilien",
+        "Dagorlad",
+        "NomanLands",
+        "EasternBrownLands",
+        "WesternBrownLands"
+      ]
+    },
+    {
+      "Name": "DeadMarshes",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Osgiliath",
+        "NorthIthilien",
+        "EasternEmynMuil",
+        "WesternEmynMuil",
+        "DruadanForest"
+      ]
+    },
+    {
+      "Name": "NorthIthilien",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "SouthIthilien",
+        "Osgiliath",
+        "DeadMarshes",
+        "MinasMorgul",
+        "Dagorlad",
+        "EasterEmynMuil"
+      ]
+    },
+    {
+      "Name": "Dagorlad",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "NorthIthilien",
+        "AshMountains",
+        "Morannon",
+        "NomanLands",
+        "EasterEmynMuil"
+      ]
+    },
+    {
+      "Name": "AshMountains",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "SouthRhun",
+        "Dagorlad",
+        "NomanLands",
+        "SouthernDorwinion"
+      ]
+    },
+    {
+      "Name": "SouthIthilien",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Osgiliath",
+        "MinasMorgul",
+        "NorthIthilien",
+        "EastHarondor",
+        "WestHarondor"
+      ]
+    },
+    {
+      "Name": "EastHarondor",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "WestHarondor",
+        "SouthIthilien",
+        "NearHarad"
+      ]
+    },
+    {
+      "Name": "WestHarondor",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "EastHarondor",
+        "SouthIthilien",
+        "Osgiliath",
+        "Pelargir",
+        "Umbar",
+        "NearHarad"
+      ]
+    },
+    {
+      "Name": "Umbar",
+      "Terrain": "Stronghold",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Sauthrons",
+      "Army": {
+        "RegularCount": 3,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "NearHarad",
+        "WestHarondor"
+      ]
+    },
+    {
+      "Name": "NearHarad",
+      "Terrain": "Town",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Sauthrons",
+      "Army": {
+        "RegularCount": 3,
+        "EliteCount": 1
+      },
+      "NeighborRegions": [
+        "FarHarad",
+        "Umbar",
+        "EastHarondor",
+        "WestHarondor",
+        "Khand"
+      ]
+    },
+    {
+      "Name": "Khand",
+      "Terrain": "Empty",
+      "InBorderOf": "Sauthrons",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "FarHarad",
+        "NearHarad"
+      ]
+    },
+    {
+      "Name": "FarHarad",
+      "Terrain": "City",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Sauthrons",
+      "Army": {
+        "RegularCount": 3,
+        "EliteCount": 1
+      },
+      "NeighborRegions": [
+        "Khand",
+        "NearHarad"
+      ]
+    },
+    {
+      "Name": "NorthRhun",
+      "Terrain": "Town",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Sauthrons",
+      "Army": {
+        "RegularCount": 2,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "EastRhun",
+        "ValeOfTheCarnen",
+        "ValeOfTheCelduin",
+        "NorthernDorwinion"
+      ]
+    },
+    {
+      "Name": "EastRhun",
+      "Terrain": "Empty",
+      "InBorderOf": "Sauthrons",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "NorthRhun",
+        "IronHills",
+        "SouthRhun",
+        "ValeOfTheCarnen"
+      ]
+    },
+    {
+      "Name": "SouthRhun",
+      "Terrain": "Town",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Sauthrons",
+      "Army": {
+        "RegularCount": 3,
+        "EliteCount": 1
+      },
+      "NeighborRegions": [
+        "EastRhun",
+        "SouthernDorwinion",
+        "AshMountains"
+      ]
+    },
+    {
+      "Name": "Morannon",
+      "Terrain": "Stronghold",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Sauron",
+      "Army": {
+        "RegularCount": 5,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Dagorlad",
+        "Gorgoroth"
+      ]
+    },
+    {
+      "Name": "BaradDur",
+      "Terrain": "Stronghold",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Sauron",
+      "Army": {
+        "RegularCount": 4,
+        "EliteCount": 1
+      },
+      "NeighborRegions": [
+        "Gorgoroth"
+      ]
+    },
+    {
+      "Name": "Gorgoroth",
+      "Terrain": "Empty",
+      "InBorderOf": "Sauron",
+      "Army": {
+        "RegularCount": 3,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "BaradDur",
+        "Morannon",
+        "MinasMorgul",
+        "Nurn"
+      ]
+    },
+    {
+      "Name": "Nurn",
+      "Terrain": "Town",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Sauron",
+      "Army": {
+        "RegularCount": 2,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "Gorgoroth"
+      ]
+    },
+    {
+      "Name": "MinasMorgul",
+      "Terrain": "Stronghold",
+      "ControlledBy": "Shadow",
+      "InBorderOf": "Sauron",
+      "Army": {
+        "RegularCount": 5,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "NorthIthilien",
+        "SouthIthilien",
+        "Gorgoroth"
+      ]
+    }
+  ]
+}

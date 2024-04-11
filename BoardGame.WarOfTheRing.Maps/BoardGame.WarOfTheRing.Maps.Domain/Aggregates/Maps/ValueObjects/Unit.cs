@@ -16,7 +16,7 @@ public class Unit : ValueObject
 
     public static Unit Create(string nationName, UnitType type)
     {
-        return new Unit(nationName, UnitType.Create(type.Value));
+        return new Unit(nationName, type);
     }
     
     protected override IEnumerable<object> GetEqualityComponents()

@@ -10,7 +10,6 @@ public class RegionEntityConfiguration : IEntityTypeConfiguration<Region>
     public void Configure(EntityTypeBuilder<Region> builder)
     {
         builder.HasOne<Map>().WithMany(x => x.Regions).HasForeignKey(x => x.MapId);
-        builder.HasOne(x => x.InBorderOf).WithMany();
         builder.ComplexProperty(x => x.Terrain, terrainBuilder =>
         {
             terrainBuilder.ComplexProperty(y => y.Settlement, settlementBuilder =>
@@ -20,19 +19,22 @@ public class RegionEntityConfiguration : IEntityTypeConfiguration<Region>
             });
             terrainBuilder.IsRequired();
         });
+
         builder.OwnsOne(x => x.Army, armyBuilder =>
         {
-            armyBuilder.ToJson();
-            
-            armyBuilder.OwnsMany(y => y.Units, unitBuilder =>
+            armyBuilder.OwnsMany(x => x.Units, unitBuilder =>
             {
                 unitBuilder.UsePropertyAccessMode(PropertyAccessMode.Field);
-                
                 unitBuilder.OwnsOne(y => y.Type);
+                unitBuilder.Navigation(y => y.Type).IsRequired();
             });
         });
-        
-        builder.HasMany(x => x.NeighborRegions).WithMany()
-            .UsingEntity(regionBuilder => regionBuilder.ToTable("RegionNeighborRegions"));
+        builder.Navigation(x => x.Army).IsRequired();
+
+        builder.OwnsMany(x=>x.Neighbors, neighborBuilder =>
+        {
+            neighborBuilder.ToJson();
+            neighborBuilder.UsePropertyAccessMode(PropertyAccessMode.Field);
+        });
     }
 }

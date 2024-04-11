@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -50,14 +51,14 @@ namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    InBorderOfId = table.Column<Guid>(type: "uuid", nullable: true),
+                    InBorderOf = table.Column<string>(type: "text", nullable: true),
                     MapId = table.Column<Guid>(type: "uuid", nullable: false),
                     Terrain_HasFortification = table.Column<bool>(type: "boolean", nullable: false),
                     Terrain_IsEmpty = table.Column<bool>(type: "boolean", nullable: false),
                     Terrain_Settlement_Type = table.Column<string>(type: "text", nullable: true),
                     Terrain_Settlement_VictoryPoint = table.Column<int>(type: "integer", nullable: false),
                     Terrain_Settlement_ControlledBy_Name = table.Column<string>(type: "text", nullable: true),
-                    Army = table.Column<string>(type: "jsonb", nullable: true)
+                    Neighbors = table.Column<string>(type: "jsonb", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,32 +69,24 @@ namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
                         principalTable: "Maps",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Region_Nation_InBorderOfId",
-                        column: x => x.InBorderOfId,
-                        principalTable: "Nation",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "RegionNeighborRegions",
+                name: "Region_Units",
                 columns: table => new
                 {
-                    NeighborRegionsId = table.Column<Guid>(type: "uuid", nullable: false),
-                    RegionId = table.Column<Guid>(type: "uuid", nullable: false)
+                    ArmyRegionId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NationName = table.Column<string>(type: "text", nullable: true),
+                    Type_Value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RegionNeighborRegions", x => new { x.NeighborRegionsId, x.RegionId });
+                    table.PrimaryKey("PK_Region_Units", x => new { x.ArmyRegionId, x.Id });
                     table.ForeignKey(
-                        name: "FK_RegionNeighborRegions_Region_NeighborRegionsId",
-                        column: x => x.NeighborRegionsId,
-                        principalTable: "Region",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RegionNeighborRegions_Region_RegionId",
-                        column: x => x.RegionId,
+                        name: "FK_Region_Units_Region_ArmyRegionId",
+                        column: x => x.ArmyRegionId,
                         principalTable: "Region",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -105,32 +98,22 @@ namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
                 column: "MapId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Region_InBorderOfId",
-                table: "Region",
-                column: "InBorderOfId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Region_MapId",
                 table: "Region",
                 column: "MapId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RegionNeighborRegions_RegionId",
-                table: "RegionNeighborRegions",
-                column: "RegionId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RegionNeighborRegions");
+                name: "Nation");
+
+            migrationBuilder.DropTable(
+                name: "Region_Units");
 
             migrationBuilder.DropTable(
                 name: "Region");
-
-            migrationBuilder.DropTable(
-                name: "Nation");
 
             migrationBuilder.DropTable(
                 name: "Maps");

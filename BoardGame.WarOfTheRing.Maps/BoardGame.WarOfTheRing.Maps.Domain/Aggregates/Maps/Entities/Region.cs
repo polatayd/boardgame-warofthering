@@ -5,17 +5,17 @@ namespace BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.Entities;
 
 public class Region : EntityBase
 {
-    private List<Region> neighborRegions = new();
-
-    public IReadOnlyList<Region> NeighborRegions => neighborRegions.AsReadOnly();
+    private List<Neighbor> neighbors = new();
+    
+    public IReadOnlyList<Neighbor> Neighbors => neighbors.AsReadOnly();
     public string Name { get; init; }
     public Terrain Terrain { get; init; }
-    public Nation InBorderOf { get; init; }
+    public string InBorderOf { get; init; }
     public Army Army { get; private set; }
     public Guid MapId { get; init; }
 
     private Region() {}
-    public Region(string name, Terrain terrain, Nation inBorderOf, Guid mapId)
+    public Region(string name, Terrain terrain, string inBorderOf, List<Neighbor> neighbors, Guid mapId)
     {
         Id = Guid.NewGuid();
         Name = name;
@@ -23,10 +23,6 @@ public class Region : EntityBase
         InBorderOf = inBorderOf;
         MapId = mapId;
         Army = Army.Create();
-    }
-    
-    public void AssignNeighbors(List<Region> regions)
-    {
-        neighborRegions.AddRange(regions);
+        this.neighbors = neighbors;
     }
 }

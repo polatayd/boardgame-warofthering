@@ -11,5 +11,9 @@ public static class MapEndpointMappings
         mapsEndpoints.MapPost("", MapHandlers.CreateMap)
             .WithName("CreateMap")
             .WithOpenApi();
+        
+        mapsEndpoints.MapGet("", MapHandlers.GetMap)
+            .WithName("GetMap")
+            .WithOpenApi();
     }
 }

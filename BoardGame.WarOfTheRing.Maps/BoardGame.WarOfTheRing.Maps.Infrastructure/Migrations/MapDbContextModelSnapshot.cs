@@ -59,8 +59,8 @@ namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("InBorderOfId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("InBorderOf")
+                        .HasColumnType("text");
 
                     b.Property<Guid>("MapId")
                         .HasColumnType("uuid");
@@ -100,8 +100,6 @@ namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InBorderOfId");
-
                     b.HasIndex("MapId");
 
                     b.ToTable("Region");
@@ -116,21 +114,6 @@ namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Maps");
-                });
-
-            modelBuilder.Entity("RegionRegion", b =>
-                {
-                    b.Property<Guid>("NeighborRegionsId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("RegionId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("NeighborRegionsId", "RegionId");
-
-                    b.HasIndex("RegionId");
-
-                    b.ToTable("RegionNeighborRegions", (string)null);
                 });
 
             modelBuilder.Entity("BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.Entities.Nation", b =>
@@ -189,10 +172,6 @@ namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
 
             modelBuilder.Entity("BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.Entities.Region", b =>
                 {
-                    b.HasOne("BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.Entities.Nation", "InBorderOf")
-                        .WithMany()
-                        .HasForeignKey("InBorderOfId");
-
                     b.HasOne("BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.Map", null)
                         .WithMany("Regions")
                         .HasForeignKey("MapId")
@@ -208,8 +187,6 @@ namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
 
                             b1.ToTable("Region");
 
-                            b1.ToJson("Army");
-
                             b1.WithOwner()
                                 .HasForeignKey("RegionId");
 
@@ -222,12 +199,14 @@ namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
                                         .ValueGeneratedOnAdd()
                                         .HasColumnType("integer");
 
+                                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b2.Property<int>("Id"));
+
                                     b2.Property<string>("NationName")
                                         .HasColumnType("text");
 
                                     b2.HasKey("ArmyRegionId", "Id");
 
-                                    b2.ToTable("Region");
+                                    b2.ToTable("Region_Units");
 
                                     b2.WithOwner()
                                         .HasForeignKey("ArmyRegionId");
@@ -245,36 +224,45 @@ namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
 
                                             b3.HasKey("UnitArmyRegionId", "UnitId");
 
-                                            b3.ToTable("Region");
+                                            b3.ToTable("Region_Units");
 
                                             b3.WithOwner()
                                                 .HasForeignKey("UnitArmyRegionId", "UnitId");
                                         });
 
-                                    b2.Navigation("Type");
+                                    b2.Navigation("Type")
+                                        .IsRequired();
                                 });
 
                             b1.Navigation("Units");
                         });
 
-                    b.Navigation("Army");
+                    b.OwnsMany("BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.ValueObjects.Neighbor", "Neighbors", b1 =>
+                        {
+                            b1.Property<Guid>("RegionId")
+                                .HasColumnType("uuid");
 
-                    b.Navigation("InBorderOf");
-                });
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer");
 
-            modelBuilder.Entity("RegionRegion", b =>
-                {
-                    b.HasOne("BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.Entities.Region", null)
-                        .WithMany()
-                        .HasForeignKey("NeighborRegionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                            b1.Property<string>("Name")
+                                .HasColumnType("text");
+
+                            b1.HasKey("RegionId", "Id");
+
+                            b1.ToTable("Region");
+
+                            b1.ToJson("Neighbors");
+
+                            b1.WithOwner()
+                                .HasForeignKey("RegionId");
+                        });
+
+                    b.Navigation("Army")
                         .IsRequired();
 
-                    b.HasOne("BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.Entities.Region", null)
-                        .WithMany()
-                        .HasForeignKey("RegionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Neighbors");
                 });
 
             modelBuilder.Entity("BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.Map", b =>
