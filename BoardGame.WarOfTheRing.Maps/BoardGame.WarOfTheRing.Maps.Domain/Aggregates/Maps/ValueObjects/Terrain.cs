@@ -38,3 +38,9 @@ public class Terrain : ValueObject
         yield return Settlement;
     }
 }
+
+public static class TerrainTypes
+{
+    public static string Empty => nameof(Empty);
+    public static string Fortification => nameof(Fortification);
+}

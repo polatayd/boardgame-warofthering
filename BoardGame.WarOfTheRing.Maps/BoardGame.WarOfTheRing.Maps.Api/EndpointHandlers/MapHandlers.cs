@@ -11,32 +11,32 @@ namespace BoardGame.WarOfTheRing.Maps.Api.EndpointHandlers;
 
 public static class MapHandlers
 {
+    public static async Task<CreateNationsCommandInput> GetCreateNationsCommandInputFromFile()
+    {
+        using var reader = new StreamReader("CreateConfig/nations.json");
+        var nationsContent = await reader.ReadToEndAsync();
+        return JsonSerializer.Deserialize<CreateNationsCommandInput>(nationsContent);
+    }
+    
+    public static async Task<CreateRegionsCommandInput> GetCreateRegionsCommandInputFromFile()
+    {
+        using var reader = new StreamReader("CreateConfig/regions.json");
+        var regionsContent = await reader.ReadToEndAsync();
+        return JsonSerializer.Deserialize<CreateRegionsCommandInput>(regionsContent);
+    }
+
     public static async Task<Results<ProblemHttpResult, Ok>> CreateMap([FromServices] IMediator mediator)
     {
-        CreateNationsCommandInput createNationsCommandInput;
-        using (var reader = new StreamReader("CreateConfig/nations.json"))
-        {
-            var nationsContent = await reader.ReadToEndAsync();
-            createNationsCommandInput = JsonSerializer.Deserialize<CreateNationsCommandInput>(nationsContent);
-        }
-
-        CreateRegionsCommandInput createRegionsCommandInput;
-        using (var reader = new StreamReader("CreateConfig/regions.json"))
-        {
-            var regionsContent = await reader.ReadToEndAsync();
-            createRegionsCommandInput = JsonSerializer.Deserialize<CreateRegionsCommandInput>(regionsContent);
-        }
-
-        await mediator.Send(
-            new CreateMapCommand(new CreateMapCommandInput(createNationsCommandInput, createRegionsCommandInput)));
+        await mediator.Send(new CreateMapCommand(new CreateMapCommandInput(
+                await GetCreateNationsCommandInputFromFile(),
+                await GetCreateRegionsCommandInputFromFile())));
 
         return TypedResults.Ok();
     }
-    
+
     public static async Task<Results<ProblemHttpResult, Ok<Map>>> GetMap([FromServices] IMediator mediator)
     {
-        var map = await mediator.Send(
-            new GetMapQuery());
+        var map = await mediator.Send(new GetMapQuery());
 
         return TypedResults.Ok(map);
     }

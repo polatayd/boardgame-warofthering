@@ -18,22 +18,22 @@ public class Settlement : ValueObject
     
     public static Settlement None()
     {
-        return new Settlement("None", 0, Force.None());
+        return new Settlement(SettlementTypes.None, 0, Force.None());
     }
 
     public static Settlement Town(Force controlledBy)
     {
-        return new Settlement("Town", 0, controlledBy);
+        return new Settlement(SettlementTypes.Town, 0, controlledBy);
     }
     
     public static Settlement City(Force controlledBy)
     {
-        return new Settlement("City", 1, controlledBy);
+        return new Settlement(SettlementTypes.City, 1, controlledBy);
     }
     
     public static Settlement Stronghold(Force controlledBy)
     {
-        return new Settlement("Stronghold", 2, controlledBy);
+        return new Settlement(SettlementTypes.Stronghold, 2, controlledBy);
     }
     
     protected override IEnumerable<object> GetEqualityComponents()
@@ -42,4 +42,12 @@ public class Settlement : ValueObject
         yield return VictoryPoint;
         yield return ControlledBy;
     }
+}
+
+public static class SettlementTypes
+{
+    public static string None => nameof(None);
+    public static string City => nameof(City);
+    public static string Town => nameof(Town);
+    public static string Stronghold => nameof(Stronghold);
 }

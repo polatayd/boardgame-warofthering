@@ -5,15 +5,6 @@ namespace BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.Entities;
 
 public class Nation : EntityBase
 {
-    public const string Dwarves = "Dwarves";
-    public const string Elves = "Elves";
-    public const string Gondor  = "Gondor";
-    public const string TheNorth = "TheNorth";
-    public const string Rohan = "Rohan";
-    public const string Isengard = "Isengard";
-    public const string Sauron  = "Sauron";
-    public const string Sauthrons = "Sauthrons";
-    
     private List<Unit> reinforcements = new();
     
     public IReadOnlyList<Unit> Reinforcements => reinforcements.AsReadOnly();
@@ -31,4 +22,16 @@ public class Nation : EntityBase
         MapId = mapId;
         this.reinforcements = reinforcements;
     }
+}
+
+public static class NationNames
+{
+    public static string TheNorth => nameof(TheNorth);
+    public static string Elves => nameof(Elves);
+    public static string Dwarves => nameof(Dwarves);
+    public static string Rohan => nameof(Rohan);
+    public static string Gondor => nameof(Gondor);
+    public static string Isengard => nameof(Isengard);
+    public static string Southrons => nameof(Southrons);
+    public static string Sauron => nameof(Sauron);
 }

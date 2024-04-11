@@ -67,6 +67,7 @@
         "EliteCount": 0
       },
       "NeighborRegions": [
+        "Buckland",
         "NorthEredLuin",
         "EredLuin",
         "TowerHills",
@@ -146,11 +147,13 @@
         "EliteCount": 0
       },
       "NeighborRegions": [
+        "SouthDowns",
         "TheShire",
         "OldForest",
         "Bree",
         "NorthDowns",
-        "Evendim"
+        "Evendim",
+        "Cardolan"
       ]
     },
     {
@@ -264,7 +267,6 @@
         "Buckland",
         "TheShire",
         "SouthEredLuin",
-        "SouthDowns",
         "Cardolan"
       ]
     },
@@ -649,7 +651,7 @@
     },
     {
       "Name": "Pelargir",
-      "Terrain": "Town",
+      "Terrain": "City",
       "ControlledBy": "FreePeoples",
       "InBorderOf": "Gondor",
       "Army": {
@@ -885,8 +887,8 @@
       "NeighborRegions": [
         "DimrillDale",
         "OldFord",
-        "NorthAnduinDale",
-        "Rhosegobel"
+        "NorthAnduinVale",
+        "Rhosgobel"
       ]
     },
     {
@@ -900,7 +902,7 @@
       "NeighborRegions": [
         "GoblinsGate",
         "GladdenFields",
-        "Rhosegobel",
+        "Rhosgobel",
         "Carock",
         "EaglesEyrie"
       ]
@@ -914,9 +916,8 @@
         "EliteCount": 0
       },
       "NeighborRegions": [
-        "EaglesEyrie",
         "HighPass",
-        "OldForest"
+        "OldFord"
       ]
     },
     {
@@ -930,7 +931,7 @@
       "NeighborRegions": [
         "MountGundabad",
         "Carock",
-        "OldFor"
+        "OldFord"
       ]
     },
     {
@@ -945,13 +946,14 @@
       "NeighborRegions": [
         "EaglesEyrie",
         "OldFord",
-        "Rhosegobel",
+        "OldForestRoad",
+        "Rhosgobel",
         "WesternMirkwood",
         "NorthernMirkwood"
       ]
     },
     {
-      "Name": "Rhosegobel",
+      "Name": "Rhosgobel",
       "Terrain": "Empty",
       "InBorderOf": "TheNorth",
       "Army": {
@@ -979,7 +981,7 @@
         "WoodlandRealm",
         "WesternMirkwood",
         "Carock",
-        "Rhosegobel",
+        "Rhosgobel",
         "NarrowsOfTheForest",
         "EasternMirkwood",
         "Dale",
@@ -1038,7 +1040,7 @@
       ]
     },
     {
-      "Name": "NorhernMirkwood",
+      "Name": "NorthernMirkwood",
       "Terrain": "Empty",
       "InBorderOf": "None",
       "Army": {
@@ -1111,7 +1113,8 @@
         "IronHills",
         "EastRhun",
         "NorthRhun",
-        "ValeOfTheCelduin"
+        "ValeOfTheCelduin",
+        "NorthernRhovanion"
       ]
     },
     {
@@ -1165,7 +1168,7 @@
       ]
     },
     {
-      "Name": "SouthernRohavinion",
+      "Name": "SouthernRhovanion",
       "Terrain": "Empty",
       "InBorderOf": "None",
       "Army": {
@@ -1280,7 +1283,7 @@
         "WesternBrownLands",
         "WesternEmynMuil",
         "DolGuldur",
-        "SoutherMirkwood"
+        "SouthernMirkwood"
       ]
     },
     {
@@ -1331,8 +1334,7 @@
         "NorthIthilien",
         "Dagorlad",
         "NomanLands",
-        "EasternBrownLands",
-        "WesternBrownLands"
+        "EasternBrownLands"
       ]
     },
     {
@@ -1365,7 +1367,7 @@
         "DeadMarshes",
         "MinasMorgul",
         "Dagorlad",
-        "EasterEmynMuil"
+        "EasternEmynMuil"
       ]
     },
     {
@@ -1381,7 +1383,7 @@
         "AshMountains",
         "Morannon",
         "NomanLands",
-        "EasterEmynMuil"
+        "EasternEmynMuil"
       ]
     },
     {
@@ -1450,7 +1452,7 @@
       "Name": "Umbar",
       "Terrain": "Stronghold",
       "ControlledBy": "Shadow",
-      "InBorderOf": "Sauthrons",
+      "InBorderOf": "Southrons",
       "Army": {
         "RegularCount": 3,
         "EliteCount": 0
@@ -1464,7 +1466,7 @@
       "Name": "NearHarad",
       "Terrain": "Town",
       "ControlledBy": "Shadow",
-      "InBorderOf": "Sauthrons",
+      "InBorderOf": "Southrons",
       "Army": {
         "RegularCount": 3,
         "EliteCount": 1
@@ -1480,7 +1482,7 @@
     {
       "Name": "Khand",
       "Terrain": "Empty",
-      "InBorderOf": "Sauthrons",
+      "InBorderOf": "Southrons",
       "Army": {
         "RegularCount": 0,
         "EliteCount": 0
@@ -1494,7 +1496,7 @@
       "Name": "FarHarad",
       "Terrain": "City",
       "ControlledBy": "Shadow",
-      "InBorderOf": "Sauthrons",
+      "InBorderOf": "Southrons",
       "Army": {
         "RegularCount": 3,
         "EliteCount": 1
@@ -1508,7 +1510,7 @@
       "Name": "NorthRhun",
       "Terrain": "Town",
       "ControlledBy": "Shadow",
-      "InBorderOf": "Sauthrons",
+      "InBorderOf": "Southrons",
       "Army": {
         "RegularCount": 2,
         "EliteCount": 0
@@ -1523,7 +1525,7 @@
     {
       "Name": "EastRhun",
       "Terrain": "Empty",
-      "InBorderOf": "Sauthrons",
+      "InBorderOf": "Southrons",
       "Army": {
         "RegularCount": 0,
         "EliteCount": 0
@@ -1539,7 +1541,7 @@
       "Name": "SouthRhun",
       "Terrain": "Town",
       "ControlledBy": "Shadow",
-      "InBorderOf": "Sauthrons",
+      "InBorderOf": "Southrons",
       "Army": {
         "RegularCount": 3,
         "EliteCount": 1
@@ -1618,6 +1620,39 @@
         "NorthIthilien",
         "SouthIthilien",
         "Gorgoroth"
+      ]
+    },
+    {
+      "Name": "NorthAnduinVale",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "GladdenFields",
+        "Rhosgobel",
+        "NarrowsOfTheForest",
+        "DolGuldur",
+        "DimrillDale",
+        "SouthAnduinVale"
+      ]
+    },
+    {
+      "Name": "NarrowsOfTheForest",
+      "Terrain": "Empty",
+      "InBorderOf": "None",
+      "Army": {
+        "RegularCount": 0,
+        "EliteCount": 0
+      },
+      "NeighborRegions": [
+        "OldForestRoad",
+        "Rhosgobel",
+        "NorthAnduinVale",
+        "DolGuldur",
+        "EasternMirkwood"
       ]
     }
   ]

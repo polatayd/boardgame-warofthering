@@ -21,6 +21,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\BoardGame.WarOfTheRing.Maps.Api\BoardGame.WarOfTheRing.Maps.Api.csproj" />
+      <ProjectReference Include="..\BoardGame.WarOfTheRing.Maps.Application\BoardGame.WarOfTheRing.Maps.Application.csproj" />
       <ProjectReference Include="..\BoardGame.WarOfTheRing.Maps.Domain\BoardGame.WarOfTheRing.Maps.Domain.csproj" />
     </ItemGroup>
 

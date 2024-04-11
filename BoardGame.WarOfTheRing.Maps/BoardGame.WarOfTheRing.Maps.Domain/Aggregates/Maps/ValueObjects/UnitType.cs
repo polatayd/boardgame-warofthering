@@ -12,22 +12,22 @@ public class UnitType : ValueObject
 
     public static UnitType Regular()
     {
-        return new UnitType("Regular");
+        return new UnitType(UnitTypes.Regular);
     }
     
     public static UnitType Elite()
     {
-        return new UnitType("Elite");
+        return new UnitType(UnitTypes.Elite);
     }
 
     public static UnitType FromValue(string value)
     {
-        if (value == "Regular")
+        if (value == UnitTypes.Regular)
         {
             return Regular();
         }
 
-        if (value == "Elite")
+        if (value == UnitTypes.Elite)
         {
             return Elite();
         }
@@ -40,4 +40,10 @@ public class UnitType : ValueObject
     {
         yield return Value;
     }
+}
+
+public static class UnitTypes
+{
+    public static string Regular => nameof(Regular);
+    public static string Elite => nameof(Elite);
 }

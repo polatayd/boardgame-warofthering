@@ -49,7 +49,7 @@
       }
     },
     {
-      "Name": "Sauthrons",
+      "Name": "Southrons",
       "BelongsTo": "Shadow",
       "Reinforcements": {
         "RegularCount": 24,

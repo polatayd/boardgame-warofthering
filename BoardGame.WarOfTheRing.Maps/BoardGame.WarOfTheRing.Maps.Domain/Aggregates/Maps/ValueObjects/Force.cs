@@ -15,27 +15,27 @@ public class Force : ValueObject
 
     public static Force None()
     {
-        return new Force("None");
+        return new Force(ForceTypes.None);
     }
 
     public static Force Shadow()
     {
-        return new Force("Shadow");
+        return new Force(ForceTypes.Shadow);
     }
 
     public static Force FreePeoples()
     {
-        return new Force("FreePeoples");
+        return new Force(ForceTypes.FreePeoples);
     }
 
     public static Force FromName(string name)
     {
-        if (name == "Shadow")
+        if (name == ForceTypes.Shadow)
         {
             return Shadow();
         }
 
-        if (name == "FreePeoples")
+        if (name == ForceTypes.FreePeoples)
         {
             return FreePeoples();
         }
@@ -49,4 +49,11 @@ public class Force : ValueObject
     {
         yield return Name;
     }
+}
+
+public static class ForceTypes
+{
+    public static string None => nameof(None);
+    public static string FreePeoples => nameof(FreePeoples);
+    public static string Shadow => nameof(Shadow);
 }
