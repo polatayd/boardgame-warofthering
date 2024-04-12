@@ -4,64 +4,64 @@
       "Name": "Dwarves",
       "BelongsTo": "FreePeoples",
       "Reinforcements": {
-        "RegularCount": 5,
-        "EliteCount": 5
+        "RegularCount": 2,
+        "EliteCount": 3
       }
     },
     {
       "Name": "Elves",
       "BelongsTo": "FreePeoples",
       "Reinforcements": {
-        "RegularCount": 5,
-        "EliteCount": 10
+        "RegularCount": 2,
+        "EliteCount": 4
       }
     },
     {
       "Name": "Gondor",
       "BelongsTo": "FreePeoples",
       "Reinforcements": {
-        "RegularCount": 15,
-        "EliteCount": 5
+        "RegularCount": 6,
+        "EliteCount": 4
       }
     },
     {
       "Name": "TheNorth",
       "BelongsTo": "FreePeoples",
       "Reinforcements": {
-        "RegularCount": 10,
-        "EliteCount": 5
+        "RegularCount": 6,
+        "EliteCount": 4
       }
     },
     {
       "Name": "Rohan",
       "BelongsTo": "FreePeoples",
       "Reinforcements": {
-        "RegularCount": 10,
-        "EliteCount": 5
+        "RegularCount": 6,
+        "EliteCount": 4
       }
     },
     {
       "Name": "Isengard",
       "BelongsTo": "Shadow",
       "Reinforcements": {
-        "RegularCount": 12,
-        "EliteCount": 6
+        "RegularCount": 6,
+        "EliteCount": 5
       }
     },
     {
       "Name": "Southrons",
       "BelongsTo": "Shadow",
       "Reinforcements": {
-        "RegularCount": 24,
-        "EliteCount": 6
+        "RegularCount": 10,
+        "EliteCount": 3
       }
     },
     {
       "Name": "Sauron",
       "BelongsTo": "Shadow",
       "Reinforcements": {
-        "RegularCount": 36,
-        "EliteCount": 6
+        "RegularCount": 8,
+        "EliteCount": 4
       }
     }
   ]

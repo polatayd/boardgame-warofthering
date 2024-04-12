@@ -15,14 +15,14 @@ public class Region : EntityBase
     public Guid MapId { get; init; }
 
     private Region() {}
-    public Region(string name, Terrain terrain, string inBorderOf, List<Neighbor> neighbors, Guid mapId)
+    public Region(string name, Terrain terrain, string inBorderOf, List<Neighbor> neighbors, Army army, Guid mapId)
     {
         Id = Guid.NewGuid();
         Name = name;
         Terrain = terrain;
         InBorderOf = inBorderOf;
         MapId = mapId;
-        Army = Army.Create();
+        Army = army;
         this.neighbors = neighbors;
     }
 }

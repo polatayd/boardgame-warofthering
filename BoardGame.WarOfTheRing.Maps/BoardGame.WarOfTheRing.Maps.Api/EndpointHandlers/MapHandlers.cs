@@ -17,7 +17,7 @@ public static class MapHandlers
         var nationsContent = await reader.ReadToEndAsync();
         return JsonSerializer.Deserialize<CreateNationsCommandInput>(nationsContent);
     }
-    
+
     public static async Task<CreateRegionsCommandInput> GetCreateRegionsCommandInputFromFile()
     {
         using var reader = new StreamReader("CreateConfig/regions.json");
@@ -25,13 +25,13 @@ public static class MapHandlers
         return JsonSerializer.Deserialize<CreateRegionsCommandInput>(regionsContent);
     }
 
-    public static async Task<Results<ProblemHttpResult, Ok>> CreateMap([FromServices] IMediator mediator)
+    public static async Task<Results<ProblemHttpResult, Created>> CreateMap([FromServices] IMediator mediator)
     {
         await mediator.Send(new CreateMapCommand(new CreateMapCommandInput(
-                await GetCreateNationsCommandInputFromFile(),
-                await GetCreateRegionsCommandInputFromFile())));
+            await GetCreateNationsCommandInputFromFile(),
+            await GetCreateRegionsCommandInputFromFile())));
 
-        return TypedResults.Ok();
+        return TypedResults.Created();
     }
 
     public static async Task<Results<ProblemHttpResult, Ok<Map>>> GetMap([FromServices] IMediator mediator)

@@ -71,6 +71,9 @@ public class CreateMapCommandHandler : IRequestHandler<CreateMapCommand>
                 createRegionInput.ControlledBy,
                 createRegionInput.InBorderOf,
                 createRegionInput.NeighborRegions,
+                createRegionInput.Army.Nation,
+                createRegionInput.Army.RegularCount,
+                createRegionInput.Army.EliteCount,
                 mapId));
         }
 

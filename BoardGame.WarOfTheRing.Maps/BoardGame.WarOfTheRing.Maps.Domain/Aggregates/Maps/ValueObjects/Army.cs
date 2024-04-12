@@ -17,6 +17,13 @@ public class Army : ValueObject
     {
         return new Army();
     }
+
+    public Army AddUnits(List<Unit> addingUnits)
+    {
+        units.AddRange(addingUnits);
+
+        return new Army(units);
+    }
     
     protected override IEnumerable<object> GetEqualityComponents()
     {

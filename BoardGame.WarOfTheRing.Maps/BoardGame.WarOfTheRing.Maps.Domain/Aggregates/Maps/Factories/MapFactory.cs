@@ -8,27 +8,18 @@ public static class MapFactory
     public static Nation CreateNation(string name, string belongsTo, int regularUnitCount, int eliteUnitCount,
         Guid mapId)
     {
-        var units = new List<Unit>();
-
-        for (var i = 0; i < regularUnitCount; i++)
-        {
-            units.Add(Unit.Create(name, UnitType.FromValue(UnitTypes.Regular)));
-        }
-
-        for (var i = 0; i < eliteUnitCount; i++)
-        {
-            units.Add(Unit.Create(name, UnitType.FromValue(UnitTypes.Elite)));
-        }
+        var units = CreateUnits(name, regularUnitCount, eliteUnitCount);
 
         return new Nation(name, Force.FromName(belongsTo), units, mapId);
     }
 
     public static Region CreateRegion(string name, string terrainType, string controlledBy, string inBorderOf,
-        List<string> neighborRegions, Guid mapId)
+        List<string> neighborRegions, string armyNationName, int armyRegularCount, int armyEliteCount, Guid mapId)
     {
         var neighbors = neighborRegions.Select(x => new Neighbor(x)).ToList();
         var terrain = CreateTerrain(terrainType, controlledBy);
-        var region = new Region(name, terrain, inBorderOf, neighbors, mapId);
+        var army = Army.Create().AddUnits(CreateUnits(armyNationName, armyRegularCount, armyEliteCount));
+        var region = new Region(name, terrain, inBorderOf, neighbors, army, mapId);
         return region;
     }
 
@@ -60,5 +51,22 @@ public static class MapFactory
         }
 
         throw new ArgumentException();
+    }
+
+    private static List<Unit> CreateUnits(string nationName, int regularUnitCount, int eliteUnitCount)
+    {
+        var units = new List<Unit>();
+
+        for (var i = 0; i < regularUnitCount; i++)
+        {
+            units.Add(Unit.Create(nationName, UnitType.FromValue(UnitTypes.Regular)));
+        }
+
+        for (var i = 0; i < eliteUnitCount; i++)
+        {
+            units.Add(Unit.Create(nationName, UnitType.FromValue(UnitTypes.Elite)));
+        }
+
+        return units;
     }
 }
