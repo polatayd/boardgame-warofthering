@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BoardGame.WarOfTheRing.Maps.Infrastructure.Persistence.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
 {
     [DbContext(typeof(MapDbContext))]
-    partial class MapDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240412200809_LeadersAddedToArmyValueObject")]
+    partial class LeadersAddedToArmyValueObject
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

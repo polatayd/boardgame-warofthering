@@ -31,8 +31,7 @@ namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
                     Name = table.Column<string>(type: "text", nullable: true),
                     IsAtWar = table.Column<bool>(type: "boolean", nullable: false),
                     MapId = table.Column<Guid>(type: "uuid", nullable: false),
-                    BelongsTo_Name = table.Column<string>(type: "text", nullable: true),
-                    Reinforcements = table.Column<string>(type: "jsonb", nullable: true)
+                    BelongsTo_Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -67,6 +66,27 @@ namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
                         name: "FK_Region_Maps_MapId",
                         column: x => x.MapId,
                         principalTable: "Maps",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Nation_Units",
+                columns: table => new
+                {
+                    ArmyNationId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NationName = table.Column<string>(type: "text", nullable: true),
+                    Type_Value = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Nation_Units", x => new { x.ArmyNationId, x.Id });
+                    table.ForeignKey(
+                        name: "FK_Nation_Units_Nation_ArmyNationId",
+                        column: x => x.ArmyNationId,
+                        principalTable: "Nation",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -107,10 +127,13 @@ namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Nation");
+                name: "Nation_Units");
 
             migrationBuilder.DropTable(
                 name: "Region_Units");
+
+            migrationBuilder.DropTable(
+                name: "Nation");
 
             migrationBuilder.DropTable(
                 name: "Region");

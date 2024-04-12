@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
 {
     [DbContext(typeof(MapDbContext))]
-    [Migration("20240411024426_Initial")]
+    [Migration("20240412194255_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -127,50 +127,67 @@ namespace BoardGame.WarOfTheRing.Maps.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsMany("BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.ValueObjects.Unit", "Reinforcements", b1 =>
+                    b.OwnsOne("BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.ValueObjects.Army", "Reinforcements", b1 =>
                         {
                             b1.Property<Guid>("NationId")
                                 .HasColumnType("uuid");
 
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer");
-
-                            b1.Property<string>("NationName")
-                                .HasColumnType("text");
-
-                            b1.HasKey("NationId", "Id");
+                            b1.HasKey("NationId");
 
                             b1.ToTable("Nation");
-
-                            b1.ToJson("Reinforcements");
 
                             b1.WithOwner()
                                 .HasForeignKey("NationId");
 
-                            b1.OwnsOne("BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.ValueObjects.UnitType", "Type", b2 =>
+                            b1.OwnsMany("BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.ValueObjects.Unit", "Units", b2 =>
                                 {
-                                    b2.Property<Guid>("UnitNationId")
+                                    b2.Property<Guid>("ArmyNationId")
                                         .HasColumnType("uuid");
 
-                                    b2.Property<int>("UnitId")
+                                    b2.Property<int>("Id")
+                                        .ValueGeneratedOnAdd()
                                         .HasColumnType("integer");
 
-                                    b2.Property<string>("Value")
+                                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b2.Property<int>("Id"));
+
+                                    b2.Property<string>("NationName")
                                         .HasColumnType("text");
 
-                                    b2.HasKey("UnitNationId", "UnitId");
+                                    b2.HasKey("ArmyNationId", "Id");
 
-                                    b2.ToTable("Nation");
+                                    b2.ToTable("Nation_Units");
 
                                     b2.WithOwner()
-                                        .HasForeignKey("UnitNationId", "UnitId");
+                                        .HasForeignKey("ArmyNationId");
+
+                                    b2.OwnsOne("BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.ValueObjects.UnitType", "Type", b3 =>
+                                        {
+                                            b3.Property<Guid>("UnitArmyNationId")
+                                                .HasColumnType("uuid");
+
+                                            b3.Property<int>("UnitId")
+                                                .HasColumnType("integer");
+
+                                            b3.Property<string>("Value")
+                                                .HasColumnType("text");
+
+                                            b3.HasKey("UnitArmyNationId", "UnitId");
+
+                                            b3.ToTable("Nation_Units");
+
+                                            b3.WithOwner()
+                                                .HasForeignKey("UnitArmyNationId", "UnitId");
+                                        });
+
+                                    b2.Navigation("Type")
+                                        .IsRequired();
                                 });
 
-                            b1.Navigation("Type");
+                            b1.Navigation("Units");
                         });
 
-                    b.Navigation("Reinforcements");
+                    b.Navigation("Reinforcements")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.Entities.Region", b =>

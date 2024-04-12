@@ -28,6 +28,11 @@ public class RegionEntityConfiguration : IEntityTypeConfiguration<Region>
                 unitBuilder.OwnsOne(y => y.Type);
                 unitBuilder.Navigation(y => y.Type).IsRequired();
             });
+            
+            armyBuilder.OwnsMany(x => x.Leaders, leaderBuilder =>
+            {
+                leaderBuilder.UsePropertyAccessMode(PropertyAccessMode.Field);
+            });
         });
         builder.Navigation(x => x.Army).IsRequired();
 

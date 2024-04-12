@@ -16,4 +16,5 @@ public class CreateReinforcementsInput
 {
     public int RegularCount { get; set; }
     public int EliteCount { get; set; }
+    public int LeaderCount { get; set; }
 }

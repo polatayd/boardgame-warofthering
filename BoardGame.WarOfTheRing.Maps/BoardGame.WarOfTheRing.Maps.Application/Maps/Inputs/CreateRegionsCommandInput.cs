@@ -20,4 +20,5 @@ public class CreateArmyInput
     public string Nation { get; set; }
     public int RegularCount { get; set; }
     public int EliteCount { get; set; }
+    public int LeaderCount { get; set; }
 }

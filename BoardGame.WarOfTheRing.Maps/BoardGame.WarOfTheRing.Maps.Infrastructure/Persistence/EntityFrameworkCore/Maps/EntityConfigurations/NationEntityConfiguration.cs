@@ -11,12 +11,21 @@ public class NationEntityConfiguration : IEntityTypeConfiguration<Nation>
     {
         builder.HasOne<Map>().WithMany(x => x.Nations).HasForeignKey(x => x.MapId);
         builder.ComplexProperty(x => x.BelongsTo, y => y.IsRequired());
-        
-        builder.OwnsMany(x => x.Reinforcements, unitBuilder =>
+
+        builder.OwnsOne(x => x.Reinforcements, armyBuilder =>
         {
-            unitBuilder.ToJson();
+            armyBuilder.OwnsMany(x => x.Units, unitBuilder =>
+            {
+                unitBuilder.UsePropertyAccessMode(PropertyAccessMode.Field);
+                unitBuilder.OwnsOne(y => y.Type);
+                unitBuilder.Navigation(y => y.Type).IsRequired();
+            });
             
-            unitBuilder.OwnsOne(y => y.Type);
+            armyBuilder.OwnsMany(x => x.Leaders, leaderBuilder =>
+            {
+                leaderBuilder.UsePropertyAccessMode(PropertyAccessMode.Field);
+            });
         });
+        builder.Navigation(x => x.Reinforcements).IsRequired();
     }
 }

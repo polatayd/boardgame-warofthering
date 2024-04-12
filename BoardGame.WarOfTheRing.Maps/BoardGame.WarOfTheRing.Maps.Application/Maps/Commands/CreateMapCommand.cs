@@ -53,6 +53,7 @@ public class CreateMapCommandHandler : IRequestHandler<CreateMapCommand>
                 createNationInput.BelongsTo,
                 createNationInput.Reinforcements.RegularCount,
                 createNationInput.Reinforcements.EliteCount,
+                createNationInput.Reinforcements.LeaderCount,
                 mapId));
         }
 
@@ -74,6 +75,7 @@ public class CreateMapCommandHandler : IRequestHandler<CreateMapCommand>
                 createRegionInput.Army.Nation,
                 createRegionInput.Army.RegularCount,
                 createRegionInput.Army.EliteCount,
+                createRegionInput.Army.LeaderCount,
                 mapId));
         }
 

@@ -6,19 +6,25 @@ namespace BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.Factories;
 public static class MapFactory
 {
     public static Nation CreateNation(string name, string belongsTo, int regularUnitCount, int eliteUnitCount,
-        Guid mapId)
+        int leaderCount, Guid mapId)
     {
-        var units = CreateUnits(name, regularUnitCount, eliteUnitCount);
+        var army = Army.Create()
+            .AddUnits(CreateUnits(name, regularUnitCount, eliteUnitCount))
+            .AddLeaders(CreateLeaders(name, leaderCount));
 
-        return new Nation(name, Force.FromName(belongsTo), units, mapId);
+        return new Nation(name, Force.FromName(belongsTo), army, mapId);
     }
 
     public static Region CreateRegion(string name, string terrainType, string controlledBy, string inBorderOf,
-        List<string> neighborRegions, string armyNationName, int armyRegularCount, int armyEliteCount, Guid mapId)
+        List<string> neighborRegions, string armyNationName, int armyRegularCount, int armyEliteCount,
+        int armyLeaderCount, Guid mapId)
     {
         var neighbors = neighborRegions.Select(x => new Neighbor(x)).ToList();
         var terrain = CreateTerrain(terrainType, controlledBy);
-        var army = Army.Create().AddUnits(CreateUnits(armyNationName, armyRegularCount, armyEliteCount));
+        var army = Army.Create()
+            .AddUnits(CreateUnits(armyNationName, armyRegularCount, armyEliteCount))
+            .AddLeaders(CreateLeaders(armyNationName, armyLeaderCount));
+
         var region = new Region(name, terrain, inBorderOf, neighbors, army, mapId);
         return region;
     }
@@ -68,5 +74,15 @@ public static class MapFactory
         }
 
         return units;
+    }
+
+    private static List<Leader> CreateLeaders(string nationName, int leaderCount)
+    {
+        if (nationName == NationNames.Sauron)
+        {
+            return Enumerable.Range(0, leaderCount).Select(_ => Leader.Create(nationName).WithNazgul()).ToList();
+        }
+
+        return Enumerable.Range(0, leaderCount).Select(_ => Leader.Create(nationName)).ToList();
     }
 }

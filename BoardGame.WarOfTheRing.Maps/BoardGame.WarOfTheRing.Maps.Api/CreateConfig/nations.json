@@ -5,7 +5,8 @@
       "BelongsTo": "FreePeoples",
       "Reinforcements": {
         "RegularCount": 2,
-        "EliteCount": 3
+        "EliteCount": 3,
+        "LeaderCount": 3
       }
     },
     {
@@ -13,7 +14,8 @@
       "BelongsTo": "FreePeoples",
       "Reinforcements": {
         "RegularCount": 2,
-        "EliteCount": 4
+        "EliteCount": 4,
+        "LeaderCount": 0
       }
     },
     {
@@ -21,7 +23,8 @@
       "BelongsTo": "FreePeoples",
       "Reinforcements": {
         "RegularCount": 6,
-        "EliteCount": 4
+        "EliteCount": 4,
+        "LeaderCount": 3
       }
     },
     {
@@ -29,7 +32,8 @@
       "BelongsTo": "FreePeoples",
       "Reinforcements": {
         "RegularCount": 6,
-        "EliteCount": 4
+        "EliteCount": 4,
+        "LeaderCount": 3
       }
     },
     {
@@ -37,7 +41,8 @@
       "BelongsTo": "FreePeoples",
       "Reinforcements": {
         "RegularCount": 6,
-        "EliteCount": 4
+        "EliteCount": 4,
+        "LeaderCount": 3
       }
     },
     {
@@ -45,7 +50,8 @@
       "BelongsTo": "Shadow",
       "Reinforcements": {
         "RegularCount": 6,
-        "EliteCount": 5
+        "EliteCount": 5,
+        "LeaderCount": 0
       }
     },
     {
@@ -53,7 +59,8 @@
       "BelongsTo": "Shadow",
       "Reinforcements": {
         "RegularCount": 10,
-        "EliteCount": 3
+        "EliteCount": 3,
+        "LeaderCount": 0
       }
     },
     {
@@ -61,7 +68,8 @@
       "BelongsTo": "Shadow",
       "Reinforcements": {
         "RegularCount": 8,
-        "EliteCount": 4
+        "EliteCount": 4,
+        "LeaderCount": 4
       }
     }
   ]

@@ -5,22 +5,20 @@ namespace BoardGame.WarOfTheRing.Maps.Domain.Aggregates.Maps.Entities;
 
 public class Nation : EntityBase
 {
-    private List<Unit> reinforcements = new();
-    
-    public IReadOnlyList<Unit> Reinforcements => reinforcements.AsReadOnly();
+    public Army Reinforcements { get; init; }
     public string Name { get; init; }
     public Force BelongsTo { get; init; }
     public bool IsAtWar { get; init; }
     public Guid MapId { get; init; }
     
     private Nation() {}
-    public Nation(string name, Force belongsTo, List<Unit> reinforcements, Guid mapId)
+    public Nation(string name, Force belongsTo, Army reinforcements, Guid mapId)
     {
         Id = Guid.NewGuid();
         Name = name;
         BelongsTo = belongsTo;
         MapId = mapId;
-        this.reinforcements = reinforcements;
+        Reinforcements = reinforcements;
     }
 }
 
